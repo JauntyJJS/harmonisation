@@ -1,0 +1,106 @@
+project:
+  type: book
+  output-dir: reports/Cohort_A
+
+book:
+  # downloads: [pdf, docx]
+  title: "Harmonisation Template for Cohort A"
+  author: "My Name"
+  date: "07/03/2025"
+  navbar:
+    search: true
+  sidebar:
+    collapse-level: 1
+
+  chapters:
+    - index.qmd
+    - part: Cohort A Cleaning
+      chapters:
+        - codes/Cohort_A/00_R_Package_And_Environment.qmd
+        - codes/Cohort_A/01_Read_Cohort_A_Data.qmd
+        # - codes/Cohort_A/02_Extract_Demographic.qmd
+        # - codes/Cohort_A/03_Export_To_Excel.qmd
+
+crossref:
+  chapters: false
+  fig-title: Figure     # (default is "Figure")
+  tbl-title: Table      # (default is "Table")
+  fig-prefix: Figure    # (default is "Figure")
+  tbl-prefix: Table     # (default is "Table")
+  ref-hyperlink: true   # (default is true)
+  title-delim: ":"      # (default is ":")
+  custom:
+    - key: suppfig
+      kind: float
+      latex-env: suppfig
+      reference-prefix: Figure S
+      space-before-numbering: false
+      latex-list-of-description: Supplementary Figure
+      caption-location: top
+    - key: supptbl
+      kind: float
+      latex-env: supptbl
+      reference-prefix: Table S
+      space-before-numbering: false
+      latex-list-of-description: Supplementary Table
+      caption-location: top
+
+bibliography: references.bib
+csl: csl_file.csl
+
+format:
+  html:
+    toc: true
+    toc-depth: 5
+    toc-location: right
+    toc-expand: true
+    number-sections: true
+    number-depth: 5
+    smooth-scroll: true
+    theme:
+      light:
+        - flatly
+        #- custom.scss
+      dark:
+        - solar
+  docx:
+    reference-doc: custom-reference.docx
+    toc: true
+    toc-depth: 5
+    number-sections: true
+    number-depth: 5
+    prefer-html: true
+    highlight-style: github
+  pdf:
+    pdf-engine: xelatex
+    # prefer-html: true  # does not work with html widgets like reactable
+    documentclass: scrreprt
+    papersize: a4
+    toc-depth: 5
+    number-sections: true
+    number-depth: 5
+    keep-tex: false
+    include-in-header:
+      text: |
+        \usepackage{fvextra}
+        \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+        \DefineVerbatimEnvironment{OutputCode}{Verbatim}{breaklines,commandchars=\\\{\}}
+    include-before-body:
+      text: |
+        \begin{flushleft}
+        \begin{sloppypar}
+        \RecustomVerbatimEnvironment{verbatim}{Verbatim}{
+          showspaces = false,
+          showtabs = false,
+          breaksymbolleft={}, % Need pacakge fvextra
+          breaklines
+          % Note: setting commandchars=\\\{\} here will cause an error
+        }
+    include-after-body:
+      text: |
+        \end{sloppypar}
+        \end{flushleft}
+
+
+
+

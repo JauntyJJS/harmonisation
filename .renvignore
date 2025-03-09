@@ -1,0 +1,10 @@
+/archive/
+/books/
+/data-raw/
+/docs/
+/inst/
+/man/
+/.quarto/
+/renv/
+/reports/
+/quarto-yaml-template/

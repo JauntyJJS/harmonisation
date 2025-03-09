@@ -1,0 +1,291 @@
+---
+title: "Read Cohort A Data"
+format:
+  html:
+    code-fold: true
+    freeze: false
+execute:
+  warning: false
+  message: false
+params:
+  analysis_folder: codes
+  harmonisation_folder: Cohort_A
+  preprocessing_folder: preprocessed_data
+  show_table: TRUE
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+library("magrittr")
+out_type <- knitr::opts_chunk$get("rmarkdown.pandoc.to")
+
+```
+
+## Read Data
+
+We read the data and have the following warnings
+
+```{r}
+#| label: read data with age issues
+
+cohort_A_data <- readxl::read_excel(
+  path = here::here("data-raw",
+                    "Cohort_A",
+                    "data_to_harmonise_age_issue.xlsx"),
+  sheet = "Sheet1",
+  col_types = c(
+    "text", "numeric"
+    )
+  )
+  
+```
+
+This warning occurs because we expect the second column `Age` to be numeric but there exists some text columns.
+
+Suppose we ask the collaborator to fix the age column and the collaborator returns a new file. To ensure that there are no messages, we can use [`testthat::expect_no_condition`](https://testthat.r-lib.org/reference/expect_error.html). 
+
+Here is an example when it gives an error with the old file
+
+```{r}
+#| label: read data with age issues with error
+#| error: true
+
+testthat::expect_no_condition(
+  readxl::read_excel(
+  path = here::here("data-raw",
+                    "Cohort_A",
+                    "data_to_harmonise_age_issue.xlsx"),
+  sheet = "Sheet1",
+  col_types = c(
+    "text", "numeric"
+    )
+  )
+)
+  
+```
+
+We can read the new file in the following way. However, this method means that you will need to read the file twice.
+
+```{r}
+#| label: read data with age issue resolved method 1
+
+testthat::expect_no_condition(
+  readxl::read_excel(
+  path = here::here("data-raw",
+                    "Cohort_A",
+                    "data_to_harmonise_age_issue_fixed.xlsx"),
+  sheet = "Sheet1",
+  col_types = c(
+    "text", "numeric"
+    )
+  )
+)
+
+cohort_A_data <- readxl::read_excel(
+  path = here::here("data-raw",
+                    "Cohort_A",
+                    "data_to_harmonise_age_issue_fixed.xlsx"),
+  sheet = "Sheet1",
+  col_types = c(
+    "text", "numeric"
+    )
+  )
+
+```
+
+To read the file only once, we can use the tee pipe operator [`%T>%`](https://magrittr.tidyverse.org/reference/tee.html).
+
+
+```{r}
+#| label: read data with age issue resolved method 2
+
+cohort_A_data <- readxl::read_excel(
+  path = here::here("data-raw",
+                    "Cohort_A",
+                    "data_to_harmonise_age_issue_fixed.xlsx"),
+  sheet = "Sheet1",
+  col_types = c(
+    "text", "numeric"
+    )
+  ) %T>%
+  testthat::expect_no_condition()
+
+```
+
+## Check for unique patient id
+
+We can use [`pointblank::rows_distinct`](https://rstudio.github.io/pointblank/reference/rows_distinct.html) to check if the column `Serial Number` has unique values.
+
+```{r}
+#| label: read data with check on unique id
+
+cohort_A_data <- readxl::read_excel(
+  path = here::here("data-raw",
+                    "Cohort_A",
+                    "data_to_harmonise_age_issue_fixed.xlsx"),
+  sheet = "Sheet1",
+  col_types = c(
+    "text", "numeric"
+    )
+  ) %T>%
+  testthat::expect_no_condition() |> 
+  dplyr::rename(cohort_unique_id = "Serial Number") |> 
+  # Remove rows when the ID value is NA
+  dplyr::filter(!is.na(.data[["cohort_unique_id"]])) |>
+  dplyr::mutate(
+    cohort_unique_id = as.character(cohort_unique_id)
+  ) |> 
+  # Remove white spaces in column names
+  dplyr::rename_all(stringr::str_trim) |> 
+  # Check if cohort id is unique
+  pointblank::rows_distinct(
+    columns = "cohort_unique_id",
+  )
+
+```
+
+## Clean Age columns
+
+Sometimes the collaborator will not give you a new file and will only respond with an email acknowledging that it is an error.
+
+You will need to edit the values yourself. It is best not to edit the file as you may forget to make the manual change if the collaborator gives you a new version a few months later with the same error.
+
+It is also advised to record such changes before data harmonisation.
+
+We read the data with the some issues with the age.
+
+```{r}
+#| label: read data to harmonise with check on unique id
+
+cohort_A_data <- readxl::read_excel(
+  path = here::here("data-raw",
+                    "Cohort_A",
+                    "data_to_harmonise.xlsx"),
+  sheet = "Sheet1",
+  col_types = c(
+    "text", "text", "numeric", "numeric", "numeric", "numeric",
+    "numeric", "numeric"
+    )
+  ) %T>%
+  testthat::expect_no_condition() |> 
+  dplyr::rename(cohort_unique_id = "Serial Number") |> 
+  # Remove rows when the ID value is NA
+  dplyr::filter(!is.na(.data[["cohort_unique_id"]])) |>
+  dplyr::mutate(
+    cohort_unique_id = as.character(cohort_unique_id)
+  ) |> 
+  # Remove white spaces in column names
+  dplyr::rename_all(stringr::str_trim) |> 
+  # Check if cohort id is unique
+  pointblank::rows_distinct(
+    columns = "cohort_unique_id",
+  )
+
+```
+
+As the `Age` is a mixture of type text and numeric in Excel, we need to convert those in type text to the appropriate values.
+
+```{r}
+#| label: change input age data
+
+cohort_A_data <- cohort_A_data |>
+  dplyr::select(c("cohort_unique_id", "Age")) |>
+  dplyr::mutate(
+    `Age before` = .data[["Age"]],
+    `Age` = dplyr::case_when(
+      .data[["Age"]] == "missing" ~ NA,
+      .default = .data[["Age"]]
+    ),
+    `Age before` = forcats::fct(
+      as.character(.data[["Age before"]])
+    )
+  ) |> 
+  # Check that these are the only patients with missing age 
+  pointblank::col_vals_null(
+    columns = c("Age"),
+    preconditions = ~ . %>% dplyr::filter(
+      .data[["cohort_unique_id"]] %in% c("A006", "A013")
+    )
+  )
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: change input age data html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  cohort_A_data |> 
+    dplyr::select("cohort_unique_id", "Age before", "Age") |> 
+    harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+Remove columns `Age before`.
+
+```{r}
+#| label: change input age data for merging
+
+cohort_A_data <- cohort_A_data |>
+  dplyr::select(-c("Age before"))
+
+```
+
+## Check corrections
+
+We check if the corrections are made based on the collaborator request are made.
+
+-  `Age` changed from missing to `NA` for patient `A006` and `A013`.
+
+```{r}
+#| label: correction checking
+
+cohort_A_data |>
+  # Check if these patient IDs are present
+  pointblank::expect_col_vals_make_subset(
+    columns = c("cohort_unique_id"),
+    set = c("A006", "A013")
+  ) |>
+  pointblank::expect_col_exists(
+    columns = c("Age")
+  ) |>
+  pointblank::expect_col_vals_expr(
+    expr = pointblank::expr(
+      dplyr::case_when(
+      .data[["cohort_unique_id"]] %in% "A006" ~ is.na(.data[["Age"]])
+      )
+    )
+  ) |>
+  pointblank::expect_col_vals_expr(
+    expr = pointblank::expr(
+      dplyr::case_when(
+      .data[["cohort_unique_id"]] %in% "A013" ~ is.na(.data[["Age"]])
+      )
+    )
+  )
+
+
+```
+
+## Write Preprocessed File
+
+We output data to be used for the next session.
+
+```{r}
+#| label: output unharmonised Cohort A data
+
+cohort_A_data |>
+  fst::write_fst(
+    path = here::here(params$analysis_folder,
+                      params$harmonisation_folder,
+                      params$preprocessing_folder,
+                      "01_Cohort_A_cleaned.fst")
+)
+
+```

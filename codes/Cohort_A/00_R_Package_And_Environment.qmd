@@ -1,0 +1,138 @@
+---
+title: "R Package And Environment"
+date: "`r Sys.Date()`"
+format:
+  html:
+    code-fold: true
+    freeze: false
+params:
+  data_dictionary: 20250307_data_dictionary.xlsx
+  show_table: TRUE
+---
+
+## R Packages Used
+
+```{r}
+#| label: load libraries
+#| echo: false
+#| warning: false
+#| message: false
+
+library("sessioninfo")
+library("quarto")
+
+library("harmonisation")
+
+library("here")
+library("readxl")
+
+library("dplyr")
+library("tidyr")
+library("magrittr")
+library("stringr")
+library("forcats")
+library("purrr")
+library("lubridate")
+library("tibble")
+
+library("pointblank")
+library("testthat")
+
+library("htmltools")
+library("fontawesome")
+library("reactable")
+
+library("openxlsx")
+
+library("glue")
+
+out_type <- knitr::opts_chunk$get("rmarkdown.pandoc.to")
+
+```
+
+Here are the R packages used in this analysis.
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: packages info html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  harmonisation::get_r_package_info() |>
+    reactable::reactable()
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: packages info not html
+#| eval: !expr out_type != "html"
+
+harmonisation::get_r_package_info() |> 
+  knitr::kable()
+
+```
+
+:::
+
+## R Platform Information
+
+Here are the R platform environment used in this analysis.
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: session info html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  r_platform_table <- harmonisation::get_r_platform_info()
+  r_platform_table |>
+    reactable::reactable(
+      defaultPageSize = 5
+    )
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: session info not html
+#| eval: !expr out_type != "html"
+
+harmonisation::get_r_platform_info() |> 
+  knitr::kable()
+
+```
+
+:::
+
+## Data dictionary
+
+Check to see if the data dictionary `r params$data_dictionary` exists.
+
+```{r}
+#| label: data dictionary path
+
+dict_relative_path <- fs::path(
+  "data-raw",
+  "data_dictionary",
+  params$data_dictionary
+)
+
+
+dict_path <- here::here(dict_relative_path)
+
+if (!file.exists(dict_path)) {
+  stop(glue::glue("Input data dictionary {dict_path} cannot be found"))
+}
+
+```

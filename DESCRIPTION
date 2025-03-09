@@ -1,0 +1,37 @@
+Type: Package
+Package: harmonisation
+Title: Utility functions for project
+Version: 0.0.0.9999
+Authors@R:
+    person(given = "Jeremy",
+           family = "Selva",
+           role = c("aut", "cre"),
+           email = "jeremy1189.jjs@gmail.com",
+           comment = c(ORCID = "0000-0002-4498-2662"))
+Description: Utility functions to harmonise data for project.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Language: en-US
+Imports:
+    fs,
+    quarto,
+    dplyr,
+    tibble,
+    stringr,
+    glue,
+    rlang,
+    purrr,
+    fontawesome,
+    htmltools,
+    reactable,
+    sessioninfo,
+    openxlsx,
+    cli,
+    forcats
+Suggests:
+    knitr,
+    pointblank,
+    spelling,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.3.2
