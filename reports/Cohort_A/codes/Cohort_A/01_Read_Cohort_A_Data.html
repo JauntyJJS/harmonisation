@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../codes/Cohort_A/02_Extract_Demographic.html" rel="next">
 <link href="../../codes/Cohort_A/00_R_Package_And_Environment.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -185,6 +186,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Read Cohort A Data</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../codes/Cohort_A/02_Extract_Demographic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Extract Demographic</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -200,8 +207,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#read-data" id="toc-read-data" class="nav-link active" data-scroll-target="#read-data"><span class="header-section-number">1</span> Read Data</a></li>
   <li><a href="#check-for-unique-patient-id" id="toc-check-for-unique-patient-id" class="nav-link" data-scroll-target="#check-for-unique-patient-id"><span class="header-section-number">2</span> Check for unique patient id</a></li>
   <li><a href="#clean-age-columns" id="toc-clean-age-columns" class="nav-link" data-scroll-target="#clean-age-columns"><span class="header-section-number">3</span> Clean Age columns</a></li>
-  <li><a href="#check-corrections" id="toc-check-corrections" class="nav-link" data-scroll-target="#check-corrections"><span class="header-section-number">4</span> Check corrections</a></li>
-  <li><a href="#write-preprocessed-file" id="toc-write-preprocessed-file" class="nav-link" data-scroll-target="#write-preprocessed-file"><span class="header-section-number">5</span> Write Preprocessed File</a></li>
+  <li><a href="#update-weight" id="toc-update-weight" class="nav-link" data-scroll-target="#update-weight"><span class="header-section-number">4</span> Update Weight</a></li>
+  <li><a href="#merge-updated-weight" id="toc-merge-updated-weight" class="nav-link" data-scroll-target="#merge-updated-weight"><span class="header-section-number">5</span> Merge updated weight</a></li>
+  <li><a href="#check-corrections" id="toc-check-corrections" class="nav-link" data-scroll-target="#check-corrections"><span class="header-section-number">6</span> Check corrections</a></li>
+  <li><a href="#write-preprocessed-file" id="toc-write-preprocessed-file" class="nav-link" data-scroll-target="#write-preprocessed-file"><span class="header-section-number">7</span> Write Preprocessed File</a></li>
   </ul>
 </nav>
     </div>
@@ -358,125 +367,144 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"data_to_harmonise.xlsx"</span>),</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"Sheet1"</span>,</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">c</span>(</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>, <span class="st">"text"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"numeric"</span>, <span class="st">"numeric"</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%T&gt;%</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  testthat<span class="sc">::</span><span class="fu">expect_no_condition</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">cohort_unique_id =</span> <span class="st">"Serial Number"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove rows when the ID value is NA</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data[[<span class="st">"cohort_unique_id"</span>]])) <span class="sc">|&gt;</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">cohort_unique_id =</span> <span class="fu">as.character</span>(cohort_unique_id)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove white spaces in column names</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename_all</span>(stringr<span class="sc">::</span>str_trim) <span class="sc">|&gt;</span> </span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if cohort id is unique</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">rows_distinct</span>(</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="st">"cohort_unique_id"</span>,</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"text"</span>, <span class="co"># unique id</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"numeric"</span>, <span class="st">"text"</span>, <span class="co"># age and sex</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="co"># height and weight</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="st">"numeric"</span>, <span class="co"># smoking history</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"numeric"</span>, <span class="st">"numeric"</span> <span class="co"># symptoms</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%T&gt;%</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  testthat<span class="sc">::</span><span class="fu">expect_no_condition</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">cohort_unique_id =</span> <span class="st">"Serial Number"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove rows when the ID value is NA</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data[[<span class="st">"cohort_unique_id"</span>]])) <span class="sc">|&gt;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">cohort_unique_id =</span> <span class="fu">as.character</span>(cohort_unique_id)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove white spaces in column names</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename_all</span>(stringr<span class="sc">::</span>str_trim) <span class="sc">|&gt;</span> </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if cohort id is unique</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">rows_distinct</span>(</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="st">"cohort_unique_id"</span>,</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>As the <code>Age</code> is a mixture of type text and numeric in Excel, we need to convert those in type text to the appropriate values.</p>
+</section>
+<section id="update-weight" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="update-weight"><span class="header-section-number">4</span> Update Weight</h2>
+<p>Here are the following patient’s height that needs to be updated.</p>
+<ul>
+<li>A018 has a weight of 215.4kg. Value is changed to 90 kg.</li>
+</ul>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cohort_A_data <span class="ot">&lt;-</span> cohort_A_data <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"cohort_unique_id"</span>, <span class="st">"Age"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Age before</span><span class="st">`</span> <span class="ot">=</span> .data[[<span class="st">"Age"</span>]],</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Age</span><span class="st">`</span> <span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>      .data[[<span class="st">"Age"</span>]] <span class="sc">==</span> <span class="st">"missing"</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">.default =</span> .data[[<span class="st">"Age"</span>]]</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Age before</span><span class="st">`</span> <span class="ot">=</span> forcats<span class="sc">::</span><span class="fu">fct</span>(</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">as.character</span>(.data[[<span class="st">"Age before"</span>]])</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check that these are the only patients with missing age </span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">col_vals_null</span>(</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Age"</span>),</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">preconditions =</span> <span class="sc">~</span> . <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>      .data[[<span class="st">"cohort_unique_id"</span>]] <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"A006"</span>, <span class="st">"A013"</span>)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="ot">&lt;-</span> cohort_A_data <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"cohort_unique_id"</span>, <span class="st">"weight"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if these patient IDs are present</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">col_vals_make_subset</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"cohort_unique_id"</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">set =</span> <span class="fu">c</span>(<span class="st">"A018"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">updated_weight =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>      .data[[<span class="st">"cohort_unique_id"</span>]] <span class="sc">==</span> <span class="st">"A018"</span> <span class="sc">&amp;</span> .data[[<span class="st">"weight"</span>]] <span class="sc">==</span> <span class="fl">215.4</span> <span class="sc">~</span> <span class="fl">90.1</span>,</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">.default =</span> .data[[<span class="st">"weight"</span>]]</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (params<span class="sc">$</span>show_table <span class="sc">&amp;&amp;</span> knitr<span class="sc">::</span><span class="fu">is_html_output</span>()) {</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  cohort_A_data <span class="sc">|&gt;</span> </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="st">"cohort_unique_id"</span>, <span class="st">"Age before"</span>, <span class="st">"Age"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    harmonisation<span class="sc">::</span><span class="fu">reactable_with_download_csv_button</span>()</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  weight_data <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>      .data[[<span class="st">"cohort_unique_id"</span>]] <span class="sc">%in%</span> </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">c</span>(<span class="st">"A018"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    harmonisation<span class="sc">::</span><span class="fu">reactable_with_download_csv_button</span>()</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="reactable-4bb0b3516ef" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="reactable-4bb0b3516ef">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"cohort_unique_id":["A001","A002","A003","A004","A005","A006","A007","A008","A009","A010","A011","A012","A013","A014","A015","A016","A017","A018","A019","A020"],"Age before":["26","55","37","74","26","missing","68","46","27","37","56","83","missing","63","75","94","47","26","84","35"],"Age":["26","55","37","74","26",null,"68","46","27","37","56","83",null,"63","75","94","47","26","84","35"]},"columns":[{"id":"cohort_unique_id","name":"cohort_unique_id","type":"character"},{"id":"Age before","name":"Age before","type":"factor","filterMethod":"(rows, columnId, filterValue) => {\n        return rows.filter(row => row.values[columnId] === filterValue)\n      }","filterInput":{"name":"select","attribs":{"aria-label":"Filter Age before","style":{"width":"100%","height":"100%"},"onChange":"function(_e){(function(event){\n          const value = event.target.value\n          Reactable.setFilter('reactable-4bb0b3516ef', 'Age before', value === '__ALL__' ? undefined : value)}).apply(event.target,[_e])}"},"children":[{"name":"option","attribs":{"value":"__ALL__"},"children":["All"]},{"name":"option","attribs":{},"children":["26"]},{"name":"option","attribs":{},"children":["55"]},{"name":"option","attribs":{},"children":["37"]},{"name":"option","attribs":{},"children":["74"]},{"name":"option","attribs":{},"children":["missing"]},{"name":"option","attribs":{},"children":["68"]},{"name":"option","attribs":{},"children":["46"]},{"name":"option","attribs":{},"children":["27"]},{"name":"option","attribs":{},"children":["56"]},{"name":"option","attribs":{},"children":["83"]},{"name":"option","attribs":{},"children":["63"]},{"name":"option","attribs":{},"children":["75"]},{"name":"option","attribs":{},"children":["94"]},{"name":"option","attribs":{},"children":["47"]},{"name":"option","attribs":{},"children":["84"]},{"name":"option","attribs":{},"children":["35"]}]}},{"id":"Age","name":"Age","type":"character"}],"filterable":true,"defaultPageSize":5,"paginationType":"jump","elementId":"reactable-4bb0b3516ef","dataKey":"b83fe14dc064b267a2722b58a289e17e"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.1.filterMethod","tag.attribs.columns.1.filterInput.attribs.onChange"],"jsHooks":[]}</script>
-<button onclick="Reactable.downloadDataCSV('reactable-4bb0b3516ef', 'download.csv')">
+<div class="reactable html-widget html-fill-item" id="reactable-483045a1797a" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="reactable-483045a1797a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"cohort_unique_id":["A018"],"weight":[215.4],"updated_weight":[90.1]},"columns":[{"id":"cohort_unique_id","name":"cohort_unique_id","type":"character"},{"id":"weight","name":"weight","type":"numeric"},{"id":"updated_weight","name":"updated_weight","type":"numeric"}],"filterable":true,"defaultPageSize":5,"paginationType":"jump","elementId":"reactable-483045a1797a","dataKey":"5f4228316fe0cc4e555fe191883bf415"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<button onclick="Reactable.downloadDataCSV('reactable-483045a1797a', 'download.csv')">
 <svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"></path></svg>
 Download as CSV
 </button>
 </div>
 </div>
-<p>Remove columns <code>Age before</code>.</p>
+<p>Remove unnecessary columns so that we can merge with the other fields.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cohort_A_data <span class="ot">&lt;-</span> cohort_A_data <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">"Age before"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weight_data <span class="ot">&lt;-</span> weight_data <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">"weight"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
-<section id="check-corrections" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="check-corrections"><span class="header-section-number">4</span> Check corrections</h2>
-<p>We check if the corrections are made based on the collaborator request are made.</p>
+<section id="merge-updated-weight" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="merge-updated-weight"><span class="header-section-number">5</span> Merge updated weight</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>join_specification <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">join_by</span>(<span class="st">"cohort_unique_id"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cohort_A_data <span class="ot">&lt;-</span> cohort_A_data <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">left_join</span>(weight_data, </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">by =</span> join_specification,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">unmatched =</span> <span class="st">"error"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">relationship =</span> <span class="st">"one-to-one"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">weight</span><span class="st">`</span> <span class="ot">=</span> .data[[<span class="st">"updated_weight"</span>]]</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="st">"updated_weight"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="check-corrections" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="check-corrections"><span class="header-section-number">6</span> Check corrections</h2>
+<p>We check if the corrections are made based on the collaborator request. Changes are made manually on the excel file as the collaborator is no longer providing newer version of the data.</p>
 <ul>
-<li><code>Age</code> changed from missing to <code>NA</code> for patient <code>A006</code> and <code>A013</code>.</li>
+<li><code>weight</code> changed from 215.4kg to 90.1kg for patient <code>A018</code></li>
 </ul>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>cohort_A_data <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if these patient IDs are present</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">expect_col_vals_make_subset</span>(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"cohort_unique_id"</span>),</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">set =</span> <span class="fu">c</span>(<span class="st">"A006"</span>, <span class="st">"A013"</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">expect_col_exists</span>(</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Age"</span>)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">expect_col_vals_expr</span>(</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">expr =</span> pointblank<span class="sc">::</span><span class="fu">expr</span>(</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>      .data[[<span class="st">"cohort_unique_id"</span>]] <span class="sc">%in%</span> <span class="st">"A006"</span> <span class="sc">~</span> <span class="fu">is.na</span>(.data[[<span class="st">"Age"</span>]])</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">expect_col_vals_expr</span>(</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">expr =</span> pointblank<span class="sc">::</span><span class="fu">expr</span>(</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>      .data[[<span class="st">"cohort_unique_id"</span>]] <span class="sc">%in%</span> <span class="st">"A013"</span> <span class="sc">~</span> <span class="fu">is.na</span>(.data[[<span class="st">"Age"</span>]])</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cohort_A_data <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if these patient IDs are present</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">expect_col_vals_make_subset</span>(</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"cohort_unique_id"</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">set =</span> <span class="fu">c</span>(<span class="st">"A018"</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">expect_col_vals_expr</span>(  </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">expr =</span> pointblank<span class="sc">::</span><span class="fu">expr</span>( </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>      dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>        .data[[<span class="st">"cohort_unique_id"</span>]] <span class="sc">%in%</span> <span class="st">"A018"</span> <span class="sc">~</span> </span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>          <span class="fu">isTRUE</span>(<span class="fu">all.equal</span>(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">target =</span> <span class="fl">90.1</span>,</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">current =</span> cohort_A_data[[<span class="st">"weight"</span>]][<span class="fu">which</span>(cohort_A_data[[<span class="st">"cohort_unique_id"</span>]] <span class="sc">==</span> <span class="st">"A018"</span>)],</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">tolerance =</span> <span class="fl">0.0001</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>          ))</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
-<section id="write-preprocessed-file" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="write-preprocessed-file"><span class="header-section-number">5</span> Write Preprocessed File</h2>
+<section id="write-preprocessed-file" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="write-preprocessed-file"><span class="header-section-number">7</span> Write Preprocessed File</h2>
 <p>We output data to be used for the next session.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cohort_A_data <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  fst<span class="sc">::</span><span class="fu">write_fst</span>(</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(params<span class="sc">$</span>analysis_folder,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                      params<span class="sc">$</span>harmonisation_folder,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                      params<span class="sc">$</span>preprocessing_folder,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"01_Cohort_A_cleaned.fst"</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cohort_A_data <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  fst<span class="sc">::</span><span class="fu">write_fst</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(params<span class="sc">$</span>analysis_folder,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                      params<span class="sc">$</span>harmonisation_folder,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                      params<span class="sc">$</span>preprocessing_folder,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"01_Cohort_A_cleaned.fst"</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
@@ -1052,6 +1080,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../codes/Cohort_A/02_Extract_Demographic.html" class="pagination-link" aria-label="Extract Demographic">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Extract Demographic</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

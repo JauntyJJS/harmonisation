@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-03-09">
+<meta name="dcterms.date" content="2025-03-10">
 
 <title>1&nbsp; R Package And Environment – Harmonisation Template for Cohort A</title>
 <style>
@@ -187,6 +187,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Read Cohort A Data</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../codes/Cohort_A/02_Extract_Demographic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Extract Demographic</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -221,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 9, 2025</p>
+      <p class="date">March 10, 2025</p>
     </div>
   </div>
   
@@ -245,8 +251,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-f0c1795e10162431454c" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-f0c1795e10162431454c">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"package":["dplyr","fontawesome","forcats","glue","harmonisation","here","htmltools","lubridate","magrittr","openxlsx","pointblank","purrr","quarto","reactable","readxl","sessioninfo","stringr","testthat","tibble","tidyr"],"version":["1.1.4","0.5.3","1.0.0","1.8.0","0.0.0.9999","1.0.1","0.5.8.1","1.9.4","2.0.3","4.2.8","0.12.2","1.0.4","1.4.4","0.4.4","1.4.4","1.2.2","1.5.1","3.2.3","3.2.1","1.3.1"],"date":["2023-11-17","2024-11-16","2023-01-29","2024-09-30","2025-03-09","2020-12-13","2024-04-04","2024-12-08","2022-03-30","2025-01-25","2024-10-23","2025-02-05","2024-07-20","2023-03-12","2025-02-27","2021-12-06","2023-11-14","2025-01-13","2023-03-20","2024-01-24"],"source":["RSPM","RSPM","RSPM","RSPM","local","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","CRAN (R 4.4.2)","RSPM","RSPM","RSPM","RSPM"]},"columns":[{"id":"package","name":"package","type":"character"},{"id":"version","name":"version","type":"character"},{"id":"date","name":"date","type":"character"},{"id":"source","name":"source","type":"character"}],"dataKey":"fc548a92b1b651d0da1b9fbb8c235189"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-0b97518855f59668d829" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-0b97518855f59668d829">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"package":["dplyr","fontawesome","forcats","glue","harmonisation","here","htmltools","lubridate","magrittr","openxlsx","pointblank","purrr","quarto","reactable","readxl","sessioninfo","stringr","testthat","tibble","tidyr"],"version":["1.1.4","0.5.3","1.0.0","1.8.0","0.0.0.9999","1.0.1","0.5.8.1","1.9.4","2.0.3","4.2.8","0.12.2","1.0.4","1.4.4","0.4.4","1.4.4","1.2.2","1.5.1","3.2.3","3.2.1","1.3.1"],"date":["2023-11-17","2024-11-16","2023-01-29","2024-09-30","2025-03-09","2020-12-13","2024-04-04","2024-12-08","2022-03-30","2025-01-25","2024-10-23","2025-02-05","2024-07-20","2023-03-12","2025-02-27","2021-12-06","2023-11-14","2025-01-13","2023-03-20","2024-01-24"],"source":["RSPM","RSPM","RSPM","RSPM","local","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","CRAN (R 4.4.2)","RSPM","RSPM","RSPM","RSPM"]},"columns":[{"id":"package","name":"package","type":"character"},{"id":"version","name":"version","type":"character"},{"id":"date","name":"date","type":"character"},{"id":"source","name":"source","type":"character"}],"dataKey":"fc548a92b1b651d0da1b9fbb8c235189"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -265,14 +271,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-adec9ff74c4e07f0563b" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-adec9ff74c4e07f0563b">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"setting":["version","os","system","ui","language","collate","ctype","tz","date","pandoc","quarto","knitr"],"value":["R version 4.4.2 (2024-10-31 ucrt)","Windows 11 x64 (build 26100)","x86_64, mingw32","RTerm","(EN)","English_Singapore.utf8","English_Singapore.utf8","Asia/Singapore","2025-03-09","3.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)","1.6.37 @ C:/Program Files/Quarto/bin/quarto.exe/ (via quarto)","1.49 from RSPM"]},"columns":[{"id":"setting","name":"setting","type":"character"},{"id":"value","name":"value","type":"character"}],"defaultPageSize":5,"dataKey":"22bfc251a44701a7376a110314019e1e"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div class="reactable html-widget html-fill-item" id="htmlwidget-a0c39f7535bc604fa847" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-a0c39f7535bc604fa847">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"setting":["version","os","system","ui","language","collate","ctype","tz","date","pandoc","quarto","knitr"],"value":["R version 4.4.2 (2024-10-31 ucrt)","Windows 11 x64 (build 26100)","x86_64, mingw32","RTerm","(EN)","English_Singapore.utf8","English_Singapore.utf8","Asia/Singapore","2025-03-10","3.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)","1.6.37 @ C:/Program Files/Quarto/bin/quarto.exe/ (via quarto)","1.49 from RSPM"]},"columns":[{"id":"setting","name":"setting","type":"character"},{"id":"value","name":"value","type":"character"}],"defaultPageSize":5,"dataKey":"2a338dbe810afb2349032fb2dfea0623"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
 <section id="data-dictionary" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="data-dictionary"><span class="header-section-number">3</span> Data dictionary</h2>
-<p>Check to see if the data dictionary 20250307_data_dictionary.xlsx exists.</p>
+<p>Check to see if the data dictionary 20250310_data_dictionary.xlsx exists.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
