@@ -1,0 +1,247 @@
+---
+title: "Extract Demographic"
+format:
+  html:
+    code-fold: true
+    freeze: false
+execute:
+  warning: false
+  message: false
+params:
+  analysis_folder: codes
+  harmonisation_folder: Cohort_A
+  preprocessing_folder: preprocessed_data
+  show_table: TRUE
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+out_type <- knitr::opts_chunk$get("rmarkdown.pandoc.to")
+
+```
+
+## Read Preprocessed File
+
+We read output data from the previous section.
+
+```{r}
+#| label: read Cohort A data
+#| echo: false
+
+cohort_A_data <- fst::read_fst(
+  path = here::here(params$analysis_folder,
+                    params$harmonisation_folder,
+                    params$preprocessing_folder,
+                    "01_Cohort_A_cleaned.fst")
+)
+
+```
+
+## Check for integer vector
+
+We have a function that checks if the numeric vector has integers.
+
+```{r}
+#| error: true
+
+non_integer_data <- data.frame(
+  non_integer_col = c(-1, 0, NA, 2.0000,
+                      3.010, pi, exp(1)
+                     )
+)
+
+non_integer_data |>
+  pointblank::col_vals_expr(
+    expr = ~ harmonisation::is_integer_vector(
+      input_vector = non_integer_data[["non_integer_col"]],
+      allow_na = TRUE)
+  )
+
+```
+
+
+## Demographics and Behavioral parameters
+
+### Age and Sex
+
+`age_years` will be mapped from the column `age`. `age` value of 0 is set as missing.
+
+`sex` is grouped as follows:
+
+```{r}
+#| label: sex table
+#| echo: false
+#| message: false
+#| warnings: false
+#| results: asis
+
+tabl <- "
+
++-------------+-----------+
+| sex before  | sex       |
++:============+:==========+
+| F           | 0         | 
++-------------------------+
+| M           | 1         |
++-------------------------+
+
+"
+cat(tabl)
+```
+
+```{r}
+#| label: age gender data
+
+age_gender_data <- cohort_A_data |>
+  dplyr::select(c("cohort_unique_id", 
+                  "age", 
+                  "sex")) |>
+  pointblank::col_vals_expr(
+    expr = ~ harmonisation::is_integer_vector(
+      cohort_A_data[["age"]],
+      allow_na = TRUE)
+  ) |>
+  dplyr::mutate(
+    # Convert age to type integer
+    age_years = as.integer(.data[["age"]]),
+    # Convert age of 0 to NA
+    age_years = dplyr::case_when(
+      .data[["age_years"]] == 0 ~ NA_integer_,
+      .default = .data[["age_years"]]
+    ),
+    sex_before = .data[["sex"]],
+    # Convert categorical columns to factors
+    sex = dplyr::case_when(
+      .data[["sex_before"]] == "F" ~ "0",
+      .data[["sex_before"]] == "M" ~ "1",
+      .default = as.character(.data[["sex_before"]])
+    ),
+    `sex_before` = forcats::fct_relevel(
+      .data[["sex_before"]],
+      c("F", "M")
+    ),
+    sex = forcats::fct_relevel(
+      .data[["sex"]],
+      c("0", "1")),
+  ) |>
+  dplyr::relocate(
+    "sex",
+    .before = "sex_before"
+  ) |> 
+  pointblank::col_vals_in_set(
+    columns = "sex",
+    set = c("0", "1")
+  ) |> 
+  pointblank::col_vals_between(
+    columns = "age_years",
+    left = 0,
+    right = 100,
+    inclusive = c(FALSE, TRUE),
+    na_pass = TRUE
+  )
+
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: age gender data html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  age_gender_data |> 
+    harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+Remove unnecessary columns so that we can merge with the other fields.
+
+```{r}
+#| label: age gender data for merging
+
+age_gender_data <- age_gender_data |>
+  dplyr::select(-c("age", "sex_before"))
+
+```
+
+### Height, Weight, BMI and BSA
+
+`height_cm` will be mapped from the column `height`. 
+`weight_kg` will be mapped from the column `weight`.
+
+`bsa_m2` in m\^2 will be calculated as sqrt([Height(cm) x Weight(kg)]/3600) 
+`bmi` will be calculated as Weight(kg)/((Height(m))\^2)
+
+All values are then converted to two decimal places.
+
+To date, only patient `A010` has a bmi greater than 50.
+
+```{r}
+#| label: body measurement data
+
+body_measurement_data <- cohort_A_data |>
+  dplyr::select(c("cohort_unique_id", 
+                  "weight", "height")) |>
+  dplyr::mutate(
+    height_cm = .data[["height"]],
+    weight_kg = .data[["weight"]],
+    bsa_m2 = sqrt((.data[["height_cm"]] * .data[["weight_kg"]]) / 3600),
+    bsa_m2 = harmonisation::round_to_nearest_digit(.data[["bsa_m2"]], digits = 2),
+    bmi = .data[["weight_kg"]] / ((.data[["height_cm"]] / 100)^2),
+    bmi = harmonisation::round_to_nearest_digit(.data[["bmi"]], digits = 2),
+    height_cm = harmonisation::round_to_nearest_digit(.data[["height_cm"]], digits = 2),
+    weight_kg = harmonisation::round_to_nearest_digit(.data[["weight_kg"]], digits = 2)
+  ) |> 
+  pointblank::col_vals_gt(
+    columns = "bmi",
+    preconditions = ~ . %>%
+      dplyr::filter(
+        .data[["cohort_unique_id"]] %in% c("A010")
+      ),
+    value = 50,
+    na_pass = TRUE    
+  ) |> 
+  pointblank::col_vals_between(
+    columns = "bmi",
+    preconditions = ~ . %>%
+      dplyr::filter(
+        !.data[["cohort_unique_id"]] %in% c("A010")
+      ),
+    left = 15,
+    right = 50,
+    inclusive = c(TRUE, TRUE),
+    na_pass = TRUE
+  )  
+
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: body measurement data html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  body_measurement_data |>
+    harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+Remove unnecessary columns so that we can merge with the other fields.
+
+```{r}
+#| label: body measurement data for merging
+
+body_measurement_data <- body_measurement_data |>
+  dplyr::select(-c("height", "weight"))
+
+```
+
