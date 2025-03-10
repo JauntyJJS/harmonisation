@@ -165,8 +165,11 @@ cohort_A_data <- readxl::read_excel(
                     "data_to_harmonise.xlsx"),
   sheet = "Sheet1",
   col_types = c(
-    "text", "text", "numeric", "numeric", "numeric", "numeric",
-    "numeric", "numeric"
+    "text", # unique id
+    "numeric", "text", # age and sex
+    "numeric", "numeric", # height and weight
+    "numeric", "numeric", "numeric", "numeric", # smoking history
+    "numeric", "numeric" # symptoms
     )
   ) %T>%
   testthat::expect_no_condition() |> 
@@ -185,41 +188,43 @@ cohort_A_data <- readxl::read_excel(
 
 ```
 
-As the `Age` is a mixture of type text and numeric in Excel, we need to convert those in type text to the appropriate values.
+## Update Weight
+
+Here are the following patient's height that needs to be updated.
+
+-   A018 has a weight of 215.4kg. Value is changed to 90 kg.
 
 ```{r}
-#| label: change input age data
+#| label: weight data
 
-cohort_A_data <- cohort_A_data |>
-  dplyr::select(c("cohort_unique_id", "Age")) |>
-  dplyr::mutate(
-    `Age before` = .data[["Age"]],
-    `Age` = dplyr::case_when(
-      .data[["Age"]] == "missing" ~ NA,
-      .default = .data[["Age"]]
-    ),
-    `Age before` = forcats::fct(
-      as.character(.data[["Age before"]])
-    )
+weight_data <- cohort_A_data |>
+  dplyr::select(c("cohort_unique_id", "weight")) |>
+  # Check if these patient IDs are present
+  pointblank::col_vals_make_subset(
+    columns = c("cohort_unique_id"),
+    set = c("A018")
   ) |> 
-  # Check that these are the only patients with missing age 
-  pointblank::col_vals_null(
-    columns = c("Age"),
-    preconditions = ~ . %>% dplyr::filter(
-      .data[["cohort_unique_id"]] %in% c("A006", "A013")
-    )
+  dplyr::mutate(
+    updated_weight = dplyr::case_when(
+      .data[["cohort_unique_id"]] == "A018" & .data[["weight"]] == 215.4 ~ 90.1,
+      .default = .data[["weight"]]
+    ),
   )
+
 ```
 
 ::: {.content-visible when-format="html"}
 
 ```{r}
-#| label: change input age data html
+#| label: weight data html
 #| eval: !expr out_type == "html"
 
 if (params$show_table && knitr::is_html_output()) {
-  cohort_A_data |> 
-    dplyr::select("cohort_unique_id", "Age before", "Age") |> 
+  weight_data |> 
+    dplyr::filter(
+      .data[["cohort_unique_id"]] %in% 
+        c("A018")
+    ) |> 
     harmonisation::reactable_with_download_csv_button()
 }
 
@@ -227,49 +232,61 @@ if (params$show_table && knitr::is_html_output()) {
 
 :::
 
-Remove columns `Age before`.
+Remove unnecessary columns so that we can merge with the other fields.
 
 ```{r}
-#| label: change input age data for merging
+#| label: weight data for merging
+  
+weight_data <- weight_data |>
+  dplyr::select(-c("weight"))
+
+```
+
+## Merge updated weight
+
+```{r}
+#| label: merge updated weight
+
+join_specification <- dplyr::join_by("cohort_unique_id")
 
 cohort_A_data <- cohort_A_data |>
-  dplyr::select(-c("Age before"))
+  dplyr::left_join(weight_data, 
+                   by = join_specification,
+                   unmatched = "error",
+                   relationship = "one-to-one") |> 
+  dplyr::mutate(
+    `weight` = .data[["updated_weight"]]
+  ) |> 
+  dplyr::select(-c("updated_weight"))
 
 ```
 
 ## Check corrections
 
-We check if the corrections are made based on the collaborator request are made.
+We check if the corrections are made based on the collaborator request. Changes are made manually on the excel file as the collaborator is no longer providing newer version of the data.
 
--  `Age` changed from missing to `NA` for patient `A006` and `A013`.
+-  `weight` changed from 215.4kg to 90.1kg for patient `A018`
 
 ```{r}
 #| label: correction checking
 
-cohort_A_data |>
+cohort_A_data |> 
   # Check if these patient IDs are present
   pointblank::expect_col_vals_make_subset(
     columns = c("cohort_unique_id"),
-    set = c("A006", "A013")
-  ) |>
-  pointblank::expect_col_exists(
-    columns = c("Age")
-  ) |>
-  pointblank::expect_col_vals_expr(
-    expr = pointblank::expr(
+    set = c("A018")
+  ) |> 
+  pointblank::expect_col_vals_expr(  
+    expr = pointblank::expr( 
       dplyr::case_when(
-      .data[["cohort_unique_id"]] %in% "A006" ~ is.na(.data[["Age"]])
-      )
-    )
-  ) |>
-  pointblank::expect_col_vals_expr(
-    expr = pointblank::expr(
-      dplyr::case_when(
-      .data[["cohort_unique_id"]] %in% "A013" ~ is.na(.data[["Age"]])
-      )
+        .data[["cohort_unique_id"]] %in% "A018" ~ 
+          isTRUE(all.equal(
+            target = 90.1,
+            current = cohort_A_data[["weight"]][which(cohort_A_data[["cohort_unique_id"]] == "A018")],
+            tolerance = 0.0001)
+          ))
     )
   )
-
 
 ```
 
