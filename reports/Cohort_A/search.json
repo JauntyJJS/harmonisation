@@ -272,5 +272,27 @@
       "Cohort A Cleaning",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Extract Demographic</span>"
     ]
+  },
+  {
+    "objectID": "codes/Cohort_A/03_Export_To_Excel.html",
+    "href": "codes/Cohort_A/03_Export_To_Excel.html",
+    "title": "4  Export To Excel",
+    "section": "",
+    "text": "1 Read all tabular data\nWe read all tabular data from the previous section.",
+    "crumbs": [
+      "Cohort A Cleaning",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Export To Excel</span>"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_A/03_Export_To_Excel.html#export-data-as-excel",
+    "href": "codes/Cohort_A/03_Export_To_Excel.html#export-data-as-excel",
+    "title": "4  Export To Excel",
+    "section": "2 Export Data as Excel",
+    "text": "2 Export Data as Excel\nWe export the standardised data to an excel file called harmonised_Cohort_A.xlsx\n\n\nCode\n# Create a new workbook\nmy_workbook &lt;- openxlsx::createWorkbook()\n\nsheet_name = c(\"demographics\")\n\noutput_data = list(demo_behave_data)  |&gt; \n  purrr::map(\n    .f = harmonisation::add_cohort_name,\n    cohort_name = params$cohort_name,\n    cohort_name_column = \"cohort_name\"\n  )\n\npurrr::walk2(\n    .x = sheet_name,\n    .y = output_data,\n    .f = harmonisation::write_to_sheet,\n    workbook = my_workbook\n)\n\n# Save workbook\nopenxlsx::saveWorkbook(\n  wb = my_workbook, \n  file = here::here(params$analysis_folder,\n                    params$output_folder,\n                    params$cleaned_folder,\n                    params$output_excel_file),\n  overwrite = TRUE\n)",
+    "crumbs": [
+      "Cohort A Cleaning",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Export To Excel</span>"
+    ]
   }
 ]

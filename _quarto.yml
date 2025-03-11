@@ -19,7 +19,7 @@ book:
         - codes/Cohort_A/00_R_Package_And_Environment.qmd
         - codes/Cohort_A/01_Read_Cohort_A_Data.qmd
         - codes/Cohort_A/02_Extract_Demographic.qmd
-        # - codes/Cohort_A/03_Export_To_Excel.qmd
+        - codes/Cohort_A/03_Export_To_Excel.qmd
 
 crossref:
   chapters: false

@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-03-11">
 
-<title>1&nbsp; R Package And Environment – Harmonisation Template for Cohort A</title>
+<title>4&nbsp; Export To Excel – Harmonisation Template for Cohort A</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../codes/Cohort_A/01_Read_Cohort_A_Data.html" rel="next">
-<link href="../../index.html" rel="prev">
+<link href="../../codes/Cohort_A/02_Extract_Demographic.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -106,22 +104,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="../../site_libs/core-js-2.5.3/shim.min.js"></script>
-
-<script src="../../site_libs/react-18.2.0/react.min.js"></script>
-
-<script src="../../site_libs/react-18.2.0/react-dom.min.js"></script>
-
-<script src="../../site_libs/reactwidget-2.0.0/react-tools.js"></script>
-
-<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-
-<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-
-<link href="../../site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
-
-<script src="../../site_libs/reactable-binding-0.4.4/reactable.js"></script>
-
 
 
 </head>
@@ -148,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../codes/Cohort_A/00_R_Package_And_Environment.html">Cohort A Cleaning</a></li><li class="breadcrumb-item"><a href="../../codes/Cohort_A/00_R_Package_And_Environment.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Package And Environment</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../codes/Cohort_A/00_R_Package_And_Environment.html">Cohort A Cleaning</a></li><li class="breadcrumb-item"><a href="../../codes/Cohort_A/03_Export_To_Excel.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Export To Excel</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -177,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../codes/Cohort_A/00_R_Package_And_Environment.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../codes/Cohort_A/00_R_Package_And_Environment.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Package And Environment</span></span></a>
   </div>
 </li>
@@ -195,7 +177,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../codes/Cohort_A/03_Export_To_Excel.html" class="sidebar-item-text sidebar-link">
+  <a href="../../codes/Cohort_A/03_Export_To_Excel.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Export To Excel</span></span></a>
   </div>
 </li>
@@ -211,18 +193,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#r-packages-used" id="toc-r-packages-used" class="nav-link active" data-scroll-target="#r-packages-used"><span class="header-section-number">1</span> R Packages Used</a></li>
-  <li><a href="#r-platform-information" id="toc-r-platform-information" class="nav-link" data-scroll-target="#r-platform-information"><span class="header-section-number">2</span> R Platform Information</a></li>
-  <li><a href="#data-dictionary" id="toc-data-dictionary" class="nav-link" data-scroll-target="#data-dictionary"><span class="header-section-number">3</span> Data dictionary</a></li>
+  <li><a href="#read-all-tabular-data" id="toc-read-all-tabular-data" class="nav-link active" data-scroll-target="#read-all-tabular-data"><span class="header-section-number">1</span> Read all tabular data</a></li>
+  <li><a href="#export-data-as-excel" id="toc-export-data-as-excel" class="nav-link" data-scroll-target="#export-data-as-excel"><span class="header-section-number">2</span> Export Data as Excel</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../codes/Cohort_A/00_R_Package_And_Environment.html">Cohort A Cleaning</a></li><li class="breadcrumb-item"><a href="../../codes/Cohort_A/00_R_Package_And_Environment.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Package And Environment</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../codes/Cohort_A/00_R_Package_And_Environment.html">Cohort A Cleaning</a></li><li class="breadcrumb-item"><a href="../../codes/Cohort_A/03_Export_To_Excel.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Export To Excel</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Package And Environment</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Export To Excel</span></h1>
 </div>
 
 
@@ -230,12 +211,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 11, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -245,61 +220,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="r-packages-used" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="r-packages-used"><span class="header-section-number">1</span> R Packages Used</h2>
-<p>Here are the R packages used in this analysis.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (params<span class="sc">$</span>show_table <span class="sc">&amp;&amp;</span> knitr<span class="sc">::</span><span class="fu">is_html_output</span>()) {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  harmonisation<span class="sc">::</span><span class="fu">get_r_package_info</span>() <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    reactable<span class="sc">::</span><span class="fu">reactable</span>()</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>out_type <span class="ot">&lt;-</span> knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">get</span>(<span class="st">"rmarkdown.pandoc.to"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-c65d129d9a3e129a8d24" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-c65d129d9a3e129a8d24">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"package":["dplyr","fontawesome","forcats","glue","harmonisation","here","htmltools","lubridate","magrittr","openxlsx","pointblank","purrr","quarto","reactable","readxl","sessioninfo","stringr","testthat","tibble","tidyr"],"version":["1.1.4","0.5.3","1.0.0","1.8.0","0.0.0.9999","1.0.1","0.5.8.1","1.9.4","2.0.3","4.2.8","0.12.2","1.0.4","1.4.4","0.4.4","1.4.4","1.2.2","1.5.1","3.2.3","3.2.1","1.3.1"],"date":["2023-11-17","2024-11-16","2023-01-29","2024-09-30","2025-03-09","2020-12-13","2024-04-04","2024-12-08","2022-03-30","2025-01-25","2024-10-23","2025-02-05","2024-07-20","2023-03-12","2025-02-27","2021-12-06","2023-11-14","2025-01-13","2023-03-20","2024-01-24"],"source":["RSPM","RSPM","RSPM","RSPM","local","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","CRAN (R 4.4.2)","RSPM","RSPM","RSPM","RSPM"]},"columns":[{"id":"package","name":"package","type":"character"},{"id":"version","name":"version","type":"character"},{"id":"date","name":"date","type":"character"},{"id":"source","name":"source","type":"character"}],"dataKey":"fc548a92b1b651d0da1b9fbb8c235189"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
-</div>
+<section id="read-all-tabular-data" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="read-all-tabular-data"><span class="header-section-number">1</span> Read all tabular data</h2>
+<p>We read all tabular data from the previous section.</p>
 </section>
-<section id="r-platform-information" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="r-platform-information"><span class="header-section-number">2</span> R Platform Information</h2>
-<p>Here are the R platform environment used in this analysis.</p>
+<section id="export-data-as-excel" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="export-data-as-excel"><span class="header-section-number">2</span> Export Data as Excel</h2>
+<p>We export the standardised data to an excel file called harmonised_Cohort_A.xlsx</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (params<span class="sc">$</span>show_table <span class="sc">&amp;&amp;</span> knitr<span class="sc">::</span><span class="fu">is_html_output</span>()) {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  r_platform_table <span class="ot">&lt;-</span> harmonisation<span class="sc">::</span><span class="fu">get_r_platform_info</span>()</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  r_platform_table <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    reactable<span class="sc">::</span><span class="fu">reactable</span>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">defaultPageSize =</span> <span class="dv">5</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-3ef9678d7851eb04ae9a" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-3ef9678d7851eb04ae9a">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"setting":["version","os","system","ui","language","collate","ctype","tz","date","pandoc","quarto","knitr"],"value":["R version 4.4.2 (2024-10-31 ucrt)","Windows 11 x64 (build 26100)","x86_64, mingw32","RTerm","(EN)","English_Singapore.utf8","English_Singapore.utf8","Asia/Singapore","2025-03-11","3.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)","1.6.37 @ C:/Program Files/Quarto/bin/quarto.exe/ (via quarto)","1.49 from RSPM"]},"columns":[{"id":"setting","name":"setting","type":"character"},{"id":"value","name":"value","type":"character"}],"defaultPageSize":5,"dataKey":"9717966f35d8afa1175a197c48a24a4b"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="data-dictionary" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="data-dictionary"><span class="header-section-number">3</span> Data dictionary</h2>
-<p>Check to see if the data dictionary 20250310_data_dictionary.xlsx exists.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dict_relative_path <span class="ot">&lt;-</span> fs<span class="sc">::</span><span class="fu">path</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data-raw"</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data_dictionary"</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  params<span class="sc">$</span>data_dictionary</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>dict_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(dict_relative_path)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(dict_path)) {</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"Input data dictionary {dict_path} cannot be found"</span>))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a new workbook</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>my_workbook <span class="ot">&lt;-</span> openxlsx<span class="sc">::</span><span class="fu">createWorkbook</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sheet_name <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"demographics"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>output_data <span class="ot">=</span> <span class="fu">list</span>(demo_behave_data)  <span class="sc">|&gt;</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map</span>(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.f =</span> harmonisation<span class="sc">::</span>add_cohort_name,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">cohort_name =</span> params<span class="sc">$</span>cohort_name,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">cohort_name_column =</span> <span class="st">"cohort_name"</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>purrr<span class="sc">::</span><span class="fu">walk2</span>(</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">.x =</span> sheet_name,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">.y =</span> output_data,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">.f =</span> harmonisation<span class="sc">::</span>write_to_sheet,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">workbook =</span> my_workbook</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Save workbook</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>openxlsx<span class="sc">::</span><span class="fu">saveWorkbook</span>(</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">wb =</span> my_workbook, </span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(params<span class="sc">$</span>analysis_folder,</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>                    params<span class="sc">$</span>output_folder,</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>                    params<span class="sc">$</span>cleaned_folder,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>                    params<span class="sc">$</span>output_excel_file),</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">overwrite =</span> <span class="cn">TRUE</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
@@ -870,14 +834,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="../../codes/Cohort_A/02_Extract_Demographic.html" class="pagination-link" aria-label="Extract Demographic">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Extract Demographic</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../codes/Cohort_A/01_Read_Cohort_A_Data.html" class="pagination-link" aria-label="Read Cohort A Data">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Read Cohort A Data</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
