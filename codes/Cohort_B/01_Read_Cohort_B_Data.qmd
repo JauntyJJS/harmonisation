@@ -1,0 +1,136 @@
+---
+title: "Read Cohort B Data"
+format:
+  html:
+    code-fold: true
+    freeze: false
+execute:
+  warning: false
+  message: false
+params:
+  analysis_folder: codes
+  harmonisation_folder: Cohort_B
+  preprocessing_folder: preprocessed_data
+  show_table: TRUE
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+library("magrittr")
+out_type <- knitr::opts_chunk$get("rmarkdown.pandoc.to")
+
+```
+
+## Read Data
+
+We read the file `data_to_harmonise_age_issue.csv` using [`vroom::vroom`](https://vroom.r-lib.org/reference/vroom.html)
+
+```{r}
+#| label: read data with age issues
+#| error: true
+
+cohort_B_data <- vroom::vroom(
+  file = here::here("data-raw",
+                    "Cohort_B",
+                    "data_to_harmonise_age_issue.csv"),
+  delim = ",",
+  col_select = 1:2,
+  show_col_types = FALSE,
+  col_types = list(
+    ID = vroom::col_character(),
+    Age = vroom::col_integer()
+    )
+  ) |>  
+  dplyr::rename(cohort_unique_id = "ID") |>
+  # Remove rows when the ID value is NA
+  dplyr::filter(!is.na(.data[["cohort_unique_id"]])) |>
+  # Remove white spaces in column names
+  dplyr::rename_all(stringr::str_trim) |> 
+  # Check if cohort id is unique
+  pointblank::rows_distinct(
+    columns = "cohort_unique_id",
+  )
+
+```
+
+To safeguard a csv file with issues, we can use the function [`vroom::problems`](https://vroom.r-lib.org/reference/problems.html)
+
+If there are issues with the data, the output of [`vroom::problems`](https://vroom.r-lib.org/reference/problems.html) will be a [tibble](https://tibble.tidyverse.org/).
+
+```{r}
+#| label: view reading data issues
+
+cohort_B_data |> 
+  vroom::problems()
+
+```
+
+To check for this in an automatically, we can use [`pointblank::expect_row_count_match`](https://rstudio.github.io/pointblank/reference/row_count_match.html)
+
+```{r}
+#| label: automate check if data is read properly
+#| error: true
+
+cohort_B_data |> 
+  vroom::problems() |> 
+  pointblank::expect_row_count_match(count = 0)
+
+```
+
+Suppose we have a csv file with no issues, we can safeguard it with the following code.
+
+```{r}
+#| label: read data with age fixed
+
+cohort_B_data <- vroom::vroom(
+  file = here::here("data-raw",
+                    "Cohort_B",
+                    "data_to_harmonise.csv"),
+  delim = ",",
+  col_select = 1:8,
+  show_col_types = FALSE,
+  col_types = list(
+    ID = vroom::col_character(),
+    Age = vroom::col_integer(),
+    Sex = vroom::col_character(),
+    Height = vroom::col_double(),
+    Weight = vroom::col_double(),
+    `Smoke History` = vroom::col_character(),
+    `Chest Pain Character` = vroom::col_character(),
+    Dyspnea = vroom::col_character()
+    )
+  ) |>  
+  dplyr::rename(cohort_unique_id = "ID") |>
+  # Remove rows when the ID value is NA
+  dplyr::filter(!is.na(.data[["cohort_unique_id"]])) |>
+  # Remove white spaces in column names
+  dplyr::rename_all(stringr::str_trim) |> 
+  # Check if cohort id is unique
+  pointblank::rows_distinct(
+    columns = "cohort_unique_id",
+  )
+
+cohort_B_data |> 
+  vroom::problems() |> 
+  pointblank::expect_row_count_match(count = 0)
+
+```
+
+## Write Preprocessed File
+
+We output data to be used for the next session.
+
+```{r}
+#| label: output unharmonised Cohort B data
+
+cohort_B_data |>
+  fst::write_fst(
+    path = here::here(params$analysis_folder,
+                      params$harmonisation_folder,
+                      params$preprocessing_folder,
+                      "01_Cohort_B_cleaned.fst")
+)
+
+```

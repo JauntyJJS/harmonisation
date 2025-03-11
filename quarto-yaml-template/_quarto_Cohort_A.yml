@@ -1,10 +1,10 @@
 project:
   type: book
-  output-dir: reports/Cohort_B
+  output-dir: reports/Cohort_A
 
 book:
   # downloads: [pdf, docx]
-  title: "Harmonisation Template for Cohort B"
+  title: "Harmonisation Template for Cohort A"
   author: "My Name"
   date: "07/03/2025"
   navbar:
@@ -14,12 +14,12 @@ book:
 
   chapters:
     - index.qmd
-    - part: Cohort B Cleaning
+    - part: Cohort A Cleaning
       chapters:
-        - codes/Cohort_B/00_R_Package_And_Environment.qmd
-        - codes/Cohort_B/01_Read_Cohort_B_Data.qmd
-        - codes/Cohort_B/02_Extract_Demographic.qmd
-        - codes/Cohort_B/03_Export_To_Excel.qmd
+        - codes/Cohort_A/00_R_Package_And_Environment.qmd
+        - codes/Cohort_A/01_Read_Cohort_A_Data.qmd
+        - codes/Cohort_A/02_Extract_Demographic.qmd
+        - codes/Cohort_A/03_Export_To_Excel.qmd
 
 crossref:
   chapters: false

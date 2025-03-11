@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2025-03-11">
 
-<title>1&nbsp; R Package And Environment – Harmonisation Template for Cohort A</title>
+<title>2&nbsp; Read Cohort B Data – Harmonisation Template for Cohort B</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../codes/Cohort_A/01_Read_Cohort_A_Data.html" rel="next">
-<link href="../../index.html" rel="prev">
+<link href="../../codes/Cohort_B/02_Extract_Demographic.html" rel="next">
+<link href="../../codes/Cohort_B/00_R_Package_And_Environment.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -106,22 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
-<script src="../../site_libs/core-js-2.5.3/shim.min.js"></script>
-
-<script src="../../site_libs/react-18.2.0/react.min.js"></script>
-
-<script src="../../site_libs/react-18.2.0/react-dom.min.js"></script>
-
-<script src="../../site_libs/reactwidget-2.0.0/react-tools.js"></script>
-
-<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
-
-<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-
-<link href="../../site_libs/reactable-0.4.4/reactable.css" rel="stylesheet">
-
-<script src="../../site_libs/reactable-binding-0.4.4/reactable.js"></script>
-
 
 
 </head>
@@ -134,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">Harmonisation Template for Cohort A</span>
+    <span class="navbar-title">Harmonisation Template for Cohort B</span>
     </a>
   </div>
         <div class="quarto-navbar-tools tools-end">
@@ -148,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../codes/Cohort_A/00_R_Package_And_Environment.html">Cohort A Cleaning</a></li><li class="breadcrumb-item"><a href="../../codes/Cohort_A/00_R_Package_And_Environment.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Package And Environment</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../codes/Cohort_B/00_R_Package_And_Environment.html">Cohort B Cleaning</a></li><li class="breadcrumb-item"><a href="../../codes/Cohort_B/01_Read_Cohort_B_Data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Read Cohort B Data</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -169,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Cohort A Cleaning</span></a>
+ <span class="menu-text">Cohort B Cleaning</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -177,25 +160,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../codes/Cohort_A/00_R_Package_And_Environment.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../codes/Cohort_B/00_R_Package_And_Environment.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Package And Environment</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../codes/Cohort_A/01_Read_Cohort_A_Data.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Read Cohort A Data</span></span></a>
+  <a href="../../codes/Cohort_B/01_Read_Cohort_B_Data.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Read Cohort B Data</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../codes/Cohort_A/02_Extract_Demographic.html" class="sidebar-item-text sidebar-link">
+  <a href="../../codes/Cohort_B/02_Extract_Demographic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Extract Demographic</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../codes/Cohort_A/03_Export_To_Excel.html" class="sidebar-item-text sidebar-link">
+  <a href="../../codes/Cohort_B/03_Export_To_Excel.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Export To Excel</span></span></a>
   </div>
 </li>
@@ -211,18 +194,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#r-packages-used" id="toc-r-packages-used" class="nav-link active" data-scroll-target="#r-packages-used"><span class="header-section-number">1</span> R Packages Used</a></li>
-  <li><a href="#r-platform-information" id="toc-r-platform-information" class="nav-link" data-scroll-target="#r-platform-information"><span class="header-section-number">2</span> R Platform Information</a></li>
-  <li><a href="#data-dictionary" id="toc-data-dictionary" class="nav-link" data-scroll-target="#data-dictionary"><span class="header-section-number">3</span> Data dictionary</a></li>
+  <li><a href="#read-data" id="toc-read-data" class="nav-link active" data-scroll-target="#read-data"><span class="header-section-number">1</span> Read Data</a></li>
+  <li><a href="#write-preprocessed-file" id="toc-write-preprocessed-file" class="nav-link" data-scroll-target="#write-preprocessed-file"><span class="header-section-number">2</span> Write Preprocessed File</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../codes/Cohort_A/00_R_Package_And_Environment.html">Cohort A Cleaning</a></li><li class="breadcrumb-item"><a href="../../codes/Cohort_A/00_R_Package_And_Environment.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Package And Environment</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../codes/Cohort_B/00_R_Package_And_Environment.html">Cohort B Cleaning</a></li><li class="breadcrumb-item"><a href="../../codes/Cohort_B/01_Read_Cohort_B_Data.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Read Cohort B Data</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Package And Environment</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Read Cohort B Data</span></h1>
 </div>
 
 
@@ -230,12 +212,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-title-meta">
 
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 11, 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -245,61 +221,117 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="r-packages-used" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="r-packages-used"><span class="header-section-number">1</span> R Packages Used</h2>
-<p>Here are the R packages used in this analysis.</p>
+<section id="read-data" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="read-data"><span class="header-section-number">1</span> Read Data</h2>
+<p>We read the file <code>data_to_harmonise_age_issue.csv</code> using <a href="https://vroom.r-lib.org/reference/vroom.html"><code>vroom::vroom</code></a></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (params<span class="sc">$</span>show_table <span class="sc">&amp;&amp;</span> knitr<span class="sc">::</span><span class="fu">is_html_output</span>()) {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  harmonisation<span class="sc">::</span><span class="fu">get_r_package_info</span>() <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    reactable<span class="sc">::</span><span class="fu">reactable</span>()</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cohort_B_data <span class="ot">&lt;-</span> vroom<span class="sc">::</span><span class="fu">vroom</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data-raw"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Cohort_B"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"data_to_harmonise_age_issue.csv"</span>),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">delim =</span> <span class="st">","</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_select =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">list</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>()</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span>  </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">cohort_unique_id =</span> <span class="st">"ID"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove rows when the ID value is NA</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data[[<span class="st">"cohort_unique_id"</span>]])) <span class="sc">|&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove white spaces in column names</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename_all</span>(stringr<span class="sc">::</span>str_trim) <span class="sc">|&gt;</span> </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if cohort id is unique</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">rows_distinct</span>(</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="st">"cohort_unique_id"</span>,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-8f2409ef3849e0e56b65" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-8f2409ef3849e0e56b65">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"package":["dplyr","fontawesome","forcats","glue","harmonisation","here","htmltools","magrittr","openxlsx","pointblank","purrr","quarto","reactable","readxl","sessioninfo","stringr","testthat","tibble","tidyr"],"version":["1.1.4","0.5.3","1.0.0","1.8.0","0.0.0.9999","1.0.1","0.5.8.1","2.0.3","4.2.8","0.12.2","1.0.4","1.4.4","0.4.4","1.4.4","1.2.2","1.5.1","3.2.3","3.2.1","1.3.1"],"date":["2023-11-17","2024-11-16","2023-01-29","2024-09-30","2025-03-09","2020-12-13","2024-04-04","2022-03-30","2025-01-25","2024-10-23","2025-02-05","2024-07-20","2023-03-12","2025-02-27","2021-12-06","2023-11-14","2025-01-13","2023-03-20","2024-01-24"],"source":["RSPM","RSPM","RSPM","RSPM","local","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","RSPM","CRAN (R 4.4.2)","RSPM","RSPM","RSPM","RSPM"]},"columns":[{"id":"package","name":"package","type":"character"},{"id":"version","name":"version","type":"character"},{"id":"date","name":"date","type":"character"},{"id":"source","name":"source","type":"character"}],"dataKey":"7f0dd59acd4a9e928c0c91ab740519e2"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
+<p>To safeguard a csv file with issues, we can use the function <a href="https://vroom.r-lib.org/reference/problems.html"><code>vroom::problems</code></a></p>
+<p>If there are issues with the data, the output of <a href="https://vroom.r-lib.org/reference/problems.html"><code>vroom::problems</code></a> will be a <a href="https://tibble.tidyverse.org/">tibble</a>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cohort_B_data <span class="sc">|&gt;</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  vroom<span class="sc">::</span><span class="fu">problems</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+    row   col expected   actual  file                                           
+  &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;                                          
+1     4     2 an integer missing D:/Jeremy/PortableR/RPortableWorkDirectory/har…
+2    10     2 an integer missing D:/Jeremy/PortableR/RPortableWorkDirectory/har…
+3    17     2 an integer missing D:/Jeremy/PortableR/RPortableWorkDirectory/har…</code></pre>
+</div>
+</div>
+<p>To check for this in an automatically, we can use <a href="https://rstudio.github.io/pointblank/reference/row_count_match.html"><code>pointblank::expect_row_count_match</code></a></p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cohort_B_data <span class="sc">|&gt;</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  vroom<span class="sc">::</span><span class="fu">problems</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">expect_row_count_match</span>(<span class="at">count =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<pre><code>Error: Row counts for the two tables did not match.
+The `expect_row_count_match()` validation failed beyond the absolute threshold level (1).
+* failure level (1) &gt;= failure threshold (1)</code></pre>
+</div>
+</div>
+<p>Suppose we have a csv file with no issues, we can safeguard it with the following code.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cohort_B_data <span class="ot">&lt;-</span> vroom<span class="sc">::</span><span class="fu">vroom</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data-raw"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Cohort_B"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"data_to_harmonise.csv"</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">delim =</span> <span class="st">","</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_select =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">list</span>(</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Age =</span> vroom<span class="sc">::</span><span class="fu">col_integer</span>(),</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Sex =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Height =</span> vroom<span class="sc">::</span><span class="fu">col_double</span>(),</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Weight =</span> vroom<span class="sc">::</span><span class="fu">col_double</span>(),</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Smoke History</span><span class="st">`</span> <span class="ot">=</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Chest Pain Character</span><span class="st">`</span> <span class="ot">=</span> vroom<span class="sc">::</span><span class="fu">col_character</span>(),</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">Dyspnea =</span> vroom<span class="sc">::</span><span class="fu">col_character</span>()</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span>  </span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">cohort_unique_id =</span> <span class="st">"ID"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove rows when the ID value is NA</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data[[<span class="st">"cohort_unique_id"</span>]])) <span class="sc">|&gt;</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove white spaces in column names</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename_all</span>(stringr<span class="sc">::</span>str_trim) <span class="sc">|&gt;</span> </span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Check if cohort id is unique</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">rows_distinct</span>(</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="st">"cohort_unique_id"</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>cohort_B_data <span class="sc">|&gt;</span> </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  vroom<span class="sc">::</span><span class="fu">problems</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  pointblank<span class="sc">::</span><span class="fu">expect_row_count_match</span>(<span class="at">count =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
 </section>
-<section id="r-platform-information" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="r-platform-information"><span class="header-section-number">2</span> R Platform Information</h2>
-<p>Here are the R platform environment used in this analysis.</p>
+<section id="write-preprocessed-file" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="write-preprocessed-file"><span class="header-section-number">2</span> Write Preprocessed File</h2>
+<p>We output data to be used for the next session.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (params<span class="sc">$</span>show_table <span class="sc">&amp;&amp;</span> knitr<span class="sc">::</span><span class="fu">is_html_output</span>()) {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  r_platform_table <span class="ot">&lt;-</span> harmonisation<span class="sc">::</span><span class="fu">get_r_platform_info</span>()</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  r_platform_table <span class="sc">|&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    reactable<span class="sc">::</span><span class="fu">reactable</span>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">defaultPageSize =</span> <span class="dv">5</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="htmlwidget-319218a5ef88507b44c1" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-319218a5ef88507b44c1">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"setting":["version","os","system","ui","language","collate","ctype","tz","date","pandoc","quarto","knitr"],"value":["R version 4.4.2 (2024-10-31 ucrt)","Windows 11 x64 (build 26100)","x86_64, mingw32","RTerm","(EN)","English_Singapore.utf8","English_Singapore.utf8","Asia/Singapore","2025-03-11","3.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown)","1.6.37 @ C:/Program Files/Quarto/bin/quarto.exe/ (via quarto)","1.49 from RSPM"]},"columns":[{"id":"setting","name":"setting","type":"character"},{"id":"value","name":"value","type":"character"}],"defaultPageSize":5,"dataKey":"9717966f35d8afa1175a197c48a24a4b"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-</section>
-<section id="data-dictionary" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="data-dictionary"><span class="header-section-number">3</span> Data dictionary</h2>
-<p>Check to see if the data dictionary 20250310_data_dictionary.xlsx exists.</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dict_relative_path <span class="ot">&lt;-</span> fs<span class="sc">::</span><span class="fu">path</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data-raw"</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data_dictionary"</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  params<span class="sc">$</span>data_dictionary</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>dict_path <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(dict_relative_path)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(dict_path)) {</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">"Input data dictionary {dict_path} cannot be found"</span>))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cohort_B_data <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  fst<span class="sc">::</span><span class="fu">write_fst</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(params<span class="sc">$</span>analysis_folder,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                      params<span class="sc">$</span>harmonisation_folder,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                      params<span class="sc">$</span>preprocessing_folder,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"01_Cohort_B_cleaned.fst"</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 
@@ -870,13 +902,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="../../codes/Cohort_B/00_R_Package_And_Environment.html" class="pagination-link" aria-label="R Package And Environment">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">R Package And Environment</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../codes/Cohort_A/01_Read_Cohort_A_Data.html" class="pagination-link" aria-label="Read Cohort A Data">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Read Cohort A Data</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../codes/Cohort_B/02_Extract_Demographic.html" class="pagination-link" aria-label="Extract Demographic">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Extract Demographic</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

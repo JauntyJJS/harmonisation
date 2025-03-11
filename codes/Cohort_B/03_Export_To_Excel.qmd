@@ -1,0 +1,81 @@
+---
+title: "Export To Excel"
+format:
+  html:
+    code-fold: true
+    freeze: false
+execute:
+  warning: false
+  message: false
+params:
+  cohort_name: Cohort_B
+  output_excel_file: harmonised_Cohort_B.xlsx
+  analysis_folder: codes
+  harmonisation_folder: Cohort_B
+  preprocessing_folder: preprocessed_data
+  output_folder: output
+  cleaned_folder: harmonised
+  show_table: TRUE
+---
+
+```{r}
+#| label: setup
+
+out_type <- knitr::opts_chunk$get("rmarkdown.pandoc.to")
+
+```
+
+## Read all tabular data
+
+We read all tabular data from the previous section.
+
+```{r}
+#| label: read all tabular data
+#| echo: false
+
+demo_behave_data <- fst::read_fst(
+  path = here::here(params$analysis_folder,
+                    params$harmonisation_folder,
+                    params$preprocessing_folder,
+                    "02_demographic_data.fst")
+)
+
+```
+
+## Export Data as Excel
+
+We export the standardised data to an excel file called `r params$output_excel_file` 
+
+```{r}
+#| label: export as excel
+
+# Create a new workbook
+my_workbook <- openxlsx::createWorkbook()
+
+sheet_name = c("demographics")
+
+output_data = list(demo_behave_data)  |> 
+  purrr::map(
+    .f = harmonisation::add_cohort_name,
+    cohort_name = params$cohort_name,
+    cohort_name_column = "cohort_name"
+  )
+
+purrr::walk2(
+    .x = sheet_name,
+    .y = output_data,
+    .f = harmonisation::write_to_sheet,
+    workbook = my_workbook
+)
+
+# Save workbook
+openxlsx::saveWorkbook(
+  wb = my_workbook, 
+  file = here::here(params$analysis_folder,
+                    params$output_folder,
+                    params$cleaned_folder,
+                    params$output_excel_file),
+  overwrite = TRUE
+)
+
+```

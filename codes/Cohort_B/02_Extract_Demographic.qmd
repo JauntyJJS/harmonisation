@@ -1,0 +1,796 @@
+---
+title: "Extract Demographic"
+format:
+  html:
+    code-fold: true
+    freeze: false
+execute:
+  warning: false
+  message: false
+params:
+  analysis_folder: codes
+  harmonisation_folder: Cohort_B
+  preprocessing_folder: preprocessed_data
+  show_table: TRUE
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+out_type <- knitr::opts_chunk$get("rmarkdown.pandoc.to")
+
+```
+
+## Read Preprocessed File
+
+We read output data from the previous section.
+
+```{r}
+#| label: read Cohort B data
+#| echo: false
+
+cohort_B_data <- fst::read_fst(
+  path = here::here(params$analysis_folder,
+                    params$harmonisation_folder,
+                    params$preprocessing_folder,
+                    "01_Cohort_B_cleaned.fst")
+)
+
+```
+
+
+## Demographics and Behavioral parameters
+
+### Age and Sex
+
+`age_years` will be mapped from the column `Age`.
+
+`sex` is grouped as follows:
+
+```{r}
+#| label: sex table
+#| echo: false
+#| message: false
+#| warnings: false
+#| results: asis
+
+tabl <- "
+
++-------------+-----------+
+| Sex         | sex       |
++:============+:==========+
+| Female      | 0         | 
++-------------+-----------+
+| Male        | 1         |
++-------------+-----------+
+
+"
+cat(tabl)
+```
+
+```{r}
+#| label: age gender data
+
+age_gender_data <- cohort_B_data |>
+  dplyr::select(c("cohort_unique_id", 
+                  "Age", 
+                  "Sex")) |>
+  pointblank::col_vals_expr(
+    expr = ~ harmonisation::is_integer_vector(
+      cohort_A_data[["age"]],
+      allow_na = TRUE)
+  ) |>
+  dplyr::mutate(
+    # Convert age to type integer
+    age_years = as.integer(.data[["Age"]]),
+    # Convert categorical columns to factors
+    sex = dplyr::case_when(
+      .data[["Sex"]] == "Female" ~ "0",
+      .data[["Sex"]] == "Male" ~ "1",
+      .default = NA_character_
+    ),
+    `Sex` = forcats::fct_relevel(
+      .data[["Sex"]],
+      c("Female", "Male")
+    ),
+    sex = forcats::fct_relevel(
+      .data[["sex"]],
+      c("0", "1")),
+  ) |>
+  dplyr::relocate(
+    "sex",
+    .before = "Sex"
+  ) |> 
+  dplyr::relocate(
+    "age_years",
+    .after = "Age"
+  ) |>
+  pointblank::col_vals_in_set(
+    columns = "sex",
+    set = c("0", "1")
+  ) |> 
+  pointblank::col_vals_between(
+    columns = "age_years",
+    left = 0,
+    right = 100,
+    inclusive = c(FALSE, TRUE),
+    na_pass = TRUE
+  )
+
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: age gender data html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  age_gender_data |> 
+    harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+Remove unnecessary columns so that we can merge with the other fields.
+
+```{r}
+#| label: age gender data for merging
+
+age_gender_data <- age_gender_data |>
+  dplyr::select(-c("Age", "Sex"))
+
+```
+
+### Height, Weight, BMI and BSA
+
+`height_cm` will be mapped from the column `Height`. 
+`weight_kg` will be mapped from the column `Weight`.
+
+`bsa_m2` in m\^2 will be calculated as sqrt([Height(cm) x Weight(kg)]/3600) 
+`bmi` will be calculated as Weight(kg)/((Height(m))\^2)
+
+All values are then converted to two decimal places.
+
+```{r}
+#| label: body measurement data
+
+body_measurement_data <- cohort_B_data |>
+  dplyr::select(c("cohort_unique_id", 
+                  "Height", "Weight")) |>
+  dplyr::mutate(
+    height_cm = .data[["Height"]],
+    weight_kg = .data[["Weight"]],
+    bsa_m2 = sqrt((.data[["height_cm"]] * .data[["weight_kg"]]) / 3600),
+    bsa_m2 = harmonisation::round_to_nearest_digit(.data[["bsa_m2"]], digits = 2),
+    bmi = .data[["weight_kg"]] / ((.data[["height_cm"]] / 100)^2),
+    bmi = harmonisation::round_to_nearest_digit(.data[["bmi"]], digits = 2),
+    height_cm = harmonisation::round_to_nearest_digit(.data[["height_cm"]], digits = 2),
+    weight_kg = harmonisation::round_to_nearest_digit(.data[["weight_kg"]], digits = 2)
+  ) |> 
+  pointblank::col_vals_between(
+    columns = "bmi",
+    left = 15,
+    right = 50,
+    inclusive = c(TRUE, TRUE),
+    na_pass = TRUE
+  )  
+
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: body measurement data html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  body_measurement_data |>
+    harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+Remove unnecessary columns so that we can merge with the other fields.
+
+```{r}
+#| label: body measurement data for merging
+
+body_measurement_data <- body_measurement_data |>
+  dplyr::select(-c("Height", "Weight"))
+
+```
+
+### Smoking History
+
+`smoke_current` is grouped as follows:
+
+```{r}
+#| label: smoke current table
+#| echo: false
+#| message: false
+#| warnings: false
+#| results: asis
+
+tabl <- "
+
++-----------------------+---------------------+
+| Smoke History         | smoke_current       |
++:======================+:====================+
+| non-smoker            | 0                   |
++-----------------------+---------------------+
+| past smoker           | 0                   |
++-----------------------+---------------------+
+| current smoker        | 1                   |
++-----------------------+---------------------+
+
+"
+cat(tabl)
+```
+
+`smoke_past` is grouped as follows:
+
+```{r}
+#| label: smoke past table
+#| echo: false
+#| message: false
+#| warnings: false
+#| results: asis
+
+tabl <- "
+
++-----------------------+---------------------+
+| Smoke History         | smoke_past          |
++:======================+:====================+
+| non-smoker            | 0                   |
++-----------------------+---------------------+
+| past smoker           | 0                   |
++-----------------------+---------------------+
+| current smoker        | 1                   |
++-----------------------+---------------------+
+
+"
+cat(tabl)
+```
+
+We do a check to ensure that we can only have these scenarios
+
+*  `smoke_current` as 1 and `smoke_past` as 0 for current smokers
+*  `smoke_current` as 0 and `smoke_past` as 1 for past smokers
+*  `smoke_current` as 0 and `smoke_past` as 0 for non-smokers
+*  `smoke_current` as -1 and `smoke_past` as -1 for unknown
+
+```{r}
+#| label: smoking data
+
+smoking_data <- cohort_B_data |>
+  dplyr::select(c("cohort_unique_id", 
+                  "Smoke History")) |>
+  dplyr::mutate(
+    smoke_current = dplyr::case_when(
+      is.na(.data[["Smoke History"]]) ~ "-1",
+      .data[["Smoke History"]] == "non-smoker" ~ "0",
+      .data[["Smoke History"]] == "past smoker" ~ "0",
+      .data[["Smoke History"]] == "current smoker" ~ "1",
+      .default = NA_character_
+    ),
+    smoke_current = forcats::fct_relevel(
+      .data[["smoke_current"]],
+      c("0", "1")), 
+    smoke_past = dplyr::case_when(
+      is.na(.data[["Smoke History"]]) ~ "-1",
+      .data[["Smoke History"]] == "non-smoker" ~ "0",
+      .data[["Smoke History"]] == "past smoker" ~ "1",
+      .data[["Smoke History"]] == "current smoker" ~ "0",
+      .default = NA_character_
+    ),
+    smoke_past = forcats::fct_relevel(
+      .data[["smoke_past"]],
+      c("0", "1")),
+    `Smoke History` = forcats::fct(
+      .data[["Smoke History"]]
+    )
+  ) |>
+  pointblank::col_vals_in_set(
+    columns = c("smoke_current", "smoke_past"),
+    set = c("0", "1", "-1")
+  ) |> 
+  pointblank::col_vals_expr(
+    expr = pointblank::expr(
+      (.data[["smoke_current"]] == "1" & .data[["smoke_past"]] == "0") |
+      (.data[["smoke_current"]] == "-1" & .data[["smoke_past"]] == -"1") |
+      (.data[["smoke_current"]] == "0" & .data[["smoke_past"]] %in% c("0", "1"))
+    )
+  )
+
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: smoking data html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  smoking_data |>
+    harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+Remove unnecessary columns so that we can merge with the other fields.
+
+```{r}
+#| label: smoking data for merging
+
+smoking_data <- smoking_data |>
+  dplyr::select(-c("Smoke History"))
+
+```
+
+### Chest Pain
+
+#### Shortness of Breath
+
+`have_sob` is grouped as follows:
+
+```{r}
+#| label: shortness of breath table
+#| echo: false
+#| message: false
+#| warnings: false
+#| results: asis
+
+tabl <- "
+
++-----------------------+---------------------+
+| Dyspnea               | have_sob            |
++:======================+:====================+
+| no                    | 0                   |
++-----------------------+---------------------+
+| yes                   | 1                   |
++-----------------------+---------------------+
+
+"
+cat(tabl)
+```
+
+```{r}
+#| label: shortness of breath data
+
+shortness_of_breath_data <- cohort_B_data |>
+  dplyr::select(c("cohort_unique_id", "Dyspnea")) |>
+  dplyr::mutate(
+    have_sob = dplyr::case_when(
+      .data[["Dyspnea"]] == "no" ~ "0",
+      .data[["Dyspnea"]] == "yes" ~ "1",
+      .default = NA_character_
+    ),
+    have_sob = forcats::fct_relevel(
+      as.character(.data[["have_sob"]]),
+      c("0", "1")),
+    Dyspnea = forcats::fct_relevel(
+      as.character(.data[["Dyspnea"]]),
+      c("no", "yes")),    
+  ) |>
+  pointblank::col_vals_in_set(
+    columns = c("have_sob"),
+    set = c("0", "1", "-1")
+  ) 
+
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: shortness of breath html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  shortness_of_breath_data |> 
+    harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+Remove unnecessary columns so that we can merge with the other fields.
+
+```{r}
+#| label: shortness of breath for merging
+
+shortness_of_breath_data <- shortness_of_breath_data |>
+  dplyr::select(-c("Dyspnea"))
+
+```
+
+#### Have chest pain or not
+
+`have_chest_pain` is grouped as follows:
+
+```{r}
+#| label: chest pain table
+#| echo: false
+#| message: false
+#| warnings: false
+#| results: asis
+
+tabl <- "
+
++----------------------+------------------+
+| Chest Pain Character | have_chest_pain  |
++:=====================+:=================+
+| no chest pain        | 0                | 
++----------------------+------------------+
+| typical, atypical    | 1                |
+| or nonanginal        |                  |
++----------------------+------------------+
+
+"
+cat(tabl)
+```
+
+```{r}
+#| label: have chest pain data
+
+have_chest_pain_data <- cohort_B_data |>
+  dplyr::select(c("cohort_unique_id", "Chest Pain Character")) |>
+  dplyr::mutate(
+    have_chest_pain = dplyr::case_when(
+      .data[["Chest Pain Character"]] %in% c("no chest pain") ~ "0",
+      .data[["Chest Pain Character"]] %in% c("typical", "atypical", "nonanginal") ~ "1",
+      .default = NA_character_
+    ),
+    have_chest_pain = forcats::fct_relevel(
+      .data[["have_chest_pain"]],
+      c("0", "1")
+    ),
+    `Chest Pain Character` = forcats::fct_relevel(
+      as.character(.data[["Chest Pain Character"]]),
+      c("no chest pain", "typical", "atypical", "nonanginal")
+    )
+  ) |>
+  pointblank::col_vals_in_set(
+    columns = c("have_chest_pain"),
+    set = c("0", "1")
+  )  
+
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: have chest pain data html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  have_chest_pain_data |> 
+    harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+Remove unnecessary columns so that we can merge with the other fields.
+
+```{r}
+#| label: have chest pain data for merging
+
+have_chest_pain_data <- have_chest_pain_data |>
+  dplyr::select(-c("Chest Pain Character"))
+
+```
+
+#### Symptomatic or Asymptomatic
+
+`symptoms` is grouped as follows:
+
+```{r}
+#| label: symptoms table
+#| echo: false
+#| message: false
+#| warnings: false
+#| results: asis
+
+tabl <- "
+
++-----------------+------------------+------------------+
+| have_sob        | have_chest_pain  | symptoms         |
++:================+:=================+:=================+
+| -1              | -1               | -1               | 
++-----------------+------------------+------------------+
+| 0               | 0                | 0                |
++-----------------+------------------+------------------+
+| 0 or 1          | 1                | 1                |
++-----------------+------------------+------------------+
+| 1               | 0                | 2                |
++-----------------+------------------+------------------+
+
+"
+cat(tabl)
+```
+
+```{r}
+#| label: symptoms data
+
+symptoms_data <- cohort_B_data |>
+  dplyr::select(c("cohort_unique_id")) |>
+  dplyr::left_join(shortness_of_breath_data, 
+                   by = dplyr::join_by("cohort_unique_id"),
+                   unmatched = "error",
+                   relationship = "one-to-one") |> 
+  dplyr::left_join(have_chest_pain_data, 
+                   by = dplyr::join_by("cohort_unique_id"),
+                   unmatched = "error",
+                   relationship = "one-to-one") |>                   
+  dplyr::mutate(
+    symptoms = dplyr::case_when(
+      (.data[["have_chest_pain"]] == "-1" &
+       .data[["have_sob"]] == "-1"
+      ) ~ "-1",
+      (.data[["have_chest_pain"]] == "0" &
+       .data[["have_sob"]] == "0" 
+      ) ~ "0",        
+      (.data[["have_chest_pain"]] == "1" &
+       .data[["have_sob"]] %in% c("0", "1")
+      ) ~ "1", 
+      (.data[["have_chest_pain"]] == "0" &
+       .data[["have_sob"]] == "1" 
+      ) ~ "2",  
+      .default = NA_character_
+    ),
+    symptoms = forcats::fct_relevel(
+      .data[["symptoms"]],
+      c("0", "1", "2"))
+  ) |> 
+  pointblank::col_vals_in_set(
+    columns = c("symptoms"),
+    set = c("0", "1", "2")
+  )
+
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: symptoms data html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  symptoms_data |> 
+    harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+Remove unnecessary columns so that we can merge with the other fields.
+
+```{r}
+#| label: symptoms data for merging
+
+symptoms_data <- symptoms_data |>
+  dplyr::select(-c("have_chest_pain", "have_sob"))
+
+```
+
+#### Chest Pain Type
+
+`chest_pain_type` is grouped as follows:
+
+```{r}
+#| label: chest pain type table
+#| echo: false
+#| message: false
+#| warnings: false
+#| results: asis
+
+tabl <- "
+
++-----------------+------------------------+------------------+
+| Dyspnea         | Chest Pain Character   | chest_pain_type  |
++:================+:=======================+:=================+
+| no              | no chest pain          | 0                |
++-----------------+------------------------+------------------+
+| no or yes       | typical                | 1                |
++-----------------+------------------------+------------------+
+| no or yes       | atypical               | 2                |
++-----------------+------------------------+------------------+
+| no or yes       | nonanginal             | 3                |
++-----------------+------------------------+------------------+
+| yes             | no chest pain          | 4                |
++-----------------+------------------------+------------------+
+
+"
+cat(tabl)
+```
+
+```{r}
+#| label: chest pain type data
+
+chest_pain_type_data <- cohort_B_data |>
+  dplyr::select(c("cohort_unique_id", "Chest Pain Character", "Dyspnea")) |>
+  dplyr::mutate(
+    chest_pain_type = dplyr::case_when(
+      (.data[["Chest Pain Character"]] == "no chest pain" &
+       .data[["Dyspnea"]] == "no" 
+      ) ~ "0",        
+      (.data[["Chest Pain Character"]] == "typical" &
+       .data[["Dyspnea"]] %in% c("no", "yes")
+      ) ~ "1",
+      (.data[["Chest Pain Character"]] == "atypical" &
+       .data[["Dyspnea"]] %in% c("no", "yes")
+      ) ~ "2", 
+      (.data[["Chest Pain Character"]] == "nonanginal" &
+       .data[["Dyspnea"]] %in% c("no", "yes")
+      ) ~ "3", 
+      (.data[["Chest Pain Character"]] == "no chest pain" &
+       .data[["Dyspnea"]] == "yes" 
+      ) ~ "4",  
+      .default = NA_character_
+    ),
+    `Chest Pain Character` = forcats::fct_relevel(
+      as.character(.data[["Chest Pain Character"]]),
+      c("no chest pain", "typical", "atypical", "nonanginal")
+    ),
+    `Dyspnea` = forcats::fct_relevel(
+      as.character(.data[["Dyspnea"]]),
+      c("no", "yes")
+    ),
+    chest_pain_type = forcats::fct_relevel(
+      .data[["chest_pain_type"]],
+      c("0", "1", "2", "3"))
+  ) |> 
+  dplyr::relocate(
+    "Chest Pain Character",
+    .after = "cohort_unique_id"
+  ) |> 
+  pointblank::col_vals_in_set(
+    columns = c("chest_pain_type"),
+    set = c("0", "1", "2", "3", "4")
+  )
+
+```
+
+::: {.content-visible when-format="html"}
+
+```{r}
+#| label: chest pain type data html
+#| eval: !expr out_type == "html"
+
+if (params$show_table && knitr::is_html_output()) {
+  chest_pain_type_data |> 
+    harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+Remove unnecessary columns so that we can merge with the other fields.
+
+```{r}
+#| label: chest pain type data for merging
+
+chest_pain_type_data <- chest_pain_type_data |>
+  dplyr::select(-c("Dyspnea", "Chest Pain Character"))
+
+```
+
+#### Combined chest pain related tables
+
+We combine all chest related tables together
+
+```{r}
+#| label: chest pain data
+
+join_specification <- dplyr::join_by("cohort_unique_id")
+
+chest_pain_data <- cohort_B_data |> 
+  dplyr::select(c("cohort_unique_id")) |> 
+  dplyr::left_join(have_chest_pain_data, 
+                   by = join_specification,
+                   unmatched = "error",
+                   relationship = "one-to-one") |> 
+  dplyr::left_join(chest_pain_type_data, 
+                   by = join_specification,
+                   unmatched = "error",
+                   relationship = "one-to-one") |> 
+  dplyr::left_join(shortness_of_breath_data, 
+                   by = join_specification,
+                   unmatched = "error",
+                   relationship = "one-to-one") |> 
+  dplyr::left_join(symptoms_data,
+                   by = join_specification,
+                   unmatched = "error",
+                   relationship = "one-to-one")
+
+testthat::expect_true(
+  pointblank::has_columns(
+    chest_pain_data,
+    columns = c("have_sob", "have_chest_pain", "symptoms", "chest_pain_type")
+  )
+) 
+
+testthat::expect_equal(
+  ncol(chest_pain_data), 5
+) 
+```
+
+### Combine Demographics
+
+We combine all the data to give the `demo_behave_data`.
+
+```{r}
+#| label: demo behave data
+
+join_specification <- dplyr::join_by("cohort_unique_id")
+
+demo_behave_data <- cohort_B_data |>
+  dplyr::select(c("cohort_unique_id")) |>
+  dplyr::left_join(age_gender_data,
+                   by = join_specification,
+                   unmatched = "error",
+                   relationship = "one-to-one") |>
+  dplyr::left_join(body_measurement_data,
+                   by = join_specification,
+                   unmatched = "error",
+                   relationship = "one-to-one") |>
+  dplyr::left_join(smoking_data,
+                   by = join_specification,
+                   unmatched = "error",
+                   relationship = "one-to-one") |>
+  dplyr::left_join(chest_pain_data,
+                   by = join_specification,
+                   unmatched = "error",
+                   relationship = "one-to-one") |>
+  dplyr::relocate(c("bsa_m2", "bmi"),
+                  .after = "sex")
+
+
+testthat::expect_true(
+  pointblank::has_columns(
+    demo_behave_data,
+    columns = c(
+      "age_years", "sex",
+      "height_cm", "weight_kg", "bsa_m2", "bmi",
+      "smoke_current", "smoke_past",
+      "have_sob", "have_chest_pain",
+      "symptoms", "chest_pain_type"
+    )
+  )
+) 
+
+testthat::expect_equal(
+  ncol(demo_behave_data), 13
+)
+
+```
+
+## Write Preprocessed File
+
+We output data to be used for the next session.
+
+```{r}
+#| label: output demographic data
+
+demo_behave_data |>
+  fst::write_fst(
+    path = here::here(
+      params$analysis_folder,
+      params$harmonisation_folder,
+      params$preprocessing_folder,
+      "02_demographic_data.fst"),
+)
+
+```

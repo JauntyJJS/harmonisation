@@ -1,0 +1,232 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "",
+    "text": "Preface\nHere is the documentation of the data harmonisation step generated using Quarto. To learn more about Quarto books visit https://quarto.org/docs/books.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#acknowledgement",
+    "href": "index.html#acknowledgement",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "Acknowledgement",
+    "text": "Acknowledgement\nLayout of this page is inspired from R package rcompendium.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#file-structure",
+    "href": "index.html#file-structure",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "File Structure",
+    "text": "File Structure\nHere is the file structure of this project.\nharmonisation_template/                   # Root of the compendium\n│\n├── harmonisation_template.Rproj          # RStudio project file\n|\n├── .quarto/                              # Intermediate files/folders generated \n|                                         # Quarto renders to the documents.\n|\n├── archive/                              # Folder to keep previous books and harmonised data\n│   ├── reports/                          # Folder containing previous documentation \n|   |                                     # of data harmonisation \n|   └── harmonised/                       # Folder containing previous GPS-CAD harmonised data\n|  \n├── reports/                              # Documentation of data harmonisation \n│  \n├── data-raw/                             # Cohort raw data (.csv, .gpkg, etc.)\n│   ├── {cohort name}/                    # Folder containing cohort raw data,\n|   |                                     # and data dictionary \n|   └── data-dictionary/                  # Data dictionary for harmonised data\n|   └── data-input/                       # Data input file from collaborators\n|  \n├── docs/                                 # R functions documentation generating using\n|                                         # pkgdown:::build_site_external()\n|  \n├── inst/                                 # Arbitrary additional files to include in the\n|   |                                     # package.\n|   |  \n|   └── WORDLIST                          # File generating by spelling::update_wordlist()\n|  \n├── man/                                  # R functions helps (automatically updated)\n│   ├── {fun-demo}.Rd                     # Documentation of the demo R function\n│   └── harmonisation-template.Rd         # High-level documentation\n|  \n├── quarto-yaml-template/                 # Folder containing template files for quarto book generation\n│   ├── _quarto_{cohort name}.yml         # Quarto book generation for each cohort\n│   └── _quarto_all.yml                   # Quarto book generation for all cohorts\n|  \n├── R/                                    # R functions location\n│   ├── {fun-demo}.R                      # Example of an R function\n│   └── harmonisation-template-package.R  # Dummy R file for high-level documentation\n│  \n├── renv/                                 # Folder that contains all packages \n|                                         # installed in the renv environment.\n|        \n├── codes/                                # R/Quarto scripts to run data harmonisation\n|   ├── quarto_script.R                   # R script to render each {cohort name}_Cleaning/ folder. \n|   |                                     # folder into html, pdf and word document.\n│   ├── {cohort name}_Cleaning/           # Quarto scripts to run data harmonisation\n|   |                                     # and output them for each cohort.\n|   └── Combine/                          # Quarto scripts to filter harmonised data\n|                                         # based on inclusion/exclusion criteria, \n|   |                                     # combined the filtered data for preliminary analysis.\n|        \n├── tests/                                # Test units file created by R package testhat\n│        \n├── .lintr                                # Configuration for linting\n|                                         # R projects and packages using linter\n|        \n├── .Rbuildignore                         # List of files/folders to be ignored while \n│                                         # checking/installing the package\n|        \n├── .renvignore                           # List of files/folders to be ignored when \n│                                         # renv is doing its snapshot\n|        \n├── _pkgdown.yml                          # Configuration for R package documentation\n|                                         # using pkgdown:::build_site_external()\n|        \n├── _quarto.yml                           # Configuration for Quarto book generation\n|                                         # Also the project configuration file\n|        \n├── custom-reference.docx                 # Microsoft word template for data harmonisation \n|                                         # documentation to Word\n|        \n├── DESCRIPTION                           # Project metadata[*]\n|        \n├── index.qmd                             # Home page of Quarto book content\n|        \n├── LICENSE                               # Content of the MIT license generated via\n|                                         # usethis::use_mit_license()\n├── LICENSE.md                            # Content of the MIT license generated via\n|                                         # usethis::use_mit_license()\n|        \n├── NAMESPACE                             # Automatically generated\n│        \n├── README.md                             # GitHub README (automatically generated)\n├── README.Rmd                            # GitHub README (ignore for now)\n│      \n|      \n├── references.bib                        # Bibtex file for Quarto book \n|      \n├── references.qmd                        # Reference document for Quarto book\n|      \n├── renv.lock                             # Metadata of R packages installed generated\n|                                         # using renv::snapshot\n|      \n├── csl_file.csl                          # Citation Style Language (CSL) file to ensure\n|                                         # citations follows the Lancet journal\n\n\n[*] These files are automatically created but user needs to manually add some information.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#installation",
+    "href": "index.html#installation",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "Installation",
+    "text": "Installation\n\nInstalling R\nGo to https://cran.rstudio.com/. Choose a version of R that matches the computer’s operating system.\n\n\nInstalling RStudio\nGo to https://posit.co/download/rstudio-desktop/. Scroll down and choose a version of RStudio that matches the computer’s operating system.\n\n\nInstalling Rtools\nGo to https://cran.r-project.org/bin/windows/Rtools/. Choose a version of Rtools that matches the R version that was installed.\n\n\nQuarto\nQuarto converts R scripts into a technical report or notebook in html, pdf, Microsoft Word, etc. It is installed together with RStudio. User can also go to https://quarto.org/docs/get-started/ to install it separately. For Quarto to be able to create pdf files, a pdf engine must be installed as well. For ease, it is suggested to install TinyTex using the terminal command quarto install tinytex.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#r-package-installation",
+    "href": "index.html#r-package-installation",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "R Package Installation",
+    "text": "R Package Installation\nUse Posit Public Package Manager PPM to set up your repository environment to install R packages from CRAN. This is because PPM allows installation of frozen R package versions based on a snapshot date.\nOne way to do that is to set in the .Rprofile file with the code options(repos = c(P3M = \"{link to repository url form Posit Public Package Manager}\"))\nR packages can be installed using the package pak as an alternative to install.packages() and remotes::install_github()](https://remotes.r-lib.org/reference/install_github.html). Benefits of using [pak` can be found here\nYou can also view your respository environment using the command pak::repo_get()\nR package can be loaded using the command library({package_name}). You can use the R package annotater to add additional information on what the loaded package does.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#using-renv",
+    "href": "index.html#using-renv",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "Using renv",
+    "text": "Using renv\nYou can increase reproducibility by using the package renv. Install renv from CRAN with pak::pak(\"renv\"). If this is your first time using renv, start with the Introduction to renv vignette. Use renv::init(bare = TRUE) to start with an empty renv environment.\nrenv will freeze the exact package versions you depend on (in renv.lock). This ensures that each collaborator (or you in the future) will use the exact same versions of these packages. Moreover renv provides to each project its own private package library making each project isolated from others.\nInstall required dependencies locally with install.packages() or renv::install() from CRAN, Bioconductor, Github, explicit file path, etc.\nSometimes the right downloader (libcurl or others) needs to set for installation of R packages inside the renv environment to be successful. Setting the R environmental variable RENV_DOWNLOAD_FILE_METHOD = “libcurl” may help.\nSave the local environment with renv::snapshot() to create the renv.lock file.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#r-functions-management",
+    "href": "index.html#r-functions-management",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "R Functions Management",
+    "text": "R Functions Management\nR functions heavily used in this project can be found in the R folder. Documentation (man folder), test units (test folder) corresponding to these functions are structured the same as creating an R package. Relevant R packages required for R package development (and available on Posit Public Package Manager PPM) are\n\n\nCode\nlibrary(\"usethis\")\nlibrary(\"devtools\")\nlibrary(\"roxygen2\")\nlibrary(\"testthat\")\nlibrary(\"covr\")\nlibrary(\"spelling\")\nlibrary(\"lintr\")\nlibrary(\"sinew\")\nlibrary(\"pkgdown\")\n\n\nHere is an example of the command to use pak::pak(\"{package name}\") to install packages from PPM.\nThere is no need to source the functions in the R folder. Use devtools::load_all() instead. devtools::load_all() will load required dependencies listed in DESCRIPTION and R functions stored in R/. Prior installation of these dependencies is required for the load to be successful.\nAfter loading, R functions can be documented (using devtools::document()), tested (using devtools::test() and then devtools::check()) and even installed as an R package (using devtools::install).\nMore information of this workflow can be found in Chapter 1: The Whole Game of the R Packages (2e) book.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#r-packages",
+    "href": "index.html#r-packages",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "R Packages",
+    "text": "R Packages\nR packages installed from Posit Public Package Manager PPM using command pak::pak(\"{package name}\") are\n\n\nCode\nlibrary(\"renv\")\nlibrary(\"sessioninfo\")\nlibrary(\"knitr\")\nlibrary(\"rmarkdown\")\nlibrary(\"quarto\")\nlibrary(\"rlang\")\nlibrary(\"cli\")\n\nlibrary(\"fs\")\nlibrary(\"here\")\nlibrary(\"fst\")\nlibrary(\"readxl\")\nlibrary(\"vroom\")\n\nlibrary(\"dplyr\")\nlibrary(\"tidyr\")\nlibrary(\"magrittr\")\nlibrary(\"stringr\")\nlibrary(\"forcats\")\nlibrary(\"purrr\")\nlibrary(\"lubridate\")\nlibrary(\"tibble\")\nlibrary(\"glue\")\n\nlibrary(\"collateral\")\nlibrary(\"pointblank\")\nlibrary(\"testthat\")\n\nlibrary(\"htmltools\")\nlibrary(\"htmlwidgets\")\nlibrary(\"fontawesome\")\nlibrary(\"reactable\")\nlibrary(\"flextable\")\n\nlibrary(\"openxlsx\")\n\nlibrary(\"harmonisation\")\n\n\nHere are all the R packages used in this analysis.\n\n\nCode\nif (params$show_table && knitr::is_html_output()) {\n  harmonisation::get_r_package_info() |&gt;\n    reactable::reactable()\n}",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#r-platform-information",
+    "href": "index.html#r-platform-information",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "R Platform Information",
+    "text": "R Platform Information\nHere are the R platform environment used in this analysis.\n\n\nCode\nif (params$show_table && knitr::is_html_output()) {\n  r_platform_table &lt;- harmonisation::get_r_platform_info()\n  r_platform_table |&gt;\n    reactable::reactable(\n      defaultPageSize = 5\n    )\n}",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#description",
+    "href": "index.html#description",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "DESCRIPTION",
+    "text": "DESCRIPTION\nThe DESCRIPTION file contains important compendium metadata. Though DESCRIPTION file is specific to R package, it can be used to work with research compendia (see below). For further information on how to edit this file, please read https://r-pkgs.org/description.html.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#data-harmonisation",
+    "href": "index.html#data-harmonisation",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "Data Harmonisation",
+    "text": "Data Harmonisation\nTo start the harmonisation of data, run the R script quarto_script.R in reports folder.\nFor each cohort, the script will clean the raw data and create a Quarto book for each cohort in html, word and pdf.\nThis involves copying a specific yml file (_quarto_{cohort name}.yml) from the quarto-yaml-template folder to the project folder harmonisation_template and rename it as _quarto.yml, overwriting any existing _quarto.yml file. Using the _quarto.yml file. Quarto will then start running the Quarto scripts in the reports/{cohort_name}_Cleaning folder. This involves reading the raw data in the data-raw/{cohort_name} folder, placing preprocessing data in the reports/{cohort_name}_Cleaning/preprocessed_data folder, outputting the harmonised data as excel file called cleaned_{cohort_name}.xlsx in the reports folder. Also, the data harmonisation process documentation will be created in the books/{cohort_name} folder as a Quarto book in html, word and pdf.\nAfter data harmonisation, data combining for all cohorts, data filtering and preliminary analysis will be done by copying _quarto_Prelim.yml file from the quarto-yaml-template folder to the project folder harmonisation_template and rename it as _quarto.yml, overwriting any existing _quarto.yml file. Using the _quarto.yml file, Quarto runs the Quarto scripts in the reports/Combine folder. Results will be outputted as excel files called harmonised.xlsx, harmonised_batch1.xlsx, harmonised_batch2.xlsx in the reports folder. In addition, the preliminary results will be created in the books/Prelim folder as a Quarto book in html, word and pdf.\nAfter doing this for each cohort, the script will then create a combined data harmonisation process documentation (for all the cohorts) as a Quarto book in html. The specific yml file (_quarto_all.yml) in the quarto-yaml-template folder will be used and the documentation will be created in the books/all folder. Data combining for all cohorts, data filtering and preliminary analysis will also be done by running Quarto scripts in the reports/Combine folder.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#general-recommendations",
+    "href": "index.html#general-recommendations",
+    "title": "Harmonisation Template for Cohort B",
+    "section": "General Recommendations",
+    "text": "General Recommendations\n\nEnsure the workspace is always in a blank state. Use usethis::use_blank_slate(scope = c(\"user\", \"project\")) to create this setting.\nKeep the root of the project as clean as possible\nStore your raw data in data-raw\nDocument raw data modifications. See Flowchart.xlsx.\nExport modified raw data in reports/{cohort_name}_Cleaning/preprocessed_data\nStore only R functions in R/\nStore only R scripts and/or qmd in reports/{cohort_name}_Cleaning\nBuilt relative paths using here::here()\nCall external functions as {package_name}::{function()}\nUse devtools::document() to update the NAMESPACE\nUse rcompendium::add_dependencies to update the list of required dependencies in DESCRIPTION\nDo not source your functions but use instead devtools::load_all(). devtools::load_all() will load required dependencies listed in DESCRIPTION and R functions stored in R/",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_B/00_R_Package_And_Environment.html",
+    "href": "codes/Cohort_B/00_R_Package_And_Environment.html",
+    "title": "1  R Package And Environment",
+    "section": "",
+    "text": "1 R Packages Used\nHere are the R packages used in this analysis.\nCode\nif (params$show_table && knitr::is_html_output()) {\n  harmonisation::get_r_package_info() |&gt;\n    reactable::reactable()\n}",
+    "crumbs": [
+      "Cohort B Cleaning",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R Package And Environment</span>"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_B/00_R_Package_And_Environment.html#r-platform-information",
+    "href": "codes/Cohort_B/00_R_Package_And_Environment.html#r-platform-information",
+    "title": "1  R Package And Environment",
+    "section": "2 R Platform Information",
+    "text": "2 R Platform Information\nHere are the R platform environment used in this analysis.\n\n\nCode\nif (params$show_table && knitr::is_html_output()) {\n  r_platform_table &lt;- harmonisation::get_r_platform_info()\n  r_platform_table |&gt;\n    reactable::reactable(\n      defaultPageSize = 5\n    )\n}",
+    "crumbs": [
+      "Cohort B Cleaning",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R Package And Environment</span>"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_B/00_R_Package_And_Environment.html#data-dictionary",
+    "href": "codes/Cohort_B/00_R_Package_And_Environment.html#data-dictionary",
+    "title": "1  R Package And Environment",
+    "section": "3 Data dictionary",
+    "text": "3 Data dictionary\nCheck to see if the data dictionary 20250310_data_dictionary.xlsx exists.\n\n\nCode\ndict_relative_path &lt;- fs::path(\n  \"data-raw\",\n  \"data_dictionary\",\n  params$data_dictionary\n)\n\n\ndict_path &lt;- here::here(dict_relative_path)\n\nif (!file.exists(dict_path)) {\n  stop(glue::glue(\"Input data dictionary {dict_path} cannot be found\"))\n}",
+    "crumbs": [
+      "Cohort B Cleaning",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>R Package And Environment</span>"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_B/01_Read_Cohort_B_Data.html",
+    "href": "codes/Cohort_B/01_Read_Cohort_B_Data.html",
+    "title": "2  Read Cohort B Data",
+    "section": "",
+    "text": "1 Read Data\nWe read the file data_to_harmonise_age_issue.csv using vroom::vroom\nCode\ncohort_B_data &lt;- vroom::vroom(\n  file = here::here(\"data-raw\",\n                    \"Cohort_B\",\n                    \"data_to_harmonise_age_issue.csv\"),\n  delim = \",\",\n  col_select = 1:2,\n  show_col_types = FALSE,\n  col_types = list(\n    ID = vroom::col_character(),\n    Age = vroom::col_integer()\n    )\n  ) |&gt;  \n  dplyr::rename(cohort_unique_id = \"ID\") |&gt;\n  # Remove rows when the ID value is NA\n  dplyr::filter(!is.na(.data[[\"cohort_unique_id\"]])) |&gt;\n  # Remove white spaces in column names\n  dplyr::rename_all(stringr::str_trim) |&gt; \n  # Check if cohort id is unique\n  pointblank::rows_distinct(\n    columns = \"cohort_unique_id\",\n  )\nTo safeguard a csv file with issues, we can use the function vroom::problems\nIf there are issues with the data, the output of vroom::problems will be a tibble.\nCode\ncohort_B_data |&gt; \n  vroom::problems()\n\n\n# A tibble: 3 × 5\n    row   col expected   actual  file                                           \n  &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;                                          \n1     4     2 an integer missing D:/Jeremy/PortableR/RPortableWorkDirectory/har…\n2    10     2 an integer missing D:/Jeremy/PortableR/RPortableWorkDirectory/har…\n3    17     2 an integer missing D:/Jeremy/PortableR/RPortableWorkDirectory/har…\nTo check for this in an automatically, we can use pointblank::expect_row_count_match\nCode\ncohort_B_data |&gt; \n  vroom::problems() |&gt; \n  pointblank::expect_row_count_match(count = 0)\n\n\nError: Row counts for the two tables did not match.\nThe `expect_row_count_match()` validation failed beyond the absolute threshold level (1).\n* failure level (1) &gt;= failure threshold (1)\nSuppose we have a csv file with no issues, we can safeguard it with the following code.\nCode\ncohort_B_data &lt;- vroom::vroom(\n  file = here::here(\"data-raw\",\n                    \"Cohort_B\",\n                    \"data_to_harmonise.csv\"),\n  delim = \",\",\n  col_select = 1:8,\n  show_col_types = FALSE,\n  col_types = list(\n    ID = vroom::col_character(),\n    Age = vroom::col_integer(),\n    Sex = vroom::col_character(),\n    Height = vroom::col_double(),\n    Weight = vroom::col_double(),\n    `Smoke History` = vroom::col_character(),\n    `Chest Pain Character` = vroom::col_character(),\n    Dyspnea = vroom::col_character()\n    )\n  ) |&gt;  \n  dplyr::rename(cohort_unique_id = \"ID\") |&gt;\n  # Remove rows when the ID value is NA\n  dplyr::filter(!is.na(.data[[\"cohort_unique_id\"]])) |&gt;\n  # Remove white spaces in column names\n  dplyr::rename_all(stringr::str_trim) |&gt; \n  # Check if cohort id is unique\n  pointblank::rows_distinct(\n    columns = \"cohort_unique_id\",\n  )\n\ncohort_B_data |&gt; \n  vroom::problems() |&gt; \n  pointblank::expect_row_count_match(count = 0)",
+    "crumbs": [
+      "Cohort B Cleaning",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Read Cohort B Data</span>"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_B/01_Read_Cohort_B_Data.html#write-preprocessed-file",
+    "href": "codes/Cohort_B/01_Read_Cohort_B_Data.html#write-preprocessed-file",
+    "title": "2  Read Cohort B Data",
+    "section": "2 Write Preprocessed File",
+    "text": "2 Write Preprocessed File\nWe output data to be used for the next session.\n\n\nCode\ncohort_B_data |&gt;\n  fst::write_fst(\n    path = here::here(params$analysis_folder,\n                      params$harmonisation_folder,\n                      params$preprocessing_folder,\n                      \"01_Cohort_B_cleaned.fst\")\n)",
+    "crumbs": [
+      "Cohort B Cleaning",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Read Cohort B Data</span>"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_B/02_Extract_Demographic.html",
+    "href": "codes/Cohort_B/02_Extract_Demographic.html",
+    "title": "3  Extract Demographic",
+    "section": "",
+    "text": "1 Read Preprocessed File\nWe read output data from the previous section.",
+    "crumbs": [
+      "Cohort B Cleaning",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Extract Demographic</span>"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_B/02_Extract_Demographic.html#demographics-and-behavioral-parameters",
+    "href": "codes/Cohort_B/02_Extract_Demographic.html#demographics-and-behavioral-parameters",
+    "title": "3  Extract Demographic",
+    "section": "2 Demographics and Behavioral parameters",
+    "text": "2 Demographics and Behavioral parameters\n\n2.1 Age and Sex\nage_years will be mapped from the column Age.\nsex is grouped as follows:\n\n\n\n\n\n\n\n\nSex\nsex\n\n\n\n\nFemale\n0\n\n\nMale\n1\n\n\n\n\n\n\nCode\nage_gender_data &lt;- cohort_B_data |&gt;\n  dplyr::select(c(\"cohort_unique_id\", \n                  \"Age\", \n                  \"Sex\")) |&gt;\n  pointblank::col_vals_expr(\n    expr = ~ harmonisation::is_integer_vector(\n      cohort_A_data[[\"age\"]],\n      allow_na = TRUE)\n  ) |&gt;\n  dplyr::mutate(\n    # Convert age to type integer\n    age_years = as.integer(.data[[\"Age\"]]),\n    # Convert categorical columns to factors\n    sex = dplyr::case_when(\n      .data[[\"Sex\"]] == \"Female\" ~ \"0\",\n      .data[[\"Sex\"]] == \"Male\" ~ \"1\",\n      .default = NA_character_\n    ),\n    `Sex` = forcats::fct_relevel(\n      .data[[\"Sex\"]],\n      c(\"Female\", \"Male\")\n    ),\n    sex = forcats::fct_relevel(\n      .data[[\"sex\"]],\n      c(\"0\", \"1\")),\n  ) |&gt;\n  dplyr::relocate(\n    \"sex\",\n    .before = \"Sex\"\n  ) |&gt; \n  dplyr::relocate(\n    \"age_years\",\n    .after = \"Age\"\n  ) |&gt;\n  pointblank::col_vals_in_set(\n    columns = \"sex\",\n    set = c(\"0\", \"1\")\n  ) |&gt; \n  pointblank::col_vals_between(\n    columns = \"age_years\",\n    left = 0,\n    right = 100,\n    inclusive = c(FALSE, TRUE),\n    na_pass = TRUE\n  )\n\n\n\n\nCode\nif (params$show_table && knitr::is_html_output()) {\n  age_gender_data |&gt; \n    harmonisation::reactable_with_download_csv_button()\n}\n\n\n\n\n\n\nDownload as CSV\n\n\n\nRemove unnecessary columns so that we can merge with the other fields.\n\n\nCode\nage_gender_data &lt;- age_gender_data |&gt;\n  dplyr::select(-c(\"Age\", \"Sex\"))\n\n\n\n\n2.2 Height, Weight, BMI and BSA\nheight_cm will be mapped from the column Height. weight_kg will be mapped from the column Weight.\nbsa_m2 in m^2 will be calculated as sqrt([Height(cm) x Weight(kg)]/3600) bmi will be calculated as Weight(kg)/((Height(m))^2)\nAll values are then converted to two decimal places.\n\n\nCode\nbody_measurement_data &lt;- cohort_B_data |&gt;\n  dplyr::select(c(\"cohort_unique_id\", \n                  \"Height\", \"Weight\")) |&gt;\n  dplyr::mutate(\n    height_cm = .data[[\"Height\"]],\n    weight_kg = .data[[\"Weight\"]],\n    bsa_m2 = sqrt((.data[[\"height_cm\"]] * .data[[\"weight_kg\"]]) / 3600),\n    bsa_m2 = harmonisation::round_to_nearest_digit(.data[[\"bsa_m2\"]], digits = 2),\n    bmi = .data[[\"weight_kg\"]] / ((.data[[\"height_cm\"]] / 100)^2),\n    bmi = harmonisation::round_to_nearest_digit(.data[[\"bmi\"]], digits = 2),\n    height_cm = harmonisation::round_to_nearest_digit(.data[[\"height_cm\"]], digits = 2),\n    weight_kg = harmonisation::round_to_nearest_digit(.data[[\"weight_kg\"]], digits = 2)\n  ) |&gt; \n  pointblank::col_vals_between(\n    columns = \"bmi\",\n    left = 15,\n    right = 50,\n    inclusive = c(TRUE, TRUE),\n    na_pass = TRUE\n  )  \n\n\n\n\nCode\nif (params$show_table && knitr::is_html_output()) {\n  body_measurement_data |&gt;\n    harmonisation::reactable_with_download_csv_button()\n}\n\n\n\n\n\n\nDownload as CSV\n\n\n\nRemove unnecessary columns so that we can merge with the other fields.\n\n\nCode\nbody_measurement_data &lt;- body_measurement_data |&gt;\n  dplyr::select(-c(\"Height\", \"Weight\"))\n\n\n\n\n2.3 Smoking History\nsmoke_current is grouped as follows:\n\n\n\n\n\n\n\n\nSmoke History\nsmoke_current\n\n\n\n\nnon-smoker\n0\n\n\npast smoker\n0\n\n\ncurrent smoker\n1\n\n\n\n\nsmoke_past is grouped as follows:\n\n\n\n\n\n\n\n\nSmoke History\nsmoke_past\n\n\n\n\nnon-smoker\n0\n\n\npast smoker\n0\n\n\ncurrent smoker\n1\n\n\n\n\nWe do a check to ensure that we can only have these scenarios\n\nsmoke_current as 1 and smoke_past as 0 for current smokers\nsmoke_current as 0 and smoke_past as 1 for past smokers\nsmoke_current as 0 and smoke_past as 0 for non-smokers\nsmoke_current as -1 and smoke_past as -1 for unknown\n\n\n\nCode\nsmoking_data &lt;- cohort_B_data |&gt;\n  dplyr::select(c(\"cohort_unique_id\", \n                  \"Smoke History\")) |&gt;\n  dplyr::mutate(\n    smoke_current = dplyr::case_when(\n      is.na(.data[[\"Smoke History\"]]) ~ \"-1\",\n      .data[[\"Smoke History\"]] == \"non-smoker\" ~ \"0\",\n      .data[[\"Smoke History\"]] == \"past smoker\" ~ \"0\",\n      .data[[\"Smoke History\"]] == \"current smoker\" ~ \"1\",\n      .default = NA_character_\n    ),\n    smoke_current = forcats::fct_relevel(\n      .data[[\"smoke_current\"]],\n      c(\"0\", \"1\")), \n    smoke_past = dplyr::case_when(\n      is.na(.data[[\"Smoke History\"]]) ~ \"-1\",\n      .data[[\"Smoke History\"]] == \"non-smoker\" ~ \"0\",\n      .data[[\"Smoke History\"]] == \"past smoker\" ~ \"1\",\n      .data[[\"Smoke History\"]] == \"current smoker\" ~ \"0\",\n      .default = NA_character_\n    ),\n    smoke_past = forcats::fct_relevel(\n      .data[[\"smoke_past\"]],\n      c(\"0\", \"1\")),\n    `Smoke History` = forcats::fct(\n      .data[[\"Smoke History\"]]\n    )\n  ) |&gt;\n  pointblank::col_vals_in_set(\n    columns = c(\"smoke_current\", \"smoke_past\"),\n    set = c(\"0\", \"1\", \"-1\")\n  ) |&gt; \n  pointblank::col_vals_expr(\n    expr = pointblank::expr(\n      (.data[[\"smoke_current\"]] == \"1\" & .data[[\"smoke_past\"]] == \"0\") |\n      (.data[[\"smoke_current\"]] == \"-1\" & .data[[\"smoke_past\"]] == -\"1\") |\n      (.data[[\"smoke_current\"]] == \"0\" & .data[[\"smoke_past\"]] %in% c(\"0\", \"1\"))\n    )\n  )\n\n\n\n\nCode\nif (params$show_table && knitr::is_html_output()) {\n  smoking_data |&gt;\n    harmonisation::reactable_with_download_csv_button()\n}\n\n\n\n\n\n\nDownload as CSV\n\n\n\nRemove unnecessary columns so that we can merge with the other fields.\n\n\nCode\nsmoking_data &lt;- smoking_data |&gt;\n  dplyr::select(-c(\"Smoke History\"))\n\n\n\n\n2.4 Chest Pain\n\n2.4.1 Shortness of Breath\nhave_sob is grouped as follows:\n\n\n\n\n\n\n\n\nDyspnea\nhave_sob\n\n\n\n\nno\n0\n\n\nyes\n1\n\n\n\n\n\n\nCode\nshortness_of_breath_data &lt;- cohort_B_data |&gt;\n  dplyr::select(c(\"cohort_unique_id\", \"Dyspnea\")) |&gt;\n  dplyr::mutate(\n    have_sob = dplyr::case_when(\n      .data[[\"Dyspnea\"]] == \"no\" ~ \"0\",\n      .data[[\"Dyspnea\"]] == \"yes\" ~ \"1\",\n      .default = NA_character_\n    ),\n    have_sob = forcats::fct_relevel(\n      as.character(.data[[\"have_sob\"]]),\n      c(\"0\", \"1\")),\n    Dyspnea = forcats::fct_relevel(\n      as.character(.data[[\"Dyspnea\"]]),\n      c(\"no\", \"yes\")),    \n  ) |&gt;\n  pointblank::col_vals_in_set(\n    columns = c(\"have_sob\"),\n    set = c(\"0\", \"1\", \"-1\")\n  ) \n\n\n\n\nCode\nif (params$show_table && knitr::is_html_output()) {\n  shortness_of_breath_data |&gt; \n    harmonisation::reactable_with_download_csv_button()\n}\n\n\n\n\n\n\nDownload as CSV\n\n\n\nRemove unnecessary columns so that we can merge with the other fields.\n\n\nCode\nshortness_of_breath_data &lt;- shortness_of_breath_data |&gt;\n  dplyr::select(-c(\"Dyspnea\"))\n\n\n\n\n2.4.2 Have chest pain or not\nhave_chest_pain is grouped as follows:\n\n\n\n\n\n\n\n\nChest Pain Character\nhave_chest_pain\n\n\n\n\nno chest pain\n0\n\n\ntypical, atypical or nonanginal\n1\n\n\n\n\n\n\nCode\nhave_chest_pain_data &lt;- cohort_B_data |&gt;\n  dplyr::select(c(\"cohort_unique_id\", \"Chest Pain Character\")) |&gt;\n  dplyr::mutate(\n    have_chest_pain = dplyr::case_when(\n      .data[[\"Chest Pain Character\"]] %in% c(\"no chest pain\") ~ \"0\",\n      .data[[\"Chest Pain Character\"]] %in% c(\"typical\", \"atypical\", \"nonanginal\") ~ \"1\",\n      .default = NA_character_\n    ),\n    have_chest_pain = forcats::fct_relevel(\n      .data[[\"have_chest_pain\"]],\n      c(\"0\", \"1\")\n    ),\n    `Chest Pain Character` = forcats::fct_relevel(\n      as.character(.data[[\"Chest Pain Character\"]]),\n      c(\"no chest pain\", \"typical\", \"atypical\", \"nonanginal\")\n    )\n  ) |&gt;\n  pointblank::col_vals_in_set(\n    columns = c(\"have_chest_pain\"),\n    set = c(\"0\", \"1\")\n  )  \n\n\n\n\nCode\nif (params$show_table && knitr::is_html_output()) {\n  have_chest_pain_data |&gt; \n    harmonisation::reactable_with_download_csv_button()\n}\n\n\n\n\n\n\nDownload as CSV\n\n\n\nRemove unnecessary columns so that we can merge with the other fields.\n\n\nCode\nhave_chest_pain_data &lt;- have_chest_pain_data |&gt;\n  dplyr::select(-c(\"Chest Pain Character\"))\n\n\n\n\n2.4.3 Symptomatic or Asymptomatic\nsymptoms is grouped as follows:\n\n\n\n\n\n\n\n\n\nhave_sob\nhave_chest_pain\nsymptoms\n\n\n\n\n-1\n-1\n-1\n\n\n0\n0\n0\n\n\n0 or 1\n1\n1\n\n\n1\n0\n2\n\n\n\n\n\n\nCode\nsymptoms_data &lt;- cohort_B_data |&gt;\n  dplyr::select(c(\"cohort_unique_id\")) |&gt;\n  dplyr::left_join(shortness_of_breath_data, \n                   by = dplyr::join_by(\"cohort_unique_id\"),\n                   unmatched = \"error\",\n                   relationship = \"one-to-one\") |&gt; \n  dplyr::left_join(have_chest_pain_data, \n                   by = dplyr::join_by(\"cohort_unique_id\"),\n                   unmatched = \"error\",\n                   relationship = \"one-to-one\") |&gt;                   \n  dplyr::mutate(\n    symptoms = dplyr::case_when(\n      (.data[[\"have_chest_pain\"]] == \"-1\" &\n       .data[[\"have_sob\"]] == \"-1\"\n      ) ~ \"-1\",\n      (.data[[\"have_chest_pain\"]] == \"0\" &\n       .data[[\"have_sob\"]] == \"0\" \n      ) ~ \"0\",        \n      (.data[[\"have_chest_pain\"]] == \"1\" &\n       .data[[\"have_sob\"]] %in% c(\"0\", \"1\")\n      ) ~ \"1\", \n      (.data[[\"have_chest_pain\"]] == \"0\" &\n       .data[[\"have_sob\"]] == \"1\" \n      ) ~ \"2\",  \n      .default = NA_character_\n    ),\n    symptoms = forcats::fct_relevel(\n      .data[[\"symptoms\"]],\n      c(\"0\", \"1\", \"2\"))\n  ) |&gt; \n  pointblank::col_vals_in_set(\n    columns = c(\"symptoms\"),\n    set = c(\"0\", \"1\", \"2\")\n  )\n\n\n\n\nCode\nif (params$show_table && knitr::is_html_output()) {\n  symptoms_data |&gt; \n    harmonisation::reactable_with_download_csv_button()\n}\n\n\n\n\n\n\nDownload as CSV\n\n\n\nRemove unnecessary columns so that we can merge with the other fields.\n\n\nCode\nsymptoms_data &lt;- symptoms_data |&gt;\n  dplyr::select(-c(\"have_chest_pain\", \"have_sob\"))\n\n\n\n\n2.4.4 Chest Pain Type\nchest_pain_type is grouped as follows:\n\n\n\n\n\n\n\n\n\nDyspnea\nChest Pain Character\nchest_pain_type\n\n\n\n\nno\nno chest pain\n0\n\n\nno or yes\ntypical\n1\n\n\nno or yes\natypical\n2\n\n\nno or yes\nnonanginal\n3\n\n\nyes\nno chest pain\n4\n\n\n\n\n\n\nCode\nchest_pain_type_data &lt;- cohort_B_data |&gt;\n  dplyr::select(c(\"cohort_unique_id\", \"Chest Pain Character\", \"Dyspnea\")) |&gt;\n  dplyr::mutate(\n    chest_pain_type = dplyr::case_when(\n      (.data[[\"Chest Pain Character\"]] == \"no chest pain\" &\n       .data[[\"Dyspnea\"]] == \"no\" \n      ) ~ \"0\",        \n      (.data[[\"Chest Pain Character\"]] == \"typical\" &\n       .data[[\"Dyspnea\"]] %in% c(\"no\", \"yes\")\n      ) ~ \"1\",\n      (.data[[\"Chest Pain Character\"]] == \"atypical\" &\n       .data[[\"Dyspnea\"]] %in% c(\"no\", \"yes\")\n      ) ~ \"2\", \n      (.data[[\"Chest Pain Character\"]] == \"nonanginal\" &\n       .data[[\"Dyspnea\"]] %in% c(\"no\", \"yes\")\n      ) ~ \"3\", \n      (.data[[\"Chest Pain Character\"]] == \"no chest pain\" &\n       .data[[\"Dyspnea\"]] == \"yes\" \n      ) ~ \"4\",  \n      .default = NA_character_\n    ),\n    `Chest Pain Character` = forcats::fct_relevel(\n      as.character(.data[[\"Chest Pain Character\"]]),\n      c(\"no chest pain\", \"typical\", \"atypical\", \"nonanginal\")\n    ),\n    `Dyspnea` = forcats::fct_relevel(\n      as.character(.data[[\"Dyspnea\"]]),\n      c(\"no\", \"yes\")\n    ),\n    chest_pain_type = forcats::fct_relevel(\n      .data[[\"chest_pain_type\"]],\n      c(\"0\", \"1\", \"2\", \"3\"))\n  ) |&gt; \n  dplyr::relocate(\n    \"Chest Pain Character\",\n    .after = \"cohort_unique_id\"\n  ) |&gt; \n  pointblank::col_vals_in_set(\n    columns = c(\"chest_pain_type\"),\n    set = c(\"0\", \"1\", \"2\", \"3\", \"4\")\n  )\n\n\n\n\nCode\nif (params$show_table && knitr::is_html_output()) {\n  chest_pain_type_data |&gt; \n    harmonisation::reactable_with_download_csv_button()\n}\n\n\n\n\n\n\nDownload as CSV\n\n\n\nRemove unnecessary columns so that we can merge with the other fields.\n\n\nCode\nchest_pain_type_data &lt;- chest_pain_type_data |&gt;\n  dplyr::select(-c(\"Dyspnea\", \"Chest Pain Character\"))\n\n\n\n\n2.4.5 Combined chest pain related tables\nWe combine all chest related tables together\n\n\nCode\njoin_specification &lt;- dplyr::join_by(\"cohort_unique_id\")\n\nchest_pain_data &lt;- cohort_B_data |&gt; \n  dplyr::select(c(\"cohort_unique_id\")) |&gt; \n  dplyr::left_join(have_chest_pain_data, \n                   by = join_specification,\n                   unmatched = \"error\",\n                   relationship = \"one-to-one\") |&gt; \n  dplyr::left_join(chest_pain_type_data, \n                   by = join_specification,\n                   unmatched = \"error\",\n                   relationship = \"one-to-one\") |&gt; \n  dplyr::left_join(shortness_of_breath_data, \n                   by = join_specification,\n                   unmatched = \"error\",\n                   relationship = \"one-to-one\") |&gt; \n  dplyr::left_join(symptoms_data,\n                   by = join_specification,\n                   unmatched = \"error\",\n                   relationship = \"one-to-one\")\n\ntestthat::expect_true(\n  pointblank::has_columns(\n    chest_pain_data,\n    columns = c(\"have_sob\", \"have_chest_pain\", \"symptoms\", \"chest_pain_type\")\n  )\n) \n\ntestthat::expect_equal(\n  ncol(chest_pain_data), 5\n) \n\n\n\n\n\n2.5 Combine Demographics\nWe combine all the data to give the demo_behave_data.\n\n\nCode\njoin_specification &lt;- dplyr::join_by(\"cohort_unique_id\")\n\ndemo_behave_data &lt;- cohort_B_data |&gt;\n  dplyr::select(c(\"cohort_unique_id\")) |&gt;\n  dplyr::left_join(age_gender_data,\n                   by = join_specification,\n                   unmatched = \"error\",\n                   relationship = \"one-to-one\") |&gt;\n  dplyr::left_join(body_measurement_data,\n                   by = join_specification,\n                   unmatched = \"error\",\n                   relationship = \"one-to-one\") |&gt;\n  dplyr::left_join(smoking_data,\n                   by = join_specification,\n                   unmatched = \"error\",\n                   relationship = \"one-to-one\") |&gt;\n  dplyr::left_join(chest_pain_data,\n                   by = join_specification,\n                   unmatched = \"error\",\n                   relationship = \"one-to-one\") |&gt;\n  dplyr::relocate(c(\"bsa_m2\", \"bmi\"),\n                  .after = \"sex\")\n\n\ntestthat::expect_true(\n  pointblank::has_columns(\n    demo_behave_data,\n    columns = c(\n      \"age_years\", \"sex\",\n      \"height_cm\", \"weight_kg\", \"bsa_m2\", \"bmi\",\n      \"smoke_current\", \"smoke_past\",\n      \"have_sob\", \"have_chest_pain\",\n      \"symptoms\", \"chest_pain_type\"\n    )\n  )\n) \n\ntestthat::expect_equal(\n  ncol(demo_behave_data), 13\n)",
+    "crumbs": [
+      "Cohort B Cleaning",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Extract Demographic</span>"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_B/02_Extract_Demographic.html#write-preprocessed-file",
+    "href": "codes/Cohort_B/02_Extract_Demographic.html#write-preprocessed-file",
+    "title": "3  Extract Demographic",
+    "section": "3 Write Preprocessed File",
+    "text": "3 Write Preprocessed File\nWe output data to be used for the next session.\n\n\nCode\ndemo_behave_data |&gt;\n  fst::write_fst(\n    path = here::here(\n      params$analysis_folder,\n      params$harmonisation_folder,\n      params$preprocessing_folder,\n      \"02_demographic_data.fst\"),\n)",
+    "crumbs": [
+      "Cohort B Cleaning",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Extract Demographic</span>"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_B/03_Export_To_Excel.html",
+    "href": "codes/Cohort_B/03_Export_To_Excel.html",
+    "title": "4  Export To Excel",
+    "section": "",
+    "text": "1 Read all tabular data\nWe read all tabular data from the previous section.",
+    "crumbs": [
+      "Cohort B Cleaning",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Export To Excel</span>"
+    ]
+  },
+  {
+    "objectID": "codes/Cohort_B/03_Export_To_Excel.html#export-data-as-excel",
+    "href": "codes/Cohort_B/03_Export_To_Excel.html#export-data-as-excel",
+    "title": "4  Export To Excel",
+    "section": "2 Export Data as Excel",
+    "text": "2 Export Data as Excel\nWe export the standardised data to an excel file called harmonised_Cohort_B.xlsx\n\n\nCode\n# Create a new workbook\nmy_workbook &lt;- openxlsx::createWorkbook()\n\nsheet_name = c(\"demographics\")\n\noutput_data = list(demo_behave_data)  |&gt; \n  purrr::map(\n    .f = harmonisation::add_cohort_name,\n    cohort_name = params$cohort_name,\n    cohort_name_column = \"cohort_name\"\n  )\n\npurrr::walk2(\n    .x = sheet_name,\n    .y = output_data,\n    .f = harmonisation::write_to_sheet,\n    workbook = my_workbook\n)\n\n# Save workbook\nopenxlsx::saveWorkbook(\n  wb = my_workbook, \n  file = here::here(params$analysis_folder,\n                    params$output_folder,\n                    params$cleaned_folder,\n                    params$output_excel_file),\n  overwrite = TRUE\n)",
+    "crumbs": [
+      "Cohort B Cleaning",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Export To Excel</span>"
+    ]
+  }
+]

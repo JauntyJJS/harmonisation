@@ -24,7 +24,7 @@ library("quarto")
 library("harmonisation")
 
 library("here")
-library("readxl")
+library("vroom")
 
 library("dplyr")
 library("tidyr")
@@ -32,6 +32,7 @@ library("magrittr")
 library("stringr")
 library("forcats")
 library("purrr")
+library("lubridate")
 library("tibble")
 
 library("pointblank")
