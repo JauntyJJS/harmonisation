@@ -1,15 +1,11 @@
 # Data Harmonisation Project Template
 
 
-This repository is a project template to create data harmonisation
-reports using [R](https://www.r-project.org/) and
-[Quarto](https://quarto.org/) books. To learn more about Quarto books
-visit <https://quarto.org/docs/books>.
-
 <a name="top"></a>
 
 ## Table of Content
 
+- [Introduction](#introduction)
 - [Acknowledgement](#acknowledgement)
 - [File Structure](#file-structure)
 - [Software Installation](#software-installation)
@@ -18,11 +14,19 @@ visit <https://quarto.org/docs/books>.
 - [R Functions Management](#r-functions-management)
 - [R Packages Used](#r-packages-used)
 - [R Platform Information](#r-platform-information)
-- [DESCRIPTION](#description)
 - [Data Harmonisation Report For Each
   Cohort](#data-harmonisation-report-for-each-cohort)
+- [Combined Data Harmonisation Report For All
+  Cohort](#combined-data-harmonisation-report-for-all-cohort)
 - [Data Harmonisation Summary](#data-harmonisation-summary)
 - [General Recommendations](#general-recommendations)
+
+## Introduction
+
+This repository is a project template to create data harmonisation
+reports using [R](https://www.r-project.org/) and
+[Quarto](https://quarto.org/) books. To learn more about Quarto books
+visit <https://quarto.org/docs/books>.
 
 ## Acknowledgement
 
@@ -409,23 +413,12 @@ Here are the R platform environment used in this analysis.
 
 <a href="#top">Back to top</a>
 
-## DESCRIPTION
-
-The `DESCRIPTION` file contains important compendium metadata. Though
-`DESCRIPTION` file is specific to R package, it can be used to work with
-research compendia (see below). For further information on how to edit
-this file, please read <https://r-pkgs.org/description.html>.
-
-<a href="#top">Back to top</a>
-
 ## Data Harmonisation Report For Each Cohort
 
 To start the harmonisation of data, run the R script
-`cohort_harmonisation_script.R` in `codes` folder.
-
-For each cohort, the script will clean and harmonise the raw data and
-create a Quarto harmonisation report book for each cohort in html, word
-and pdf.
+`cohort_harmonisation_script.R` in `codes` folder. The script will clean
+and harmonise the raw data and create a Quarto harmonisation report book
+for each cohort in html, word and pdf.
 
 This involves
 
@@ -446,6 +439,40 @@ harmonised data as excel file called `harmonised_{cohort_name}.xlsx` in
 the `codes/output/harmonised` folder. Also, the data harmonisation
 process documentation will be created in the `reports/{cohort_name}`
 folder as a Quarto book in html, word and pdf.
+
+<a href="#top">Back to top</a>
+
+## Combined Data Harmonisation Report For All Cohort
+
+To start the harmonisation of data, run the R script
+`cohort_all_harmonisation_script.R` in `codes` folder. The script will
+clean and harmonise the raw data and create a Quarto harmonisation
+report (all cohort combined) book in html.
+
+This involves
+
+- copying a specific `yml` file (`_quarto_all.yml`) from the
+  `templates/quarto-yaml` folder to the project folder `harmonisation`
+  and rename it as `_quarto.yml`, overwriting any existing `_quarto.yml`
+  file.
+- copying a specific `qmd` file (`_index_report.qmd`) from the
+  `templates/index-qmd` folder to the project folder `harmonisation` and
+  rename it as `index.qmd`, overwriting any existing `index.qmd` file.
+
+Using the `_quarto.yml`, `index.qmd`, `references.bib` and
+`csl_file.csl` files, Quarto will then start running the Quarto scripts
+in the `codes/{cohort_name}` folder. This involves reading the raw data
+in the `data-raw/{cohort_name}` folder, placing preprocessing data in
+the `codes/{cohort_name}/preprocessed_data` folder, outputting the
+harmonised data as excel file called `harmonised_{cohort_name}.xlsx` in
+the `codes/output/harmonised` folder. Also, the data harmonisation
+process documentation will be created in the `reports/all` folder as a
+Quarto book in html.
+
+A harmonisation report file can consist of a few hundred pages. It is
+not recommended to output the combined report as one pdf or word
+document file because the file size may be too large and it takes a long
+time to open the file.
 
 <a href="#top">Back to top</a>
 
