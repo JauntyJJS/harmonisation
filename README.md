@@ -28,6 +28,17 @@ reports using [R](https://www.r-project.org/) and
 [Quarto](https://quarto.org/) books. To learn more about Quarto books
 visit <https://quarto.org/docs/books>.
 
+Output of these reports can be found here:
+
+- Cohort_A Harmonisation Report:
+  <https://jauntyjjs-harmonisation-cohort-a.netlify.app>
+- Cohort_B Harmonisation Report:
+  <https://jauntyjjs-harmonisation-cohort-b.netlify.app>
+- Combined (All cohorts) Harmonisation Report:
+  <https://jauntyjjs-harmonisation-cohort-all.netlify.app>
+- Harmonisation Summary:
+  <https://jauntyjjs-harmonisation-summary.netlify.app>
+
 ## Acknowledgement
 
 Layout of this page is inspired from R package
