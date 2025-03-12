@@ -310,17 +310,17 @@ Relevant R packages required for R package development (and available on
 Posit Public Package Manager
 [PPM](https://packagemanager.posit.co/client)) are
 
-``` r
-library("usethis")
-library("devtools")
-library("roxygen2")
-library("testthat")
-library("covr")
-library("spelling")
-library("lintr")
-library("sinew")
-library("pkgdown")
-```
+| package | description | version | date | source | repository |
+|:---|:---|:---|:---|:---|:---|
+| covr | Test Coverage for Packages | 3.6.4 | 2023-11-09 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| devtools | Tools to Make Developing R Packages Easier | 2.4.5 | 2022-10-11 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| lintr | A ‘Linter’ for R Code | 3.2.0 | 2025-02-12 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| pkgdown | Make Static HTML Documentation for a Package | 2.1.1 | 2024-09-17 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| roxygen2 | In-Line Documentation for R | 7.3.2 | 2024-06-28 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| sinew | Package Development Documentation and Namespace Management | 0.4.0 | 2022-03-31 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| spelling | Tools for Spell Checking in R | 2.3.1 | 2024-10-04 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| testthat | Unit Testing for R | 3.2.3 | 2025-01-13 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| usethis | Automate Package and Project Setup | 3.1.0 | 2024-11-26 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
 
 Here is an example of the command to use `pak::pak("{package name}")` to
 install packages from [PPM](https://packagemanager.posit.co/client).
@@ -348,108 +348,49 @@ Game](https://r-pkgs.org/whole-game.html) of the R Packages (2e) book.
 ## R Packages Used
 
 R packages installed from Posit Public Package Manager
-[PPM](https://packagemanager.posit.co/client) using command
+[PPM](https://packagemanager.posit.co/client) or CRAN using command
 `pak::pak("{package name}")` are
-
-``` r
-library("renv")
-library("sessioninfo")
-library("knitr")
-library("rmarkdown")
-library("quarto")
-library("rlang")
-library("cli")
-
-library("fs")
-library("here")
-library("fst")
-library("readxl")
-library("vroom")
-
-library("dplyr")
-library("tidyr")
-library("magrittr")
-library("stringr")
-library("forcats")
-library("purrr")
-library("tibble")
-library("glue")
-
-library("collateral")
-library("pointblank")
-library("testthat")
-
-library("htmltools")
-library("htmlwidgets")
-library("fontawesome")
-library("reactable")
-library("flextable")
-library("ftExtra")
-
-library("openxlsx")
-
-library("harmonisation")
-```
 
 Here are all the R packages used in this analysis.
 
-``` r
-harmonisation::get_r_package_info() |> 
-  knitr::kable()
-```
-
-| package       | version    | date       | source         |
-|:--------------|:-----------|:-----------|:---------------|
-| cli           | 3.6.4      | 2025-02-13 | RSPM           |
-| collateral    | 0.5.2      | 2021-10-25 | RSPM           |
-| covr          | 3.6.4      | 2023-11-09 | RSPM           |
-| devtools      | 2.4.5      | 2022-10-11 | RSPM           |
-| dplyr         | 1.1.4      | 2023-11-17 | RSPM           |
-| flextable     | 0.9.7      | 2024-10-27 | RSPM           |
-| fontawesome   | 0.5.3      | 2024-11-16 | RSPM           |
-| forcats       | 1.0.0      | 2023-01-29 | RSPM           |
-| fs            | 1.6.5      | 2024-10-30 | RSPM           |
-| fst           | 0.9.8      | 2022-02-08 | RSPM           |
-| ftExtra       | 0.6.4      | 2024-05-10 | RSPM           |
-| glue          | 1.8.0      | 2024-09-30 | RSPM           |
-| harmonisation | 0.0.0.9999 | 2025-03-09 | local          |
-| here          | 1.0.1      | 2020-12-13 | RSPM           |
-| htmltools     | 0.5.8.1    | 2024-04-04 | RSPM           |
-| htmlwidgets   | 1.6.4      | 2023-12-06 | RSPM           |
-| knitr         | 1.49       | 2024-11-08 | RSPM           |
-| lintr         | 3.2.0      | 2025-02-12 | RSPM           |
-| magrittr      | 2.0.3      | 2022-03-30 | RSPM           |
-| openxlsx      | 4.2.8      | 2025-01-25 | RSPM           |
-| pkgdown       | 2.1.1      | 2024-09-17 | RSPM           |
-| pointblank    | 0.12.2     | 2024-10-23 | RSPM           |
-| purrr         | 1.0.4      | 2025-02-05 | RSPM           |
-| quarto        | 1.4.4      | 2024-07-20 | RSPM           |
-| reactable     | 0.4.4      | 2023-03-12 | RSPM           |
-| readxl        | 1.4.4      | 2025-02-27 | RSPM           |
-| renv          | 1.1.0      | 2025-01-29 | RSPM (R 4.4.0) |
-| rlang         | 1.1.5      | 2025-01-17 | RSPM           |
-| rmarkdown     | 2.29       | 2024-11-04 | RSPM           |
-| roxygen2      | 7.3.2      | 2024-06-28 | RSPM           |
-| sessioninfo   | 1.2.2      | 2021-12-06 | CRAN (R 4.4.2) |
-| sinew         | 0.4.0      | 2022-03-31 | RSPM           |
-| spelling      | 2.3.1      | 2024-10-04 | RSPM           |
-| stringr       | 1.5.1      | 2023-11-14 | RSPM           |
-| testthat      | 3.2.3      | 2025-01-13 | RSPM           |
-| tibble        | 3.2.1      | 2023-03-20 | RSPM           |
-| tidyr         | 1.3.1      | 2024-01-24 | RSPM           |
-| usethis       | 3.1.0      | 2024-11-26 | RSPM           |
-| vroom         | 1.6.5      | 2023-12-05 | RSPM           |
+| package | title | version | date | source | repository |
+|:---|:---|:---|:---|:---|:---|
+| cli | Helpers for Developing Command Line Interfaces | 3.6.4 | 2025-02-13 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| dplyr | A Grammar of Data Manipulation | 1.1.4 | 2023-11-17 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| flextable | Functions for Tabular Reporting | 0.9.7 | 2024-10-27 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| fontawesome | Easily Work with ‘Font Awesome’ Icons | 0.5.3 | 2024-11-16 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| forcats | Tools for Working with Categorical Variables (Factors) | 1.0.0 | 2023-01-29 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| fs | Cross-Platform File System Operations Based on ‘libuv’ | 1.6.5 | 2024-10-30 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| fst | Lightning Fast Serialization of Data Frames | 0.9.8 | 2022-02-08 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| ftExtra | Extensions for ‘Flextable’ | 0.6.4 | 2024-05-10 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| glue | Interpreted String Literals | 1.8.0 | 2024-09-30 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| harmonisation | Utility functions for project | 0.0.0.9999 | 2025-03-09 | local | NA |
+| here | A Simpler Way to Find Your Files | 1.0.1 | 2020-12-13 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| htmltools | Tools for HTML | 0.5.8.1 | 2024-04-04 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| htmlwidgets | HTML Widgets for R | 1.6.4 | 2023-12-06 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| knitr | A General-Purpose Package for Dynamic Report Generation in R | 1.49 | 2024-11-08 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| magrittr | A Forward-Pipe Operator for R | 2.0.3 | 2022-03-30 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| openxlsx | Read, Write and Edit xlsx Files | 4.2.8 | 2025-01-25 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| pointblank | Data Validation and Organization of Metadata for Local and Remote Tables | 0.12.2 | 2024-10-23 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| purrr | Functional Programming Tools | 1.0.4 | 2025-02-05 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| quarto | R Interface to ‘Quarto’ Markdown Publishing System | 1.4.4 | 2024-07-20 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| reactable | Interactive Data Tables for R | 0.4.4 | 2023-03-12 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| readxl | Read Excel Files | 1.4.4 | 2025-02-27 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| renv | Project Environments | 1.1.2 | 2025-03-03 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| rlang | Functions for Base Types and Core R and ‘Tidyverse’ Features | 1.1.5 | 2025-01-17 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| rmarkdown | Dynamic Documents for R | 2.29 | 2024-11-04 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| sessioninfo | R Session Information | 1.2.2 | 2021-12-06 | CRAN (R 4.4.2) | https://cran.rstudio.com |
+| stringr | Simple, Consistent Wrappers for Common String Operations | 1.5.1 | 2023-11-14 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| testthat | Unit Testing for R | 3.2.3 | 2025-01-13 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| tibble | Simple Data Frames | 3.2.1 | 2023-03-20 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| tidyr | Tidy Messy Data | 1.3.1 | 2024-01-24 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
+| vroom | Read and Write Rectangular Text Data Quickly | 1.6.5 | 2023-12-05 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
 
 <a href="#top">Back to top</a>
 
 ## R Platform Information
 
 Here are the R platform environment used in this analysis.
-
-``` r
-harmonisation::get_r_platform_info() |> 
-  knitr::kable()
-```
 
 | setting | value |
 |:---|:---|

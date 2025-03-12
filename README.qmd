@@ -271,9 +271,10 @@ R functions heavily used in this project can be found in the `R` folder. Documen
 
 ```{r}
 #| label: R Package development packages
-#| echo: true
+#| echo: false
 #| warning: false
 #| message: false
+
 
 library("usethis")
 library("devtools")
@@ -284,6 +285,50 @@ library("spelling")
 library("lintr")
 library("sinew")
 library("pkgdown")
+
+
+```
+
+```{r}
+#| label: R Package development packages for print
+#| echo: false
+#| warning: false
+#| message: false
+#| eval: !expr out_type != "html"
+
+r_package_data <- harmonisation::get_r_package_info() |> 
+  dplyr::mutate(
+    description = purrr::map_chr(
+      .x = .data[["package"]], 
+      .f = utils::packageDescription, 
+      fields = "Title"
+    ),
+    description = stringr::str_replace(.data[["description"]], "\\n", " "),
+    repository = purrr::map_chr(
+      .x = .data[["package"]], 
+      .f = utils::packageDescription, 
+      fields = "RemoteRepos"
+    ),
+  ) |> 
+  dplyr::relocate(
+    "description",
+    .after = "package"
+  )
+  
+r_package_data |>   
+  knitr::kable()
+
+```
+
+```{r}
+#| label: Detach Package
+#| echo: false
+#| warning: false
+#| message: false
+
+for (pkg in r_package_data$package) {
+  detach(paste0("package:", pkg), character.only = TRUE)
+}
 
 
 ```
@@ -299,11 +344,11 @@ More information of this workflow can be found in [Chapter 1: The Whole Game](ht
 
 ## R Packages Used
 
-R packages installed from Posit Public Package Manager [PPM](https://packagemanager.posit.co/client) using command `pak::pak("{package name}")` are
+R packages installed from Posit Public Package Manager [PPM](https://packagemanager.posit.co/client) or CRAN using command `pak::pak("{package name}")` are
 
 ```{r}
 #| label: load cran libraries
-#| echo: true
+#| echo: false
 #| warning: false
 #| message: false
 
@@ -330,7 +375,7 @@ library("purrr")
 library("tibble")
 library("glue")
 
-library("collateral")
+# library("collateral")
 library("pointblank")
 library("testthat")
 
@@ -353,9 +398,31 @@ Here are all the R packages used in this analysis.
 
 ```{r}
 #| label: packages info not html
+#| echo: false
+#| warning: false
+#| message: false
 #| eval: !expr out_type != "html"
 
-harmonisation::get_r_package_info() |> 
+r_package_data <- harmonisation::get_r_package_info() |> 
+  dplyr::mutate(
+    title = purrr::map_chr(
+      .x = .data[["package"]], 
+      .f = utils::packageDescription, 
+      fields = "Title"
+    ),
+    title = stringr::str_replace(.data[["title"]], "\\n", " "),
+    repository = purrr::map_chr(
+      .x = .data[["package"]], 
+      .f = utils::packageDescription, 
+      fields = "RemoteRepos"
+    ),
+  ) |> 
+  dplyr::relocate(
+    "title",
+    .after = "package"
+  )
+  
+r_package_data |>   
   knitr::kable()
 
 ```
@@ -372,6 +439,9 @@ Here are the R platform environment used in this analysis.
 
 ```{r}
 #| label: session info not html
+#| echo: false
+#| warning: false
+#| message: false
 #| eval: !expr out_type != "html"
 
 harmonisation::get_r_platform_info() |> 
