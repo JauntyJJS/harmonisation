@@ -31,13 +31,23 @@ visit <https://quarto.org/docs/books>.
 Output of these reports can be found here:
 
 - Cohort_A Harmonisation Report:
-  <https://jauntyjjs-harmonisation-cohort-a.netlify.app>
+  - 🌐 HTML: <https://jauntyjjs-harmonisation-cohort-a.netlify.app>
+  - 📕 PDF :
+    <https://jauntyjjs-harmonisation-cohort-a.netlify.app/Harmonisation-Template-for-Cohort-A.pdf>
+  - 📘 Word:
+    <https://jauntyjjs-harmonisation-cohort-a.netlify.app/Harmonisation-Template-for-Cohort-A.docx>
 - Cohort_B Harmonisation Report:
-  <https://jauntyjjs-harmonisation-cohort-b.netlify.app>
+  - 🌐 HTML: <https://jauntyjjs-harmonisation-cohort-b.netlify.app>
+  - 📕 PDF :
+    <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.pdf>
+  - 📘 Word:
+    <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.docx>
 - Combined (All cohorts) Harmonisation Report:
-  <https://jauntyjjs-harmonisation-cohort-all.netlify.app>
+  - 🌐 HTML: <https://jauntyjjs-harmonisation-cohort-all.netlify.app>
 - Harmonisation Summary:
-  <https://jauntyjjs-harmonisation-summary.netlify.app>
+  - 🌐 HTML: <https://jauntyjjs-harmonisation-summary.netlify.app>
+  - 📘 Word:
+    <https://jauntyjjs-harmonisation-summary.netlify.app/Harmonisation-Summary-Report-Template.docx>
 
 ## Acknowledgement
 
@@ -268,20 +278,17 @@ installation of frozen R package versions based on a snapshot date.
 One way to do that is to set in the `.Rprofile` file with the code
 `options(repos = c(P3M = "{link to repository url form Posit Public Package Manager}"))`
 
-R packages can be installed using the package
-[`pak`](https://pak.r-lib.org/) as an alternative to
+R packages can be installed using
+[`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html)
+from the R package [`pak`](https://pak.r-lib.org/) as an alternative to
 [`install.packages()`](https://rdrr.io/r/utils/install.packages.html)
 and
 [`remotes::install_github()`](https://remotes.r-lib.org/reference/install_github.html).
 Benefits of using [`pak`](https://pak.r-lib.org/) can be found
 [here](https://pak.r-lib.org/reference/features.html)
 
-You can also view your respository environment using the command
+You can also view your repository environment using the command
 [`pak::repo_get()`](https://pak.r-lib.org/reference/repo_get.html)
-
-R package can be loaded using the command `library({package_name})`. You
-can use the R package [`annotater`](https://annotater.liomys.mx/) to add
-additional information on what the loaded package does.
 
 <a href="#top">Back to top</a>
 
@@ -300,9 +307,11 @@ will use the exact same versions of these packages. Moreover `renv`
 provides to each project its own private package library making each
 project isolated from others.
 
-Install required dependencies locally with `install.packages()` or
-[`renv::install()`](https://rstudio.github.io/renv/reference/install.html)
-from CRAN, Bioconductor, Github, explicit file path, etc.
+Install required dependencies locally with
+[`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html)
+from [CRAN](https://cran.r-project.org/),
+[Bioconductor](https://www.bioconductor.org/),
+[R-universe](https://r-universe.dev/search), etc.
 
 Sometimes the right
 [downloader](https://community.rstudio.com/t/can-not-install-packages-after-initializing-renv/106064)
@@ -338,7 +347,8 @@ Posit Public Package Manager
 | usethis | Automate Package and Project Setup | 3.1.0 | 2024-11-26 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
 
 Here is an example of the command to use `pak::pak("{package name}")` to
-install packages from [PPM](https://packagemanager.posit.co/client).
+install packages from the Posit Public Package Manager
+[PPM](https://packagemanager.posit.co/client).
 
 There is no need to source the functions in the R folder. Use
 [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html)
@@ -363,8 +373,9 @@ Game](https://r-pkgs.org/whole-game.html) of the R Packages (2e) book.
 ## R Packages Used
 
 R packages installed from Posit Public Package Manager
-[PPM](https://packagemanager.posit.co/client) or CRAN using command
-`pak::pak("{package name}")` are
+[PPM](https://packagemanager.posit.co/client) or
+[CRAN](https://cran.r-project.org/) using command
+`pak::pkg_install("{package name}")` are
 
 Here are all the R packages used in this analysis.
 
@@ -530,9 +541,6 @@ summary documentation will be created in the
 - Use
   [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)
   to update the `NAMESPACE`
-- Use
-  [`rcompendium::add_dependencies`](https://frbcesab.github.io/rcompendium/reference/add_dependencies.html)
-  to update the list of required dependencies in `DESCRIPTION`
 - Do not source your functions but use instead
   [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html).
   [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html)

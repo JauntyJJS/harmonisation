@@ -35,10 +35,19 @@ This repository is a project template to create data harmonisation reports using
 
 Output of these reports can be found here:
 
-*  Cohort_A Harmonisation Report: <https://jauntyjjs-harmonisation-cohort-a.netlify.app>
-*  Cohort_B Harmonisation Report: <https://jauntyjjs-harmonisation-cohort-b.netlify.app>
-*  Combined (All cohorts) Harmonisation Report: <https://jauntyjjs-harmonisation-cohort-all.netlify.app>
-*  Harmonisation Summary: <https://jauntyjjs-harmonisation-summary.netlify.app>
+*  Cohort_A Harmonisation Report: 
+   * 🌐 HTML: <https://jauntyjjs-harmonisation-cohort-a.netlify.app>
+   * 📕 PDF : <https://jauntyjjs-harmonisation-cohort-a.netlify.app/Harmonisation-Template-for-Cohort-A.pdf>
+   * 📘 Word: <https://jauntyjjs-harmonisation-cohort-a.netlify.app/Harmonisation-Template-for-Cohort-A.docx>
+*  Cohort_B Harmonisation Report:
+   * 🌐 HTML: <https://jauntyjjs-harmonisation-cohort-b.netlify.app>
+   * 📕 PDF : <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.pdf>
+   * 📘 Word: <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.docx>
+*  Combined (All cohorts) Harmonisation Report:
+   * 🌐 HTML: <https://jauntyjjs-harmonisation-cohort-all.netlify.app>
+*  Harmonisation Summary:
+   * 🌐 HTML: <https://jauntyjjs-harmonisation-summary.netlify.app>
+   * 📘 Word: <https://jauntyjjs-harmonisation-summary.netlify.app/Harmonisation-Summary-Report-Template.docx>
 
 ## Acknowledgement
 
@@ -252,11 +261,9 @@ Use Posit Public Package Manager [PPM](https://packagemanager.posit.co/client) t
 
 One way to do that is to set in the `.Rprofile` file with the code `options(repos = c(P3M = "{link to repository url form Posit Public Package Manager}"))`
 
-R packages can be installed using the package [`pak`](https://pak.r-lib.org/) as an alternative to [`install.packages()`](https://rdrr.io/r/utils/install.packages.html) and [`remotes::install_github()`](https://remotes.r-lib.org/reference/install_github.html). Benefits of using [`pak`](https://pak.r-lib.org/) can be found [here](https://pak.r-lib.org/reference/features.html)
+R packages can be installed using [`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html) from the R package [`pak`](https://pak.r-lib.org/) as an alternative to [`install.packages()`](https://rdrr.io/r/utils/install.packages.html) and [`remotes::install_github()`](https://remotes.r-lib.org/reference/install_github.html). Benefits of using [`pak`](https://pak.r-lib.org/) can be found [here](https://pak.r-lib.org/reference/features.html)
 
-You can also view your respository environment using the command [`pak::repo_get()`](https://pak.r-lib.org/reference/repo_get.html)
-
-R package can be loaded using the command `library({package_name})`. You can use the R package [`annotater`](https://annotater.liomys.mx/) to add additional information on what the loaded package does. 
+You can also view your repository environment using the command [`pak::repo_get()`](https://pak.r-lib.org/reference/repo_get.html)
 
 <a href="#top">Back to top</a>
 
@@ -267,7 +274,7 @@ You can increase reproducibility by using the package [`renv`](https://rstudio.g
 `renv` will freeze the exact package versions you depend on (in `renv.lock`). 
 This ensures that each collaborator (or you in the future) will use the exact same versions of these packages. Moreover `renv` provides to each project its own private package library making each project isolated from others.
 
-Install required dependencies locally with `install.packages()` or [`renv::install()`](https://rstudio.github.io/renv/reference/install.html) from CRAN, Bioconductor, Github, explicit file path, etc.
+Install required dependencies locally with [`pak::pkg_install()`](https://pak.r-lib.org/reference/pkg_install.html) from [CRAN](https://cran.r-project.org/), [Bioconductor](https://www.bioconductor.org/), [R-universe](https://r-universe.dev/search), etc.
 
 Sometimes the right [downloader](https://community.rstudio.com/t/can-not-install-packages-after-initializing-renv/106064) (libcurl or others) needs to set for installation of R packages inside the `renv` environment to be successful. Setting the R environmental variable RENV_DOWNLOAD_FILE_METHOD = "libcurl" may help.
 
@@ -343,7 +350,7 @@ for (pkg in r_package_data$package) {
 
 ```
 
-Here is an example of the command to use `pak::pak("{package name}")` to install packages from [PPM](https://packagemanager.posit.co/client).
+Here is an example of the command to use `pak::pak("{package name}")` to install packages from the Posit Public Package Manager [PPM](https://packagemanager.posit.co/client).
 
 There is no need to source the functions in the R folder. Use [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html) instead. [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html) will load required dependencies listed in `DESCRIPTION` and R functions stored in `R/`. Prior installation of these dependencies is required for the load to be successful.
 
@@ -354,7 +361,7 @@ More information of this workflow can be found in [Chapter 1: The Whole Game](ht
 
 ## R Packages Used
 
-R packages installed from Posit Public Package Manager [PPM](https://packagemanager.posit.co/client) or CRAN using command `pak::pak("{package name}")` are
+R packages installed from Posit Public Package Manager [PPM](https://packagemanager.posit.co/client) or [CRAN](https://cran.r-project.org/) using command `pak::pkg_install("{package name}")` are
 
 ```{r}
 #| label: load cran libraries
@@ -517,7 +524,6 @@ Using the `_quarto.yml`, `index.qmd`, `references.bib` and `csl_file.csl` files,
 - Built relative paths using [`here::here()`](https://here.r-lib.org/reference/here.html)
 - Call external functions as `{package_name}::{function()}`
 - Use [`devtools::document()`](https://devtools.r-lib.org/reference/document.html) to update the `NAMESPACE`
-- Use [`rcompendium::add_dependencies`](https://frbcesab.github.io/rcompendium/reference/add_dependencies.html) to update the list of required dependencies in `DESCRIPTION`
 - Do not source your functions but use instead [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html). [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html) will load required dependencies listed in `DESCRIPTION` and R functions stored in `R/`
 
 <a href="#top">Back to top</a>
