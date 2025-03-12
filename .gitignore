@@ -7,7 +7,6 @@
 .DS_Store
 generate
 renv
-data-raw
 /.quarto/
 codes/Cohort_A/*.docx
 codes/Cohort_A/*.pdf

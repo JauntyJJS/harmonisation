@@ -7,21 +7,21 @@ library(purrr)
 
 index_qmd_file <- paste0(
   "_index_",
-  "file_structure",
+  "report",
   ".qmd"
 )
 
 fs::file_copy(
   path = here::here(
-    "index-qmd-template",
+    "templates",
+    "index-qmd",
     index_qmd_file),
   new_path = here::here("index.qmd"),
   overwrite = TRUE
 )
 
 copy_and_render <- function(
-    cohort,
-    quarto_yml_folder = "quarto-yaml-template"
+    cohort
 ) {
 
   quarto_yml_file <- paste0(
@@ -32,7 +32,8 @@ copy_and_render <- function(
 
   fs::file_copy(
     path = here::here(
-      quarto_yml_folder,
+      "templates",
+      "quarto-yaml",
       quarto_yml_file),
     new_path = here::here("_quarto.yml"),
     overwrite = TRUE
@@ -50,8 +51,7 @@ cohort_name <- c("Cohort_A", "Cohort_B")
 purrr::walk(
   .x = cohort_name,
   .f = ~copy_and_render(
-    cohort = .x,
-    quarto_yml_folder = "quarto-yaml-template"
+    cohort = .x
   )
 )
 

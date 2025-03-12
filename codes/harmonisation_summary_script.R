@@ -6,13 +6,14 @@ library(here)
 
 index_qmd_file <- paste0(
   "_index_",
-  "harmonisation_summary",
+  "summary",
   ".qmd"
 )
 
 fs::file_copy(
   path = here::here(
-    "index-qmd-template",
+    "templates",
+    "index-qmd",
     index_qmd_file),
   new_path = here::here("index.qmd"),
   overwrite = TRUE
@@ -20,13 +21,14 @@ fs::file_copy(
 
 quarto_yml_file <- paste0(
   "_quarto_",
-  "harmonisation_summary",
+  "summary",
   ".yml"
 )
 
 fs::file_copy(
   path = here::here(
-    "quarto-yaml-template",
+    "templates",
+    "quarto-yaml",
     quarto_yml_file),
   new_path = here::here("_quarto.yml"),
   overwrite = TRUE
