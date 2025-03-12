@@ -8,9 +8,5 @@
 generate
 renv
 /.quarto/
-codes/Cohort_A/*.docx
-codes/Cohort_A/*.pdf
-codes/Cohort_A/*.html
-codes/Cohort_A/*.json
 .Rmarkdown
 .html

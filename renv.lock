@@ -729,44 +729,6 @@
       "NeedsCompilation": "no",
       "Repository": "CRAN"
     },
-    "collateral": {
-      "Package": "collateral",
-      "Version": "0.5.2",
-      "Source": "Repository",
-      "Title": "Quickly Evaluate Captured Side Effects",
-      "Authors@R": "c( person(\"James\", \"Goldie\", email = \"me@jamesgoldie.dev\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-5024-6207\")), person(\"Jean-Francois\", \"Zinque\", email = \"jzinque@gmail.com\", role = \"ctb\"), person(\"Mikhail\", \"Balyasin\", email = \"mikhail.balyasin+blog@gmail.com\", role = \"ctb\"))",
-      "Description": "Map functions while capturing results, errors, warnings, messages and other output tidily, then filter and summarise data frames or lists on the basis of those side effects.",
-      "URL": "https://collateral.jamesgoldie.dev, https://github.com/jimjam-slam/collateral",
-      "Language": "en-AU",
-      "Depends": [
-        "R (>= 3.1.0)"
-      ],
-      "Imports": [
-        "purrr",
-        "crayon",
-        "methods",
-        "pillar"
-      ],
-      "License": "MIT + file LICENSE",
-      "Encoding": "UTF-8",
-      "RoxygenNote": "7.1.1",
-      "BugReports": "https://github.com/jimjam-slam/collateral/issues",
-      "Suggests": [
-        "dplyr",
-        "tibble",
-        "tidyr",
-        "furrr",
-        "ggplot2",
-        "knitr",
-        "rmarkdown",
-        "testthat"
-      ],
-      "VignetteBuilder": "knitr",
-      "NeedsCompilation": "no",
-      "Author": "James Goldie [aut, cre] (<https://orcid.org/0000-0002-5024-6207>), Jean-Francois Zinque [ctb], Mikhail Balyasin [ctb]",
-      "Maintainer": "James Goldie <me@jamesgoldie.dev>",
-      "Repository": "RSPM"
-    },
     "colorspace": {
       "Package": "colorspace",
       "Version": "2.1-1",
@@ -4193,7 +4155,55 @@
     "renv": {
       "Package": "renv",
       "Version": "1.1.2",
-      "Source": "Repository"
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Project Environments",
+      "Authors@R": "c( person(\"Kevin\", \"Ushey\", role = c(\"aut\", \"cre\"), email = \"kevin@rstudio.com\", comment = c(ORCID = \"0000-0003-2880-7407\")), person(\"Hadley\", \"Wickham\", role = c(\"aut\"), email = \"hadley@rstudio.com\", comment = c(ORCID = \"0000-0003-4757-117X\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
+      "Description": "A dependency management toolkit for R. Using 'renv', you can create and manage project-local R libraries, save the state of these libraries to a 'lockfile', and later restore your library as required. Together, these tools can help make your projects more isolated, portable, and reproducible.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://rstudio.github.io/renv/, https://github.com/rstudio/renv",
+      "BugReports": "https://github.com/rstudio/renv/issues",
+      "Imports": [
+        "utils"
+      ],
+      "Suggests": [
+        "BiocManager",
+        "cli",
+        "compiler",
+        "covr",
+        "cpp11",
+        "devtools",
+        "gitcreds",
+        "jsonlite",
+        "jsonvalidate",
+        "knitr",
+        "miniUI",
+        "modules",
+        "packrat",
+        "pak",
+        "R6",
+        "remotes",
+        "reticulate",
+        "rmarkdown",
+        "rstudioapi",
+        "shiny",
+        "testthat",
+        "uuid",
+        "waldo",
+        "yaml",
+        "webfakes"
+      ],
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Config/testthat/parallel": "true",
+      "Config/testthat/start-first": "bioconductor,python,install,restore,snapshot,retrieve,remotes",
+      "NeedsCompilation": "no",
+      "Author": "Kevin Ushey [aut, cre] (<https://orcid.org/0000-0003-2880-7407>), Hadley Wickham [aut] (<https://orcid.org/0000-0003-4757-117X>), Posit Software, PBC [cph, fnd]",
+      "Maintainer": "Kevin Ushey <kevin@rstudio.com>",
+      "Repository": "RSPM"
     },
     "rex": {
       "Package": "rex",
