@@ -419,11 +419,9 @@ tabl <- "
 +-----------------+------------------+
 | chest_pain_type | have_chest_pain  |
 +:================+:=================+
-| 0 or 4          | 0                | 
+| 0               | 0                | 
 +-----------------+------------------+
 | 1, 2 or 3       | 1                |
-+-----------------+------------------+
-| -1              | -1               |
 +-----------------+------------------+
 
 "
@@ -437,14 +435,13 @@ have_chest_pain_data <- cohort_A_data |>
   dplyr::select(c("cohort_unique_id", "chest_pain_type")) |>
   dplyr::mutate(
     have_chest_pain = dplyr::case_when(
-      .data[["chest_pain_type"]] %in% c(0, 4) ~ "0",
+      .data[["chest_pain_type"]] %in% c(0) ~ "0",
       .data[["chest_pain_type"]] %in% c(1, 2, 3) ~ "1",
-      .data[["chest_pain_type"]] %in% c(-1) ~ "-1",
       .default = NA_character_
     ),
     have_chest_pain = forcats::fct_relevel(
       .data[["have_chest_pain"]],
-      c("0", "1", "-1")
+      c("0", "1")
     ),
     chest_pain_type = forcats::fct_relevel(
       as.character(.data[["chest_pain_type"]]),

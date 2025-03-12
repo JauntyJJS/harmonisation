@@ -1,0 +1,1168 @@
+```{r}
+#| echo: false
+#| label: functions for clinical
+
+
+flextable_harmonise_value_design <- function(
+      data, 
+      value_column_width = 2.5,
+      description_column_width = 3.5
+) {
+  
+  flextable_output <- data |> 
+    flextable::flextable() |>
+    flextable::font(fontname = "Calibri", part = "all") |>
+    flextable::fontsize(size = 12, part = "all") |> 
+    flextable::width(
+       j = c("Value", "Description"),
+       width = c(value_column_width, description_column_width), #Total must be 16.5
+    unit = "cm") |>  
+    flextable::hline_top(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+    flextable::hline_bottom(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+    flextable::vline_left(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+    flextable::vline(border = officer::fp_border(color = "grey", style = "solid", width = 1), part = "header") |>
+    flextable::vline_right(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+    flextable::border(border = officer::fp_border(color = "grey", style = "solid", width = 1)) |>
+    flextable::set_table_properties(
+      opts_word = list(split = TRUE, keep_with_next = TRUE)
+    ) |>
+    ftExtra::colformat_md(part = "all", md_extensions = "+hard_line_breaks")
+  
+  return(flextable_output)
+  
+}
+
+flextable_harmonisation_design <- function(
+      data, 
+      cohort_id_column_width = 3.5,
+      original_response_column_width = 6,
+      harmonisation_response_column_width = 6
+) {
+  
+  flextable_output <- data |> 
+    flextable::flextable() |>
+    flextable::font(fontname = "Calibri", part = "all") |>
+    flextable::fontsize(size = 12, part = "all") |> 
+    flextable::width(
+       j = c("Cohort ID", "Original Response", "Harmonisation Response"),
+       width = c(cohort_id_column_width, 
+                 original_response_column_width, 
+                 harmonisation_response_column_width), #Total must be 16.5
+    unit = "cm") |>  
+    flextable::hline_top(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+    flextable::hline_bottom(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+    flextable::vline_left(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+    flextable::vline(border = officer::fp_border(color = "grey", style = "solid", width = 1), part = "header") |>
+    flextable::vline_right(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+    flextable::border(border = officer::fp_border(color = "grey", style = "solid", width = 1)) |>
+    flextable::set_table_properties(
+      opts_word = list(split = TRUE, keep_with_next = TRUE)
+    ) |>
+    ftExtra::colformat_md(part = "all", md_extensions = "+hard_line_breaks")
+  
+  return(flextable_output)
+  
+}
+
+sex_provided_f_m_na_text <- function(provided_column_name,
+                                     female_value,
+                                     male_value,
+                                     missing_value = NULL) {
+  
+  female_value <- paste0("*", female_value, "*") |> 
+    stringr::str_flatten_comma(last = ' and ')
+  
+  male_value <- paste0("*", male_value, "*") |> 
+    stringr::str_flatten_comma(last = ' and ')
+  
+  bullet_text = glue::glue(
+    "{female_value} as female.
+    
+    {male_value} as male."
+  )  
+  
+  if (isFALSE(is.null(missing_value))) {
+    missing_value <- paste0("*", missing_value, "*") |> 
+      stringr::str_flatten_comma(last = ' and ') 
+    
+    bullet_text = glue::glue(
+      "{bullet_text}
+      
+      {missing_value} as unknown."
+    )
+  }
+
+  text_used <- glue::glue(
+    "Column *{provided_column_name}* with
+    
+    {bullet_text}",
+  )
+  
+  return(text_used)
+  
+}
+
+sex_harmonised_f_m_na_text <- function(provided_column_name, 
+                                       harmonised_column_name,
+                                       female_value,
+                                       male_value,
+                                       missing_value = NULL) {
+  
+  female_value <- paste0("*", female_value, "*") |> 
+    stringr::str_flatten_comma(last = ' and ')
+  
+  male_value <- paste0("*", male_value, "*") |> 
+    stringr::str_flatten_comma(last = ' and ')
+  
+  bullet_text = glue::glue(
+    "{female_value} as 0.
+    
+    {male_value} as 1."
+  )  
+  
+  if (isFALSE(is.null(missing_value))) {
+    missing_value <- paste0("*", missing_value, "*") |> 
+      stringr::str_flatten_comma(last = ' and ') 
+    
+    bullet_text = glue::glue(
+      "{bullet_text}
+      
+      {missing_value} as -1."
+    )
+  }  
+  
+  missing_value <- paste0("*", missing_value, "*") |> 
+    stringr::str_flatten_comma(last = ' and ')     
+  
+  if (provided_column_name != harmonised_column_name) {
+      text_used <- glue::glue(
+        "Map the values of *{provided_column_name}* to *{harmonised_column_name}* as follows:
+        
+        {bullet_text}",
+      )
+  } else {
+      text_used <- glue::glue(
+        "Change the values of *{provided_column_name}* as follows:
+        
+        {bullet_text}"
+      )
+  }
+    
+  return(text_used)  
+    
+}
+
+provided_no_yes_na_text <- function(provided_column_name,
+                                    no_value,
+                                    yes_value,
+                                    missing_value = NULL) {
+  
+  no_value <- paste0("*", no_value, "*") |> 
+    stringr::str_flatten_comma(last = ' and ')
+  
+  yes_value <- paste0("*", yes_value, "*") |> 
+    stringr::str_flatten_comma(last = ' and ')
+  
+  bullet_text = glue::glue(
+    "{no_value} as no.
+    
+    {yes_value} as yes."
+  )  
+  
+  if (isFALSE(is.null(missing_value))) {
+    missing_value <- paste0("*", missing_value, "*") |> 
+      stringr::str_flatten_comma(last = ' and ') 
+    
+    bullet_text = glue::glue(
+      "{bullet_text}
+      
+      {missing_value} as unknown."
+    )
+  }
+
+  text_used <- glue::glue(
+    "Column *{provided_column_name}* with
+    
+    {bullet_text}",
+  )
+  
+  return(text_used)
+  
+}
+
+harmonised_no_yes_na_text <- function(provided_column_name, 
+                                      harmonised_column_name,
+                                      no_value,
+                                      yes_value,
+                                      missing_value = NULL) {
+  
+  no_value <- paste0("*", no_value, "*") |> 
+    stringr::str_flatten_comma(last = ' and ')
+  
+  yes_value <- paste0("*", yes_value, "*") |> 
+    stringr::str_flatten_comma(last = ' and ')
+  
+  bullet_text = glue::glue(
+    "{no_value} as 0.
+    
+    {yes_value} as 1."
+  )  
+  
+  if (isFALSE(is.null(missing_value))) {
+    missing_value <- paste0("*", missing_value, "*") |> 
+      stringr::str_flatten_comma(last = ' and ') 
+    
+    bullet_text = glue::glue(
+      "{bullet_text}
+      
+      {missing_value} as -1."
+    )
+  }  
+  
+  missing_value <- paste0("*", missing_value, "*") |> 
+    stringr::str_flatten_comma(last = ' and ')     
+  
+  if (provided_column_name != harmonised_column_name) {
+      text_used <- glue::glue(
+        "Map the values of *{provided_column_name}* to *{harmonised_column_name}* as follows:
+        
+        {bullet_text}",
+      )
+  } else {
+      text_used <- glue::glue(
+        "Change the values of *{provided_column_name}* as follows:
+        
+        {bullet_text}"
+      )
+  }
+    
+  return(text_used)  
+    
+}
+
+harmonised_0_1_na_text <- function(provided_column_name, 
+                                   harmonised_column_name,
+                                   missing_value = NULL) {
+  
+  
+  bullet_text = "Other values remain unchanged."
+  
+  if (isFALSE(is.null(missing_value)) & isTRUE(missing_value != "-1")) {
+    missing_value <- paste0("*", missing_value, "*") |> 
+      stringr::str_flatten_comma(last = ' and ') 
+    
+    bullet_text = glue::glue(
+      "{missing_value} as -1.
+      
+      {bullet_text}"
+    )
+  }  
+  
+  if (provided_column_name != harmonised_column_name & isFALSE(is.null(missing_value)) & isTRUE(missing_value != "-1")) {
+    text_used <- glue::glue(
+      "Map the values of *{provided_column_name}* to *{harmonised_column_name}* as follows:
+      
+      {bullet_text}",
+      )
+  } else if (provided_column_name == harmonised_column_name & isFALSE(is.null(missing_value)) & isTRUE(missing_value != "-1")) {
+    text_used <- glue::glue(
+      "Change the values of *{provided_column_name}* as follows:
+      
+      {bullet_text}",
+      )
+  } else if (provided_column_name != harmonised_column_name & (isTRUE(is.null(missing_value)) | isTRUE(missing_value == "-1"))) {
+    text_used <- glue::glue("*{harmonised_column_name}* will take the values of *{provided_column_name}*.")
+  } else if (provided_column_name == harmonised_column_name & (isTRUE(is.null(missing_value)) | isTRUE(missing_value == "-1"))) {
+    text_used <- glue::glue("*{provided_column_name}* remains unchanged.")
+  }
+  
+  return(text_used)    
+}
+
+```
+
+```{r}
+#| label: cohort id for clinical
+#| echo: false
+
+cohort_id <- c(
+  "Cohort A", "Cohort B"
+)
+
+```
+
+
+Steps taken to harmonised data columns in relation to demographic and clinical variables are discussed here. 
+
+## Age
+
+*age_years* is the harmonised positive integer data field to denote the age of the patient during the time of the CT scan.
+
+It is harmonised as follows:
+
+::: {#supptbl-age-harmonisation}
+
+```{r}
+#| label: create age table
+#| echo: false
+#| message: false
+#| warnings: false
+
+
+orignal_response <- c(
+  "Column *age* of positve integer values. 0 is used to indicate unknown values.",
+  "Column *Age* of positve integer values"
+)
+
+harmonisation_response <- c(
+  "Value of *0* in *age* will be changed to *NA*.  *age_years* will take the values of *age*.",
+  "*age_years* will take the values of *Age*."
+)
+
+age_table <- tibble::tibble(
+  `Cohort ID` = cohort_id,
+  `Original Response` = orignal_response,
+  `Harmonisation Response` = harmonisation_response
+)
+
+# See https://github.com/quarto-dev/quarto-cli/issues/3340
+
+# age_table |>
+#   gt::gt() |>
+#   gt::cols_width(
+#     .data[["Original Response"]] ~ gt::px(200),
+#     .data[["Harmonisation Response"]] ~ gt::px(200),
+#     dplyr::everything() ~ gt::px(110)
+#   ) |>
+#   gt::fmt_markdown() |>
+#   gt::tab_options(
+#     table.font.size = "15px",
+#     latex.use_longtable = TRUE
+#   )
+
+age_table |>
+  flextable_harmonisation_design()
+
+```
+
+Harmonisation process of *age_years*.
+
+:::
+
+{{< pagebreak >}}
+
+## Sex
+
+*sex* is the harmonised data field to denote the sex of the patient during the time of the CT scan. 
+
+It holds the following values: 
+
+::: {#supptbl-sex-harmonise-values}
+
+```{r}
+#| label: create sex harmonised table
+#| echo: false
+#| message: false
+#| warnings: false
+#| 
+sex_table <- tibble::tibble(
+  `Value` = c("0", "1", "-1"),
+  `Description` = c("female", "male", "unknown")
+)
+
+# sex_table |>
+#   gt::gt() |>
+#   gt::cols_width(
+#     .data[["Value"]] ~ gt::px(200),
+#     .data[["Description"]] ~ gt::px(200),
+#     dplyr::everything() ~ gt::px(110)
+#   ) |>
+#   gt::tab_options(
+#     table.font.size = "15px",
+#     latex.use_longtable = TRUE
+#   )
+
+
+sex_table |>
+  flextable_harmonise_value_design()
+
+
+```
+
+Harmonised values of *sex*.
+
+:::
+
+It is harmonised as follows:
+
+::: {#supptbl-sex-harmonisation}
+
+```{r}
+#| label: create sex table
+#| echo: false
+#| message: false
+#| warnings: false
+
+orignal_response <- c(
+  sex_provided_f_m_na_text(provided_column_name = "sex", female_value = "F", male_value = "M"),
+  sex_provided_f_m_na_text(provided_column_name = "Sex", female_value = "Female", male_value = "Male")
+)
+
+harmonisation_response <- c(
+  sex_harmonised_f_m_na_text(provided_column_name = "sex", harmonised_column_name = "sex", female_value = "F", male_value = "M"),
+  sex_harmonised_f_m_na_text(provided_column_name = "Sex", harmonised_column_name = "sex", female_value = "Female", male_value = "Male")
+)
+
+sex_table <- tibble::tibble(
+  `Cohort ID` = cohort_id,
+  `Original Response` = orignal_response,
+  `Harmonisation Response` = harmonisation_response
+)
+
+# sex_table |>
+#   gt::gt() |>
+#   gt::cols_width(
+#     .data[["Original Response"]] ~ gt::px(200),
+#     .data[["Harmonisation Response"]] ~ gt::px(200),
+#     dplyr::everything() ~ gt::px(110)
+#   ) |>
+#   gt::fmt_markdown() |>
+#   gt::tab_options(
+#     table.font.size = "15px"
+#     # latex.use_longtable = TRUE
+#   )
+
+sex_table |>
+  flextable_harmonisation_design()
+
+```
+
+Harmonisation process of *sex*.
+
+:::
+
+{{< pagebreak >}}
+
+## Height, Weight, BMI and BSA
+
+*height* is the harmonised positive real data field to denote the height in cm of the patient during the time of the CT scan.
+
+*weight* is the harmonised positive real data field to denote the weight in kg of the patient during the time of the CT scan.
+
+*bsa_m2* is the harmonised positive real data field to denote the body surface area in m^2^ of the patient during the time of the CT scan.
+
+*bmi* is the harmonised positive real data field to denote the body mass index of the patient during the time of the CT scan.
+
+All values are converted to two decimal places if the number of decimal places exceeded two.
+
+They are harmonised as follows:
+
+::: {#supptbl-height-weight-bsa-bmi-harmonisation}
+
+```{r}
+#| label: create bmi table
+#| echo: false
+#| message: false
+#| warnings: false
+
+orignal_response <- c(
+  glue::glue(
+    "Column *height* in cm of positve real numeric values in one decimal place. 
+    
+    Column *weight* in kg of positve real numeric values in one decimal place."
+  ),
+  glue::glue(
+    "Column *Height* in cm of positve integer values.  
+    
+    Column *Weight* in kg of positve integer values."
+  )
+)
+
+harmonisation_response <- c(
+  glue::glue(
+    "*height_cm* will take the values of *height*.
+    
+    *weight_kg* will take the values of *weight*.
+    
+    *bsa_m2* and *bmi* are calculated using data fields 
+    *height_cm* and *weight_kg*. All values are then converted to two decimal places."
+  ),
+  glue::glue(
+    "*height_cm* will take the values of *Height*.
+    
+    *weight_kg* will take the values of *Weight*.
+    
+    *bsa_m2* and *bmi* are calculated using data fields 
+    *height_cm* and *weight_kg*. All values are then converted to two decimal places."
+  ) 
+)
+
+bmi_table <- tibble::tibble(
+  `Cohort ID` = cohort_id,
+  `Original Response` = orignal_response,
+  `Harmonisation Response` = harmonisation_response
+)
+
+
+bmi_table |>
+  flextable_harmonisation_design()
+
+```
+
+Harmonisation process of *height_cm*, *weight_kg*, *bsa_m2* and *bmi*.
+
+:::
+
+{{< pagebreak >}}
+
+
+## Smoking History
+
+*smoke_current* is the harmonised data field to denote if the patient is a current smoker during the time of the CT scan. *smoke_past* is the harmonised data field to denote if the patient is a past smoker during the time of the CT scan. 
+
+They hold the following values:
+
+::: {#supptbl-smoking-history-harmonise-values}
+
+```{r}
+#| label: create smoker harmonised table
+#| echo: false
+#| message: false
+#| warnings: false
+
+smoker_table <- tibble::tibble(
+  `Value` = c("0", "1", "-1"),
+  `Description` = c("no", "yes", "unknown")
+)
+
+smoker_table |>
+  flextable_harmonise_value_design()
+
+
+```
+
+Harmonised values of *smoke_current* and *smoke_past*.
+
+:::
+
+They are harmonised as follows:
+
+::: {#supptbl-smoking-history-harmonisation}
+
+```{r}
+#| label: create smoking table
+#| echo: false
+#| message: false
+#| warnings: false
+
+orignal_response <- c(
+  glue::glue(
+    "Column *smoke_current_good* with 
+    
+    *0* as no.
+    
+    *1* as yes.
+    
+    *-1* as unknown.
+    
+    Column *smoke_past_good* with 
+    
+    *0* as no.
+    
+    *1* as yes.
+    
+    *-1* as unknown."
+  ),  
+  glue::glue(
+    "Column *Smoke History* with 
+    
+    *non-smoker* as non-smoker.
+    
+    *past smoker* as a past smoker.
+    
+    *current smoker* as a current smoker."
+  )
+)
+
+harmonisation_response <- c(
+  glue::glue(
+    "*smoke_current* will take the values of *smoke_current_good*.
+    
+    *smoke_past* will take the values of *smoke_past_good*."
+  ),  
+  glue::glue(
+    "Map the values of *Smoke History* to *smoke_current* as follows:
+    
+    *non-smoker* and *past smoker* as 0.
+    
+    *current smoker* as 1.
+    
+    Map the values of *Smoke History* to *smoke_past* as follows:
+    
+    *non-smoker* and *current smoker* as 0.
+    
+    *past smoker* as 1."
+  )
+)
+
+smoking_table <- tibble::tibble(
+  `Cohort ID` = cohort_id,
+  `Original Response` = orignal_response,
+  `Harmonisation Response` = harmonisation_response
+)
+
+smoking_table |>
+  flextable_harmonisation_design()
+
+```
+
+Harmonised process of *smoke_current* and *smoke_past*.
+
+:::
+
+After harmonisation, we validate the values of *smoke_current* and *smoke_past* to ensure that there can only be the following cases:
+
+::: {#supptbl-smoking-history-validation}
+
+```{r}
+#| label: create smoker validated table
+#| echo: false
+#| message: false
+#| warnings: false
+
+
+validation_table <- tibble::tribble(
+  ~Description, ~`smoke_current`, ~`smoke_past`,
+  "Non-smoker"    ,  "0",  "0",
+  "Past smoker"   ,  "0",  "1",
+  "Current smoker",  "1",  "0",
+  "Unknown"       , "-1", "-1"
+)
+
+validation_table |>
+  flextable::flextable() |>
+  flextable::font(fontname = "Calibri", part = "all") |>
+  flextable::fontsize(size = 12, part = "all") |> 
+  flextable::width(
+       j = c("Description", "smoke_current", "smoke_past"),
+       width = c(4.5, 4.8, 4.8), #Total must be 16.5
+       unit = "cm") |>  
+  flextable::italic(j = c("smoke_current", "smoke_past"), part = "header") |> 
+  flextable::hline_top(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+  flextable::hline_bottom(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+  flextable::vline_left(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+  flextable::vline(border = officer::fp_border(color = "grey", style = "solid", width = 1), part = "header") |>
+  flextable::vline_right(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+  flextable::border(border = officer::fp_border(color = "grey", style = "solid", width = 1)) |>
+  flextable::set_table_properties(
+      opts_word = list(split = TRUE, keep_with_next = TRUE)
+  ) |>
+  ftExtra::colformat_md(part = "all", md_extensions = "+hard_line_breaks")
+
+
+```
+
+Valid values of *smoke_current* and *smoke_past*.
+
+:::
+
+{{< pagebreak >}}
+
+## Have Shortness of Breath
+
+*have_sob* is the harmonised data field to denote if the patient has shortness of breath during the time of the CT scan.
+
+It holds the following values:
+
+::: {#supptbl-have-sob-harmonise-values}
+
+```{r}
+#| label: create have sob harmonised table
+#| echo: false
+#| message: false
+#| warnings: false
+
+have_sob_table <- tibble::tibble(
+  `Value` = c("0", "1", "-1"),
+  `Description` = c("no", "yes", "unknown")
+)
+
+have_sob_table |>
+  flextable_harmonise_value_design()
+
+```
+
+Harmonised values of *have_sob*.
+
+:::
+
+*have_sob* is harmonised as follows:
+
+::: {#supptbl-have-sob-harmonisation}
+
+```{r}
+#| label: create have sob table
+#| echo: false
+#| message: false
+#| warnings: false
+
+Cohort_A_original_response <- provided_no_yes_na_text(provided_column_name = 'have_sob', no_value = '0', yes_value = '1')
+
+Cohort_A_harmonisation_response <- harmonised_0_1_na_text(
+  provided_column_name = 'have_sob', 
+  harmonised_column_name = "have_sob") 
+
+Cohort_B_original_response <- provided_no_yes_na_text(provided_column_name = 'Dyspnea', no_value = 'no', yes_value = 'yes')
+
+Cohort_B_harmonisation_response <- harmonised_no_yes_na_text(
+  provided_column_name = 'Dyspnea', 
+  harmonised_column_name = 'have_sob', 
+  no_value = 'no', 
+  yes_value = 'yes')
+
+
+orignal_response <- c(
+  Cohort_A_original_response,
+  Cohort_B_original_response
+)
+
+harmonisation_response <- c(
+  Cohort_A_harmonisation_response,
+  Cohort_B_harmonisation_response
+)
+
+have_sob_table <- tibble::tibble(
+  `Cohort ID` = cohort_id,
+  `Original Response` = orignal_response,
+  `Harmonisation Response` = harmonisation_response
+)
+
+
+have_sob_table |>
+  flextable_harmonisation_design()
+
+```
+
+Harmonised process of *have_sob*.
+
+:::
+
+{{< pagebreak >}}
+
+## Have Chest Pain
+
+*have_chest_pain* is the harmonised data field to denote if the patient has chest pain during the time of the CT scan.
+
+It holds the following values:
+
+::: {#supptbl-have-chest-pain-harmonise-values}
+
+```{r}
+#| label: create have chest pain harmonised table
+#| echo: false
+#| message: false
+#| warnings: false
+
+have_chest_pain_table <- tibble::tibble(
+  `Value` = c("0", "1", "-1"),
+  `Description` = c("no", "yes", "unknown")
+)
+
+have_chest_pain_table |>
+  flextable_harmonise_value_design()
+
+```
+
+Harmonised values of *have_chest_pain*.
+
+:::
+
+*have_chest_pain* is harmonised as follows:
+
+::: {#supptbl-have-chest-pain-harmonisation}
+
+```{r}
+#| label: create have chest pain table
+#| echo: false
+#| message: false
+#| warnings: false
+
+Cohort_A_original_response <- glue::glue(
+   "Column *chest_pain_type* with
+   
+   *0* as no chest pain.
+    
+   *1* as typical chest pain.
+    
+   *2* as atypcial chest pain.
+    
+   *3* as nonanginal chest pain.
+   "
+)
+
+Cohort_A_harmonisation_response <- glue::glue(
+   "Map the values of *chest_pain_type* to *have_chest_pain* as follows:
+   
+   If *chest_pain_type* has a value of *1*, *2* or *3*, *have_chest_pain* will be 1.
+   
+   Else, if *chest_pain_type* has a value of *0*, *have_chest_pain* will be 0.
+   "
+)
+
+Cohort_B_original_response <- glue::glue(
+   "Column *Chest Pain Character* with
+   
+   *no chest pain* as no chest pain.
+    
+   *typical* as typical chest pain.
+    
+   *atypcial* as atypcial chest pain.
+    
+   *nonanginal* as nonanginal chest pain.
+   "
+)
+
+Cohort_B_harmonisation_response <- glue::glue(
+   "Map the values of *Chest Pain Character* to *have_chest_pain* as follows:
+   
+   If *chest_pain_type* has a value of *typical*, *atypical* or *nonanginal*, *have_chest_pain* will be 1.
+   
+   Else, if *chest_pain_type* has a value of *no chest pain*, *have_chest_pain* will be 0.
+   "
+)
+
+
+orignal_response <- c(
+  Cohort_A_original_response,
+  Cohort_B_original_response
+)
+
+harmonisation_response <- c(
+  Cohort_A_harmonisation_response,
+  Cohort_B_harmonisation_response
+)
+
+have_chest_pain_table <- tibble::tibble(
+  `Cohort ID` = cohort_id,
+  `Original Response` = orignal_response,
+  `Harmonisation Response` = harmonisation_response
+)
+
+
+have_chest_pain_table |>
+  flextable_harmonisation_design()
+
+```
+
+Harmonised process of *have_chest_pain*.
+
+:::
+
+{{< pagebreak >}}
+
+## Symptoms
+
+*symptoms* is the harmonised data field to denote the patient's symptoms during the time of the CT scan.
+
+It holds the following values:
+
+::: {#supptbl-symptoms-harmonise-values}
+
+```{r}
+#| label: create symptoms harmonised table
+#| echo: false
+#| message: false
+#| warnings: false
+#| 
+symptoms_table <- tibble::tibble(
+  `Value` = c("0", "1", "2", "3", "-1"),
+  `Description` = c("asymptomatic", "chest pain", "only dyspnea", "others", "unknown")
+)
+
+symptoms_table |>
+  flextable_harmonise_value_design()
+
+```
+
+Harmonised values of *symptoms*.
+
+:::
+
+Regarding the symptoms: chest pain, dypsnea and other symptoms: 
+
+*  If a patient has all three symptoms, chest pain will take the highest priority. Hence, *symptoms* = 1
+*  If a patient has both dyspnea and other symptoms (not chest pain related), dyspnea will take the higher priority. Hence, *symptoms* = 2
+
+The general approach is to assume that the patients are asymptomatic (*symptoms* = 0) unless indicated that they have chest pain (*symptoms* = 1), dypsnea (*symptoms* = 2), other symptoms like heart palpitations (*symptoms* = 3) or all symptom related data fields are missing (*symptoms* = -1). 
+
+*symptoms* is harmonised as follows:
+
+::: {#supptbl-symptoms-harmonisation}
+
+```{r}
+#| label: create symptoms table
+#| echo: false
+#| message: false
+#| warnings: false
+
+Cohort_A_original_response <- glue::glue(
+   "{provided_no_yes_na_text(provided_column_name = 'have_sob', no_value = '0', yes_value = '1')}
+   
+   Column *chest_pain_type* with
+   
+   *0* as no chest pain.
+    
+   *1* as typical chest pain.
+    
+   *2* as atypcial chest pain.
+    
+   *3* as nonanginal chest pain.
+   "
+)
+
+Cohort_A_harmonisation_response <- glue::glue(
+   "Map the values of *chest_pain_type* and *have_sob* to *symptoms* as follows:
+   
+   If *chest_pain_type* has a value of *1*, *2* or *3*, *symptoms* will be 1.
+   
+   Else, if *chest_pain_type* has a value of *0* and *have_sob* has a value of *1*, *symptoms* will be 2.
+   
+   Else, *symptoms* will be 0.
+   "
+)
+
+Cohort_B_original_response <- glue::glue(
+   "{provided_no_yes_na_text(provided_column_name = 'Dyspnea', no_value = 'no', yes_value = 'yes')}
+   
+   Column *Chest Pain Character* with
+   
+   *no chest pain* as no chest pain.
+    
+   *typical* as typical chest pain.
+    
+   *atypcial* as atypcial chest pain.
+    
+   *nonanginal* as nonanginal chest pain.
+   "
+)
+
+Cohort_B_harmonisation_response <- glue::glue(
+   "Map the values of *Chest Pain Character* and *Dyspnea* to *symptoms* as follows:
+   
+   If *chest_pain_type* has a value of *typical*, *atypical* or *nonanginal*, *symptoms* will be 1.
+   
+   Else, if *chest_pain_type* has a value of *no chest pain* and *Dyspnea* has a value of *yes*, *symptoms* will be 2.
+   
+   Else, *symptoms* will be 0.
+   "
+)
+
+
+orignal_response <- c(
+  Cohort_A_original_response,
+  Cohort_B_original_response
+)
+
+harmonisation_response <- c(
+  Cohort_A_harmonisation_response,
+  Cohort_B_harmonisation_response
+)
+
+symptoms_table <- tibble::tibble(
+  `Cohort ID` = cohort_id,
+  `Original Response` = orignal_response,
+  `Harmonisation Response` = harmonisation_response
+)
+
+
+symptoms_table |>
+  flextable_harmonisation_design()
+
+```
+
+Harmonised process of *symptoms*.
+
+:::
+
+{{< pagebreak >}}
+
+## Chest Pain Type
+
+*chest_pain_type* is the harmonised data field to denote the patient's chest pain type during the time of the CT scan.
+
+It holds the following values:
+
+::: {#supptbl-chest-pain-character-harmonise-values}
+
+```{r}
+#| label: create character harmonised table
+#| echo: false
+#| message: false
+#| warnings: false
+#| 
+character_table <- tibble::tibble(
+  `Value` = c("0", "1", "2", "3", "4", "-1"),
+  `Description` = c("no symptoms", "typical", "atypical", "nonanginal", "dyspnea", "unknown")
+)
+
+character_table |>
+  flextable_harmonise_value_design()
+
+```
+
+Harmonised values of *chest_pain_type*.
+
+:::
+
+Regarding the symptoms: chest pain, dypsnea and other symptoms: 
+
+*  If a patient has both chest pain (typical, atypical or nonanginal) and dyspnea, chest pain will take the higher priority. Hence, *chest_pain_type* will be either 1, 2 or 3
+*  If a patient has both dyspnea and other symptoms (not chest pain related), dyspnea will take the higher priority. Hence, *chest_pain_type* will be 4.
+* If a patient has other symptoms that are neither chest pain nor dyspnea, like heart palpitations, *chest_pain_type* will be -1.
+
+The general approach is to assume that the patients are asymptomatic (*chest_pain_type* = 0) unless indicated that they have a specific type of chest pain (*chest_pain_type* = 1, 2 or 3), dypsnea (*chest_pain_type* = 4), other symptoms like heart palpitations (*chest_pain_type* = -1) or all symptom related data fields are missing (*chest_pain_typed* = -1). 
+
+*chest_pain_type* is harmonised as follows:
+
+::: {#supptbl-chest-pain-character-harmonisation}
+
+```{r}
+#| label: create character table
+#| echo: false
+#| message: false
+#| warnings: false
+
+Cohort_A_original_response <- glue::glue(
+   "{provided_no_yes_na_text(provided_column_name = 'have_sob', no_value = '0', yes_value = '1')}
+   
+   Column *chest_pain_type* with
+   
+   *0* as no chest pain.
+    
+   *1* as typical chest pain.
+    
+   *2* as atypcial chest pain.
+    
+   *3* as nonanginal chest pain.
+   "
+)
+
+Cohort_A_harmonisation_response <- glue::glue(
+   "Map the values of *chest_pain_type* and *have_sob* to *chest_pain_type* as follows:
+   
+   If *chest_pain_type* has a value of *1*, *chest_pain_type* will be *1*.
+   
+   Else, if *chest_pain_type* has a value of *2*, *chest_pain_type* will be *2*.
+   
+   Else, if *chest_pain_type* has a value of *3*, *chest_pain_type* will be *3*.
+   
+   Else, if *chest_pain_type* has a value of *0* and *have_sob* has a value of *1*, *chest_pain_type* will be 4.
+   
+   Else, *chest_pain_type* will be 0.
+   "
+)
+
+Cohort_B_original_response <- glue::glue(
+   "{provided_no_yes_na_text(provided_column_name = 'Dyspnea', no_value = 'no', yes_value = 'yes')}
+   
+   Column *Chest Pain Character* with
+   
+   *no chest pain* as no chest pain.
+    
+   *typical* as typical chest pain.
+    
+   *atypcial* as atypcial chest pain.
+    
+   *nonanginal* as nonanginal chest pain.
+   "
+)
+
+Cohort_B_harmonisation_response <- glue::glue(
+   "Map the values of *Chest Pain Character* and *Dyspnea* to *chest_pain_type* as follows:
+   
+   If *Chest Pain Character* has a value of *typical*, *chest_pain_type* will be 1.
+   
+   Else, if *Chest Pain Character* has a value of *atypical*, *chest_pain_type* will be 2.
+   
+   Else, if *Chest Pain Character* has a value of *nonanginal*, *chest_pain_type* will be 3.
+
+   Else, if *Chest Pain Character* has a value of *no chest pain* and *Dyspnea* has a value of *yes*, *chest_pain_type* will be 4.
+   
+   Else, *chest_pain_type* will be 0.
+   "
+)
+
+orignal_response <- c(
+  Cohort_A_original_response,
+  Cohort_B_original_response
+)
+
+harmonisation_response <- c(
+  Cohort_A_harmonisation_response,
+  Cohort_B_harmonisation_response
+)
+
+character_table <- tibble::tibble(
+  `Cohort ID` = cohort_id,
+  `Original Response` = orignal_response,
+  `Harmonisation Response` = harmonisation_response
+)
+
+character_table |>
+  flextable_harmonisation_design()
+
+```
+
+Harmonised process of *chest_pain_type*.
+
+:::
+
+After harmonisation, we validate the values of *chest_pain_type* and *symptoms* to ensure that there can only be the following cases:
+
+::: {#supptbl-chest-pain-character-validation}
+
+```{r}
+#| label: create character validated table
+#| echo: false
+#| message: false
+#| warnings: false
+
+
+validation_table <- tibble::tribble(
+  ~Description      ,                        ~symptoms,  ~chest_pain_type,
+  "Asymptomatic"    ,                              "0",               "0",
+  "Have chest pain" ,                              "1",       "1, 2 or 3",
+  "Only dypsnea"    ,                              "2",               "4",
+  "Other symptoms"  ,                              "2",              "-1",
+  "Unknown"         ,                             "-1",              "-1"
+)
+
+validation_table |>
+  flextable::flextable() |>
+  flextable::font(fontname = "Calibri", part = "all") |>
+  flextable::fontsize(size = 12, part = "all") |> 
+  flextable::width(
+       j = c("Description", "symptoms", "chest_pain_type"),
+       width = c(4.5, 5, 5), #Total must be 16.5
+       unit = "cm") |>  
+  flextable::italic(j = c("symptoms", "chest_pain_type"), part = "header") |> 
+  flextable::hline_top(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+  flextable::hline_bottom(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+  flextable::vline_left(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+  flextable::vline(border = officer::fp_border(color = "grey", style = "solid", width = 1), part = "header") |>
+  flextable::vline_right(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>
+  flextable::border(border = officer::fp_border(color = "grey", style = "solid", width = 1)) |>
+  flextable::set_table_properties(
+      opts_word = list(split = TRUE, keep_with_next = TRUE)
+  ) |>
+  ftExtra::colformat_md(part = "all", md_extensions = "+hard_line_breaks")
+
+
+```
+
+Valid values of *symptoms* and *chest_pain_type*.
+
+:::
+
+{{< pagebreak >}}
+

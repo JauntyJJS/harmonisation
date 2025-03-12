@@ -1,0 +1,69 @@
+## Cohort Introduction
+
+Here are the cohorts used in the paper.
+
+::: {#supptbl-cohort-introduction}
+
+```{r}
+#| label: create cohort introduction table
+#| echo: false
+#| message: false
+#| warnings: false
+
+
+cohort_id <- c(
+  "Cohort A", "Cohort B"
+)
+
+cohort_name <- c(
+  "Cohort A Full Name",
+  "Cohort B Full Name"
+)
+
+cohort_table <- tibble::tibble(
+  `Cohort ID` = cohort_id,
+  `Cohort Name` = cohort_name
+)
+
+# See https://github.com/quarto-dev/quarto-cli/issues/3340
+
+# cohort_table |>
+#   gt::gt() |>
+#   gt::cols_width(
+#     .data[["Cohort Name"]] ~ gt::px(150),
+#     dplyr::everything() ~ gt::px(100)
+#   ) |>
+#   gt::fmt_markdown() |>
+#   gt::tab_options(
+#     table.font.size = "15px",
+#     latex.use_longtable = TRUE
+#   )
+
+cohort_table |>
+  flextable::flextable() |>
+  flextable::font(fontname = "Calibri", part = "all") |> 
+  flextable::fontsize(size = 12, part = "all") |> 
+  flextable::width(
+    j = c("Cohort ID", "Cohort Name"),
+    width = c(3.5, 8.5), #Total must be 16.5
+    unit = "cm") |>  
+  flextable::hline_top(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |> 
+  flextable::hline_bottom(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |>   
+  flextable::vline_left(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |> 
+  flextable::vline(border = officer::fp_border(color = "grey", style = "solid", width = 1), part = "header") |> 
+  flextable::vline_right(border = officer::fp_border(color = "black", style = "solid", width = 1.5), part = "header") |> 
+  flextable::border(border = officer::fp_border(color = "grey", style = "solid", width = 1)) |> 
+  flextable::set_table_properties(
+    opts_word = list(split = TRUE, keep_with_next = TRUE)
+  ) |>
+  ftExtra::colformat_md(part = "all", md_extensions = "+hard_line_breaks")
+
+```
+
+Cohorts used in study.
+
+:::
+
+{{< pagebreak >}}
+
+

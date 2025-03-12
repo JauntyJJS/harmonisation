@@ -1,0 +1,39 @@
+# List of Tables {.unnumbered .unlisted}
+
+@supptbl-cohort-introduction: Cohorts used in study.
+
+@supptbl-age-harmonisation: Harmonisation process of *age*.
+
+@supptbl-sex-harmonise-values: Harmonised values of *sex*.
+
+@supptbl-sex-harmonisation: Harmonised process of *sex*.
+
+@supptbl-height-weight-bsa-bmi-harmonisation: Harmonisation process of *height_cm*, *weight_kg*, *bsa_m2* and *bmi*.
+
+@supptbl-smoking-history-harmonise-values: Harmonised values of *smoke_current* and *smoke_past*.
+
+@supptbl-smoking-history-harmonisation: Harmonised process of *smoke_current* and *smoke_past*.
+
+@supptbl-smoking-history-validation: Valid values of *smoke_current* and *smoke_past*.
+
+@supptbl-have-sob-harmonise-values: Harmonised values of *have_sob*.
+
+@supptbl-have-sob-harmonisation: Harmonised process of *have_sob*.
+
+@supptbl-have-chest-pain-harmonise-values: Harmonised values of *have_chest_pain*.
+
+@supptbl-have-chest-pain-harmonisation: Harmonised process of *have_chest_pain*.
+
+@supptbl-symptoms-harmonise-values: Harmonised values of *symptoms*.
+
+@supptbl-symptoms-harmonisation: Harmonised process of *symptoms*.
+
+@supptbl-chest-pain-character-harmonise-values: Harmonised values of *chest_pain_type*.
+
+@supptbl-chest-pain-character-harmonisation: Harmonised process of *chest_pain_type*.
+
+@supptbl-chest-pain-character-validation: Valid values of *symptoms* and *chest_pain_type*.
+
+
+{{< pagebreak >}}
+

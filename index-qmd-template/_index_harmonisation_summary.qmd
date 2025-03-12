@@ -1,0 +1,19 @@
+```{r}
+#| label: load cran libraries
+#| echo: false
+#| warning: false
+#| message: false
+
+library("knitr")
+library("rmarkdown")
+library("flextable")
+library("ftExtra")
+library("glue")
+
+```
+
+# {.unnumbered .unlisted}
+
+{{< pagebreak >}}
+
+

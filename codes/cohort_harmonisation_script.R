@@ -3,10 +3,27 @@ library(fs)
 library(here)
 library(purrr)
 
+# Copy the right index.qmd file
+
+index_qmd_file <- paste0(
+  "_index_",
+  "file_structure",
+  ".qmd"
+)
+
+fs::file_copy(
+  path = here::here(
+    "index-qmd-template",
+    index_qmd_file),
+  new_path = here::here("index.qmd"),
+  overwrite = TRUE
+)
+
 copy_and_render <- function(
     cohort,
     quarto_yml_folder = "quarto-yaml-template"
 ) {
+
   quarto_yml_file <- paste0(
     "_quarto_",
     cohort,
