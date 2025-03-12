@@ -3,7 +3,6 @@ project:
   output-dir: reports/all
 
 book:
-  downloads: [pdf, docx]
   title: "Harmonisation Template For All Cohorts"
   author: "My Name"
   navbar:

@@ -1,3 +1,7 @@
+# Demographic and Clinical Variables
+
+Steps taken to harmonised data columns in relation to demographic and clinical variables are discussed here. 
+
 ```{r}
 #| echo: false
 #| label: functions for clinical
@@ -290,9 +294,6 @@ cohort_id <- c(
 )
 
 ```
-
-
-Steps taken to harmonised data columns in relation to demographic and clinical variables are discussed here. 
 
 ## Age
 

@@ -1,7 +1,0 @@
-# Cohort
-
-{{< include cohort_introduction.qmd >}}
-
-# Demographic and Clinical Variables
-
-{{< include clinical_harmonisation.qmd >}}

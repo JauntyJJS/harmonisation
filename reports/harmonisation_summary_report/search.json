@@ -1,0 +1,133 @@
+[
+  {
+    "objectID": "codes/harmonisation_summary/list_of_figures_tables.html",
+    "href": "codes/harmonisation_summary/list_of_figures_tables.html",
+    "title": "List of Tables",
+    "section": "",
+    "text": "Table S1: Cohorts used in study.\nTable S1: Harmonisation process of age.\nTable S2: Harmonised values of sex.\nTable S3: Harmonised process of sex.\nTable S4: Harmonisation process of height_cm, weight_kg, bsa_m2 and bmi.\nTable S5: Harmonised values of smoke_current and smoke_past.\nTable S6: Harmonised process of smoke_current and smoke_past.\nTable S7: Valid values of smoke_current and smoke_past.\nTable S8: Harmonised values of have_sob.\nTable S9: Harmonised process of have_sob.\nTable S10: Harmonised values of have_chest_pain.\nTable S11: Harmonised process of have_chest_pain.\nTable S12: Harmonised values of symptoms.\nTable S13: Harmonised process of symptoms.\nTable S14: Harmonised values of chest_pain_type.\nTable S15: Harmonised process of chest_pain_type.\nTable S16: Valid values of symptoms and chest_pain_type.",
+    "crumbs": [
+      "List of Tables"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/cohort_introduction.html",
+    "href": "codes/harmonisation_summary/cohort_introduction.html",
+    "title": "1  Cohort",
+    "section": "",
+    "text": "1 Cohort Introduction\nHere are the cohorts used in the paper.",
+    "crumbs": [
+      "Cohort",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Cohort</span>"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/cohort_introduction.html#cohort-introduction",
+    "href": "codes/harmonisation_summary/cohort_introduction.html#cohort-introduction",
+    "title": "1  Cohort",
+    "section": "",
+    "text": "Table S1: Cohorts used in study.\n\n\n\n\nCohort IDCohort NameCohort ACohort A Full NameCohort BCohort B Full Name",
+    "crumbs": [
+      "Cohort",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Cohort</span>"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/clinical_harmonisation.html",
+    "href": "codes/harmonisation_summary/clinical_harmonisation.html",
+    "title": "2  Demographic and Clinical Variables",
+    "section": "",
+    "text": "1 Age\nSteps taken to harmonised data columns in relation to demographic and clinical variables are discussed here.\nage_years is the harmonised positive integer data field to denote the age of the patient during the time of the CT scan.\nIt is harmonised as follows:",
+    "crumbs": [
+      "Demographic and Clinical Variables",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographic and Clinical Variables</span>"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/clinical_harmonisation.html#age",
+    "href": "codes/harmonisation_summary/clinical_harmonisation.html#age",
+    "title": "2  Demographic and Clinical Variables",
+    "section": "",
+    "text": "Table S1: Harmonisation process of age_years.\n\n\n\n\nCohort IDOriginal ResponseHarmonisation ResponseCohort AColumn age of positve integer values. 0 is used to indicate unknown values.Value of 0 in age will be changed to NA. age_years will take the values of age.Cohort BColumn Age of positve integer valuesage_years will take the values of Age.",
+    "crumbs": [
+      "Demographic and Clinical Variables",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographic and Clinical Variables</span>"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/clinical_harmonisation.html#sex",
+    "href": "codes/harmonisation_summary/clinical_harmonisation.html#sex",
+    "title": "2  Demographic and Clinical Variables",
+    "section": "2 Sex",
+    "text": "2 Sex\nsex is the harmonised data field to denote the sex of the patient during the time of the CT scan.\nIt holds the following values:\n\n\n\nTable S2: Harmonised values of sex.\n\n\n\n\nValueDescription0female1male-1unknown\n\n\n\n\n\nIt is harmonised as follows:\n\n\n\nTable S3: Harmonisation process of sex.\n\n\n\n\nCohort IDOriginal ResponseHarmonisation ResponseCohort AColumn sex withF as female.M as male.Change the values of sex as follows:F as 0.M as 1.Cohort BColumn Sex withFemale as female.Male as male.Map the values of Sex to sex as follows:Female as 0.Male as 1.",
+    "crumbs": [
+      "Demographic and Clinical Variables",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographic and Clinical Variables</span>"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/clinical_harmonisation.html#height-weight-bmi-and-bsa",
+    "href": "codes/harmonisation_summary/clinical_harmonisation.html#height-weight-bmi-and-bsa",
+    "title": "2  Demographic and Clinical Variables",
+    "section": "3 Height, Weight, BMI and BSA",
+    "text": "3 Height, Weight, BMI and BSA\nheight is the harmonised positive real data field to denote the height in cm of the patient during the time of the CT scan.\nweight is the harmonised positive real data field to denote the weight in kg of the patient during the time of the CT scan.\nbsa_m2 is the harmonised positive real data field to denote the body surface area in m2 of the patient during the time of the CT scan.\nbmi is the harmonised positive real data field to denote the body mass index of the patient during the time of the CT scan.\nAll values are converted to two decimal places if the number of decimal places exceeded two.\nThey are harmonised as follows:\n\n\n\nTable S4: Harmonisation process of height_cm, weight_kg, bsa_m2 and bmi.\n\n\n\n\nCohort IDOriginal ResponseHarmonisation ResponseCohort AColumn height in cm of positve real numeric values in one decimal place.Column weight in kg of positve real numeric values in one decimal place.height_cm will take the values of height.weight_kg will take the values of weight.bsa_m2 and bmi are calculated using data fields height_cm and weight_kg. All values are then converted to two decimal places.Cohort BColumn Height in cm of positve integer values.Column Weight in kg of positve integer values.height_cm will take the values of Height.weight_kg will take the values of Weight.bsa_m2 and bmi are calculated using data fields height_cm and weight_kg. All values are then converted to two decimal places.",
+    "crumbs": [
+      "Demographic and Clinical Variables",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographic and Clinical Variables</span>"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/clinical_harmonisation.html#smoking-history",
+    "href": "codes/harmonisation_summary/clinical_harmonisation.html#smoking-history",
+    "title": "2  Demographic and Clinical Variables",
+    "section": "4 Smoking History",
+    "text": "4 Smoking History\nsmoke_current is the harmonised data field to denote if the patient is a current smoker during the time of the CT scan. smoke_past is the harmonised data field to denote if the patient is a past smoker during the time of the CT scan.\nThey hold the following values:\n\n\n\nTable S5: Harmonised values of smoke_current and smoke_past.\n\n\n\n\nValueDescription0no1yes-1unknown\n\n\n\n\n\nThey are harmonised as follows:\n\n\n\nTable S6: Harmonised process of smoke_current and smoke_past.\n\n\n\n\nCohort IDOriginal ResponseHarmonisation ResponseCohort AColumn smoke_current_good with0 as no.1 as yes.-1 as unknown.Column smoke_past_good with0 as no.1 as yes.-1 as unknown.smoke_current will take the values of smoke_current_good.smoke_past will take the values of smoke_past_good.Cohort BColumn Smoke History withnon-smoker as non-smoker.past smoker as a past smoker.current smoker as a current smoker.Map the values of Smoke History to smoke_current as follows:non-smoker and past smoker as 0.current smoker as 1.Map the values of Smoke History to smoke_past as follows:non-smoker and current smoker as 0.past smoker as 1.\n\n\n\n\n\nAfter harmonisation, we validate the values of smoke_current and smoke_past to ensure that there can only be the following cases:\n\n\n\nTable S7: Valid values of smoke_current and smoke_past.\n\n\n\n\nDescriptionsmoke_currentsmoke_pastNon-smoker00Past smoker01Current smoker10Unknown-1-1",
+    "crumbs": [
+      "Demographic and Clinical Variables",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographic and Clinical Variables</span>"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/clinical_harmonisation.html#have-shortness-of-breath",
+    "href": "codes/harmonisation_summary/clinical_harmonisation.html#have-shortness-of-breath",
+    "title": "2  Demographic and Clinical Variables",
+    "section": "5 Have Shortness of Breath",
+    "text": "5 Have Shortness of Breath\nhave_sob is the harmonised data field to denote if the patient has shortness of breath during the time of the CT scan.\nIt holds the following values:\n\n\n\nTable S8: Harmonised values of have_sob.\n\n\n\n\nValueDescription0no1yes-1unknown\n\n\n\n\n\nhave_sob is harmonised as follows:\n\n\n\nTable S9: Harmonised process of have_sob.\n\n\n\n\nCohort IDOriginal ResponseHarmonisation ResponseCohort AColumn have_sob with0 as no.1 as yes.have_sob remains unchanged.Cohort BColumn Dyspnea withno as no.yes as yes.Map the values of Dyspnea to have_sob as follows:no as 0.yes as 1.",
+    "crumbs": [
+      "Demographic and Clinical Variables",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographic and Clinical Variables</span>"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/clinical_harmonisation.html#have-chest-pain",
+    "href": "codes/harmonisation_summary/clinical_harmonisation.html#have-chest-pain",
+    "title": "2  Demographic and Clinical Variables",
+    "section": "6 Have Chest Pain",
+    "text": "6 Have Chest Pain\nhave_chest_pain is the harmonised data field to denote if the patient has chest pain during the time of the CT scan.\nIt holds the following values:\n\n\n\nTable S10: Harmonised values of have_chest_pain.\n\n\n\n\nValueDescription0no1yes-1unknown\n\n\n\n\n\nhave_chest_pain is harmonised as follows:\n\n\n\nTable S11: Harmonised process of have_chest_pain.\n\n\n\n\nCohort IDOriginal ResponseHarmonisation ResponseCohort AColumn chest_pain_type with0 as no chest pain.1 as typical chest pain.2 as atypcial chest pain.3 as nonanginal chest pain.Map the values of chest_pain_type to have_chest_pain as follows:If chest_pain_type has a value of 1, 2 or 3, have_chest_pain will be 1.Else, if chest_pain_type has a value of 0, have_chest_pain will be 0.Cohort BColumn Chest Pain Character withno chest pain as no chest pain.typical as typical chest pain.atypcial as atypcial chest pain.nonanginal as nonanginal chest pain.Map the values of Chest Pain Character to have_chest_pain as follows:If chest_pain_type has a value of typical, atypical or nonanginal, have_chest_pain will be 1.Else, if chest_pain_type has a value of no chest pain, have_chest_pain will be 0.",
+    "crumbs": [
+      "Demographic and Clinical Variables",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographic and Clinical Variables</span>"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/clinical_harmonisation.html#symptoms",
+    "href": "codes/harmonisation_summary/clinical_harmonisation.html#symptoms",
+    "title": "2  Demographic and Clinical Variables",
+    "section": "7 Symptoms",
+    "text": "7 Symptoms\nsymptoms is the harmonised data field to denote the patient’s symptoms during the time of the CT scan.\nIt holds the following values:\n\n\n\nTable S12: Harmonised values of symptoms.\n\n\n\n\nValueDescription0asymptomatic1chest pain2only dyspnea3others-1unknown\n\n\n\n\n\nRegarding the symptoms: chest pain, dypsnea and other symptoms:\n\nIf a patient has all three symptoms, chest pain will take the highest priority. Hence, symptoms = 1\nIf a patient has both dyspnea and other symptoms (not chest pain related), dyspnea will take the higher priority. Hence, symptoms = 2\n\nThe general approach is to assume that the patients are asymptomatic (symptoms = 0) unless indicated that they have chest pain (symptoms = 1), dypsnea (symptoms = 2), other symptoms like heart palpitations (symptoms = 3) or all symptom related data fields are missing (symptoms = -1).\nsymptoms is harmonised as follows:\n\n\n\nTable S13: Harmonised process of symptoms.\n\n\n\n\nCohort IDOriginal ResponseHarmonisation ResponseCohort AColumn have_sob with0 as no.1 as yes.Column chest_pain_type with0 as no chest pain.1 as typical chest pain.2 as atypcial chest pain.3 as nonanginal chest pain.Map the values of chest_pain_type and have_sob to symptoms as follows:If chest_pain_type has a value of 1, 2 or 3, symptoms will be 1.Else, if chest_pain_type has a value of 0 and have_sob has a value of 1, symptoms will be 2.Else, symptoms will be 0.Cohort BColumn Dyspnea withno as no.yes as yes.Column Chest Pain Character withno chest pain as no chest pain.typical as typical chest pain.atypcial as atypcial chest pain.nonanginal as nonanginal chest pain.Map the values of Chest Pain Character and Dyspnea to symptoms as follows:If chest_pain_type has a value of typical, atypical or nonanginal, symptoms will be 1.Else, if chest_pain_type has a value of no chest pain and Dyspnea has a value of yes, symptoms will be 2.Else, symptoms will be 0.",
+    "crumbs": [
+      "Demographic and Clinical Variables",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographic and Clinical Variables</span>"
+    ]
+  },
+  {
+    "objectID": "codes/harmonisation_summary/clinical_harmonisation.html#chest-pain-type",
+    "href": "codes/harmonisation_summary/clinical_harmonisation.html#chest-pain-type",
+    "title": "2  Demographic and Clinical Variables",
+    "section": "8 Chest Pain Type",
+    "text": "8 Chest Pain Type\nchest_pain_type is the harmonised data field to denote the patient’s chest pain type during the time of the CT scan.\nIt holds the following values:\n\n\n\nTable S14: Harmonised values of chest_pain_type.\n\n\n\n\nValueDescription0no symptoms1typical2atypical3nonanginal4dyspnea-1unknown\n\n\n\n\n\nRegarding the symptoms: chest pain, dypsnea and other symptoms:\n\nIf a patient has both chest pain (typical, atypical or nonanginal) and dyspnea, chest pain will take the higher priority. Hence, chest_pain_type will be either 1, 2 or 3\nIf a patient has both dyspnea and other symptoms (not chest pain related), dyspnea will take the higher priority. Hence, chest_pain_type will be 4.\nIf a patient has other symptoms that are neither chest pain nor dyspnea, like heart palpitations, chest_pain_type will be -1.\n\nThe general approach is to assume that the patients are asymptomatic (chest_pain_type = 0) unless indicated that they have a specific type of chest pain (chest_pain_type = 1, 2 or 3), dypsnea (chest_pain_type = 4), other symptoms like heart palpitations (chest_pain_type = -1) or all symptom related data fields are missing (chest_pain_typed = -1).\nchest_pain_type is harmonised as follows:\n\n\n\nTable S15: Harmonised process of chest_pain_type.\n\n\n\n\nCohort IDOriginal ResponseHarmonisation ResponseCohort AColumn have_sob with0 as no.1 as yes.Column chest_pain_type with0 as no chest pain.1 as typical chest pain.2 as atypcial chest pain.3 as nonanginal chest pain.Map the values of chest_pain_type and have_sob to chest_pain_type as follows:If chest_pain_type has a value of 1, chest_pain_type will be 1.Else, if chest_pain_type has a value of 2, chest_pain_type will be 2.Else, if chest_pain_type has a value of 3, chest_pain_type will be 3.Else, if chest_pain_type has a value of 0 and have_sob has a value of 1, chest_pain_type will be 4.Else, chest_pain_type will be 0.Cohort BColumn Dyspnea withno as no.yes as yes.Column Chest Pain Character withno chest pain as no chest pain.typical as typical chest pain.atypcial as atypcial chest pain.nonanginal as nonanginal chest pain.Map the values of Chest Pain Character and Dyspnea to chest_pain_type as follows:If Chest Pain Character has a value of typical, chest_pain_type will be 1.Else, if Chest Pain Character has a value of atypical, chest_pain_type will be 2.Else, if Chest Pain Character has a value of nonanginal, chest_pain_type will be 3.Else, if Chest Pain Character has a value of no chest pain and Dyspnea has a value of yes, chest_pain_type will be 4.Else, chest_pain_type will be 0.\n\n\n\n\n\nAfter harmonisation, we validate the values of chest_pain_type and symptoms to ensure that there can only be the following cases:\n\n\n\nTable S16: Valid values of symptoms and chest_pain_type.\n\n\n\n\nDescriptionsymptomschest_pain_typeAsymptomatic00Have chest pain11, 2 or 3Only dypsnea24Other symptoms2-1Unknown-1-1",
+    "crumbs": [
+      "Demographic and Clinical Variables",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Demographic and Clinical Variables</span>"
+    ]
+  }
+]
