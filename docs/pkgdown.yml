@@ -2,7 +2,7 @@ pandoc: '3.2'
 pkgdown: 2.1.1
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-03-12T10:57Z
+last_built: 2025-03-14T14:05Z
 urls:
-  reference: D:/Jeremy/PortableR/RPortableWorkDirectory/harmonisation/docs/reference
-  article: D:/Jeremy/PortableR/RPortableWorkDirectory/harmonisation/docs/articles
+  reference: https://jauntyjjs.github.io/harmonisation/reference
+  article: https://jauntyjjs.github.io/harmonisation/articles

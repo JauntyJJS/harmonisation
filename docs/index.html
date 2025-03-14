@@ -5,16 +5,27 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Utility functions for project • harmonisation</title>
+<title>Utility Functions For A Data Harmonisation Project • harmonisation</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Utility functions for project">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Utility Functions For A Data Harmonisation Project">
 <meta name="description" content="Utility functions to harmonise data for project.">
 <meta property="og:description" content="Utility functions to harmonise data for project.">
 </head>
 <body>
+<p>
+
+
+
+
+
+
+
+
+  # https://github.com/r-lib/pkgdown/issues/2704
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous"><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script></p>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -22,7 +33,7 @@
 
     <a class="navbar-brand me-2" href="index.html">harmonisation</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9999</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,12 +59,12 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="data-harmonisation-project-template">Data Harmonisation Project Template<a class="anchor" aria-label="anchor" href="#data-harmonisation-project-template"></a>
 </h1></div>
-<p>This repository is a project template to create data harmonisation reports using <a href="https://www.r-project.org/" class="external-link">R</a> and <a href="https://quarto.org/" class="external-link">Quarto</a> books. To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="external-link uri">https://quarto.org/docs/books</a>.</p>
 <p><a name="top"></a></p>
 <div class="section level2">
 <h2 id="table-of-content">Table of Content<a class="anchor" aria-label="anchor" href="#table-of-content"></a>
 </h2>
 <ul>
+<li><a href="#motivation">Motivation</a></li>
 <li><a href="#acknowledgement">Acknowledgement</a></li>
 <li><a href="#file-structure">File Structure</a></li>
 <li><a href="#software-installation">Software Installation</a></li>
@@ -62,11 +73,62 @@
 <li><a href="#r-functions-management">R Functions Management</a></li>
 <li><a href="#r-packages-used">R Packages Used</a></li>
 <li><a href="#r-platform-information">R Platform Information</a></li>
-<li><a href="#description">DESCRIPTION</a></li>
 <li><a href="#data-harmonisation-report-for-each-cohort">Data Harmonisation Report For Each Cohort</a></li>
+<li><a href="#combined-data-harmonisation-report-for-all-cohort">Combined Data Harmonisation Report For All Cohort</a></li>
 <li><a href="#data-harmonisation-summary">Data Harmonisation Summary</a></li>
 <li><a href="#general-recommendations">General Recommendations</a></li>
 </ul>
+</div>
+<div class="section level2">
+<h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
+</h2>
+<p>Some large cohort studies involve the pooling of data from multiple sites, studies or clinical trials. Prior to statistical or machine learning analysis, a data steward must be able to not just clean but organise and sort through these heterogeneous inputs in a standardised and consistent format. This process is sometimes called retrospective data harmonisation. As methods of data harmonisation for certain data fields or variables can be complicated, it must be recorded in a coherent way such that different stakeholders (such as your collaborators or study committee members) can understand what is being done to the raw/provided data. Despite its importance in the big data environment, there are limit resources on how to document the data harmonisation process in a structured, efficient (with some automation) and robust way.</p>
+<p>This repository aims to be a project template to allow a data steward to be able to create data harmonisation reports using <a href="https://www.r-project.org/" class="external-link">R</a> and <a href="https://quarto.org/" class="external-link">Quarto</a> books. To learn more about Quarto books visit <a href="https://quarto.org/docs/books" class="external-link uri">https://quarto.org/docs/books</a>.</p>
+<p>Output of these reports are as follows:</p>
+<p>Run the R script <code>cohort_harmonisation_script.R</code> in <code>codes</code> folder to generate:</p>
+<ul>
+<li>Cohort_A Harmonisation Report:
+<ul>
+<li>🌐 HTML: <a href="https://jauntyjjs-harmonisation-cohort-a.netlify.app" class="external-link uri">https://jauntyjjs-harmonisation-cohort-a.netlify.app</a>
+</li>
+<li>📕 PDF : <a href="https://jauntyjjs-harmonisation-cohort-a.netlify.app/Harmonisation-Template-for-Cohort-A.pdf" class="external-link uri">https://jauntyjjs-harmonisation-cohort-a.netlify.app/Harmonisation-Template-for-Cohort-A.pdf</a>
+</li>
+<li>📘 Word: <a href="https://jauntyjjs-harmonisation-cohort-a.netlify.app/Harmonisation-Template-for-Cohort-A.docx" class="external-link uri">https://jauntyjjs-harmonisation-cohort-a.netlify.app/Harmonisation-Template-for-Cohort-A.docx</a>
+</li>
+</ul>
+</li>
+<li>Cohort_B Harmonisation Report:
+<ul>
+<li>🌐 HTML: <a href="https://jauntyjjs-harmonisation-cohort-b.netlify.app" class="external-link uri">https://jauntyjjs-harmonisation-cohort-b.netlify.app</a>
+</li>
+<li>📕 PDF : <a href="https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.pdf" class="external-link uri">https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.pdf</a>
+</li>
+<li>📘 Word: <a href="https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.docx" class="external-link uri">https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.docx</a>
+</li>
+</ul>
+</li>
+</ul>
+<p>Run the R script <code>cohort_all_harmonisation_script.R</code> in <code>codes</code> folder to generate:</p>
+<ul>
+<li>Combined (All cohorts) Harmonisation Report:
+<ul>
+<li>🌐 HTML: <a href="https://jauntyjjs-harmonisation-cohort-all.netlify.app" class="external-link uri">https://jauntyjjs-harmonisation-cohort-all.netlify.app</a>
+</li>
+</ul>
+</li>
+</ul>
+<p>Run the R script <code>harmonisation_summary_script.R</code> in <code>codes</code> folder to generate:</p>
+<ul>
+<li>Harmonisation Summary:
+<ul>
+<li>🌐 HTML: <a href="https://jauntyjjs-harmonisation-summary.netlify.app" class="external-link uri">https://jauntyjjs-harmonisation-summary.netlify.app</a>
+</li>
+<li>📘 Word: <a href="https://jauntyjjs-harmonisation-summary.netlify.app/Harmonisation-Summary-Report-Template.docx" class="external-link uri">https://jauntyjjs-harmonisation-summary.netlify.app/Harmonisation-Summary-Report-Template.docx</a>
+</li>
+</ul>
+</li>
+</ul>
+<p><a href="#top">Back to top</a></p>
 </div>
 <div class="section level2">
 <h2 id="acknowledgement">Acknowledgement<a class="anchor" aria-label="anchor" href="#acknowledgement"></a>
@@ -281,9 +343,8 @@
 </h2>
 <p>Use Posit Public Package Manager <a href="https://packagemanager.posit.co/client" class="external-link">PPM</a> to set up your repository environment to install R packages from <a href="https://cloud.r-project.org/" class="external-link">CRAN</a>. This is because PPM allows installation of frozen R package versions based on a snapshot date.</p>
 <p>One way to do that is to set in the <code>.Rprofile</code> file with the code <code>options(repos = c(P3M = "{link to repository url form Posit Public Package Manager}"))</code></p>
-<p>R packages can be installed using the package <a href="https://pak.r-lib.org/" class="external-link"><code>pak</code></a> as an alternative to <a href="https://rdrr.io/r/utils/install.packages.html" class="external-link"><code>install.packages()</code></a> and <a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link"><code>remotes::install_github()</code></a>. Benefits of using <a href="https://pak.r-lib.org/" class="external-link"><code>pak</code></a> can be found <a href="https://pak.r-lib.org/reference/features.html" class="external-link">here</a></p>
-<p>You can also view your respository environment using the command <a href="https://pak.r-lib.org/reference/repo_get.html" class="external-link"><code>pak::repo_get()</code></a></p>
-<p>R package can be loaded using the command <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library({package_name})</a></code>. You can use the R package <a href="https://annotater.liomys.mx/" class="external-link"><code>annotater</code></a> to add additional information on what the loaded package does.</p>
+<p>R packages can be installed using <a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link"><code>pak::pkg_install()</code></a> from the R package <a href="https://pak.r-lib.org/" class="external-link"><code>pak</code></a> as an alternative to <a href="https://rdrr.io/r/utils/install.packages.html" class="external-link"><code>install.packages()</code></a> and <a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link"><code>remotes::install_github()</code></a>. Benefits of using <a href="https://pak.r-lib.org/" class="external-link"><code>pak</code></a> can be found <a href="https://pak.r-lib.org/reference/features.html" class="external-link">here</a></p>
+<p>You can also view your repository environment using the command <a href="https://pak.r-lib.org/reference/repo_get.html" class="external-link"><code>pak::repo_get()</code></a></p>
 <p><a href="#top">Back to top</a></p>
 </div>
 <div class="section level2">
@@ -292,7 +353,7 @@
 </h2>
 <p>You can increase reproducibility by using the package <a href="https://rstudio.github.io/renv/" class="external-link"><code>renv</code></a>. Install <code>renv</code> from CRAN with <code>pak::pak("renv")</code>. If this is your first time using <code>renv</code>, start with the <a href="https://rstudio.github.io/renv/articles/renv.html" class="external-link"><code>Introduction to renv vignette</code></a>. Use <code>renv::init(bare = TRUE)</code> to start with an empty <code>renv</code> environment.</p>
 <p><code>renv</code> will freeze the exact package versions you depend on (in <code>renv.lock</code>). This ensures that each collaborator (or you in the future) will use the exact same versions of these packages. Moreover <code>renv</code> provides to each project its own private package library making each project isolated from others.</p>
-<p>Install required dependencies locally with <code><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages()</a></code> or <a href="https://rstudio.github.io/renv/reference/install.html" class="external-link"><code>renv::install()</code></a> from CRAN, Bioconductor, Github, explicit file path, etc.</p>
+<p>Install required dependencies locally with <a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link"><code>pak::pkg_install()</code></a> from <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a>, <a href="https://r-universe.dev/search" class="external-link">R-universe</a>, etc.</p>
 <p>Sometimes the right <a href="https://community.rstudio.com/t/can-not-install-packages-after-initializing-renv/106064" class="external-link">downloader</a> (libcurl or others) needs to set for installation of R packages inside the <code>renv</code> environment to be successful. Setting the R environmental variable RENV_DOWNLOAD_FILE_METHOD = “libcurl” may help.</p>
 <p>Save the local environment with <a href="https://rstudio.github.io/renv/reference/snapshot.html" class="external-link"><code>renv::snapshot()</code></a> to create the <code>renv.lock</code> file.</p>
 <p><a href="#top">Back to top</a></p>
@@ -393,7 +454,7 @@
 </tr>
 </tbody>
 </table>
-<p>Here is an example of the command to use <code>pak::pak("{package name}")</code> to install packages from <a href="https://packagemanager.posit.co/client" class="external-link">PPM</a>.</p>
+<p>Here is an example of the command to use <code>pak::pak("{package name}")</code> to install packages from the Posit Public Package Manager <a href="https://packagemanager.posit.co/client" class="external-link">PPM</a>.</p>
 <p>There is no need to source the functions in the R folder. Use <a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link"><code>devtools::load_all()</code></a> instead. <a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link"><code>devtools::load_all()</code></a> will load required dependencies listed in <code>DESCRIPTION</code> and R functions stored in <code>R/</code>. Prior installation of these dependencies is required for the load to be successful.</p>
 <p>After loading, R functions can be documented (using <a href="https://devtools.r-lib.org/reference/document.html" class="external-link"><code>devtools::document()</code></a>), tested (using <a href="https://devtools.r-lib.org/reference/test.html" class="external-link"><code>devtools::test()</code></a> and then <a href="https://devtools.r-lib.org/reference/check.html" class="external-link"><code>devtools::check()</code></a>) and even installed as an R package (using <a href="https://devtools.r-lib.org/reference/install.html" class="external-link"><code>devtools::install</code></a>).</p>
 <p>More information of this workflow can be found in <a href="https://r-pkgs.org/whole-game.html" class="external-link">Chapter 1: The Whole Game</a> of the R Packages (2e) book.</p>
@@ -401,7 +462,7 @@
 <div class="section level2">
 <h2 id="r-packages-used">R Packages Used<a class="anchor" aria-label="anchor" href="#r-packages-used"></a>
 </h2>
-<p>R packages installed from Posit Public Package Manager <a href="https://packagemanager.posit.co/client" class="external-link">PPM</a> or CRAN using command <code>pak::pak("{package name}")</code> are</p>
+<p>R packages installed from Posit Public Package Manager <a href="https://packagemanager.posit.co/client" class="external-link">PPM</a> or <a href="https://cran.r-project.org/" class="external-link">CRAN</a> using command <code>pak::pkg_install("{package name}")</code> are</p>
 <p>Here are all the R packages used in this analysis.</p>
 <table style="width:100%;" class="table">
 <colgroup>
@@ -713,7 +774,7 @@
 </tr>
 <tr class="odd">
 <td align="left">date</td>
-<td align="left">2025-03-12</td>
+<td align="left">2025-03-14</td>
 </tr>
 <tr class="even">
 <td align="left">pandoc</td>
@@ -732,22 +793,28 @@
 <p><a href="#top">Back to top</a></p>
 </div>
 <div class="section level2">
-<h2 id="description">DESCRIPTION<a class="anchor" aria-label="anchor" href="#description"></a>
-</h2>
-<p>The <code>DESCRIPTION</code> file contains important compendium metadata. Though <code>DESCRIPTION</code> file is specific to R package, it can be used to work with research compendia (see below). For further information on how to edit this file, please read <a href="https://r-pkgs.org/description.html" class="external-link uri">https://r-pkgs.org/description.html</a>.</p>
-<p><a href="#top">Back to top</a></p>
-</div>
-<div class="section level2">
 <h2 id="data-harmonisation-report-for-each-cohort">Data Harmonisation Report For Each Cohort<a class="anchor" aria-label="anchor" href="#data-harmonisation-report-for-each-cohort"></a>
 </h2>
-<p>To start the harmonisation of data, run the R script <code>cohort_harmonisation_script.R</code> in <code>codes</code> folder.</p>
-<p>For each cohort, the script will clean and harmonise the raw data and create a Quarto harmonisation report book for each cohort in html, word and pdf.</p>
+<p>To start the harmonisation of data, run the R script <code>cohort_harmonisation_script.R</code> in <code>codes</code> folder. The script will clean and harmonise the raw data and create a Quarto harmonisation report book for each cohort in html, word and pdf.</p>
 <p>This involves</p>
 <ul>
 <li>copying a specific <code>yml</code> file (<code>_quarto_{cohort name}.yml</code>) from the <code>templates/quarto-yaml</code> folder to the project folder <code>harmonisation</code> and rename it as <code>_quarto.yml</code>, overwriting any existing <code>_quarto.yml</code> file.</li>
 <li>copying a specific <code>qmd</code> file (<code>_index_report.qmd</code>) from the <code>templates/index-qmd</code> folder to the project folder <code>harmonisation</code> and rename it as <code>index.qmd</code>, overwriting any existing <code>index.qmd</code> file.</li>
 </ul>
 <p>Using the <code>_quarto.yml</code>, <code>index.qmd</code>, <code>references.bib</code> and <code>csl_file.csl</code> files, Quarto will then start running the Quarto scripts in the <code>codes/{cohort_name}</code> folder. This involves reading the raw data in the <code>data-raw/{cohort_name}</code> folder, placing preprocessing data in the <code>codes/{cohort_name}/preprocessed_data</code> folder, outputting the harmonised data as excel file called <code>harmonised_{cohort_name}.xlsx</code> in the <code>codes/output/harmonised</code> folder. Also, the data harmonisation process documentation will be created in the <code>reports/{cohort_name}</code> folder as a Quarto book in html, word and pdf.</p>
+<p><a href="#top">Back to top</a></p>
+</div>
+<div class="section level2">
+<h2 id="combined-data-harmonisation-report-for-all-cohort">Combined Data Harmonisation Report For All Cohort<a class="anchor" aria-label="anchor" href="#combined-data-harmonisation-report-for-all-cohort"></a>
+</h2>
+<p>To start the harmonisation of data, run the R script <code>cohort_all_harmonisation_script.R</code> in <code>codes</code> folder. The script will clean and harmonise the raw data and create a Quarto harmonisation report (all cohort combined) book in html.</p>
+<p>This involves</p>
+<ul>
+<li>copying a specific <code>yml</code> file (<code>_quarto_all.yml</code>) from the <code>templates/quarto-yaml</code> folder to the project folder <code>harmonisation</code> and rename it as <code>_quarto.yml</code>, overwriting any existing <code>_quarto.yml</code> file.</li>
+<li>copying a specific <code>qmd</code> file (<code>_index_report.qmd</code>) from the <code>templates/index-qmd</code> folder to the project folder <code>harmonisation</code> and rename it as <code>index.qmd</code>, overwriting any existing <code>index.qmd</code> file.</li>
+</ul>
+<p>Using the <code>_quarto.yml</code>, <code>index.qmd</code>, <code>references.bib</code> and <code>csl_file.csl</code> files, Quarto will then start running the Quarto scripts in the <code>codes/{cohort_name}</code> folder. This involves reading the raw data in the <code>data-raw/{cohort_name}</code> folder, placing preprocessing data in the <code>codes/{cohort_name}/preprocessed_data</code> folder, outputting the harmonised data as excel file called <code>harmonised_{cohort_name}.xlsx</code> in the <code>codes/output/harmonised</code> folder. Also, the data harmonisation process documentation will be created in the <code>reports/all</code> folder as a Quarto book in html.</p>
+<p>A harmonisation report file can consist of a few hundred pages. It is not recommended to output the combined report as one pdf or word document file because the file size may be too large and it takes a long time to open the file.</p>
 <p><a href="#top">Back to top</a></p>
 </div>
 <div class="section level2">
@@ -782,8 +849,6 @@
 <li>Call external functions as <code>{package_name}::{function()}</code>
 </li>
 <li>Use <a href="https://devtools.r-lib.org/reference/document.html" class="external-link"><code>devtools::document()</code></a> to update the <code>NAMESPACE</code>
-</li>
-<li>Use <a href="https://frbcesab.github.io/rcompendium/reference/add_dependencies.html" class="external-link"><code>rcompendium::add_dependencies</code></a> to update the list of required dependencies in <code>DESCRIPTION</code>
 </li>
 <li>Do not source your functions but use instead <a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link"><code>devtools::load_all()</code></a>. <a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link"><code>devtools::load_all()</code></a> will load required dependencies listed in <code>DESCRIPTION</code> and R functions stored in <code>R/</code>
 </li>
@@ -843,5 +908,6 @@
 
 
 
-  </body>
+  
+</body>
 </html>

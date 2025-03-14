@@ -22,3 +22,4 @@
 ^references\.qmd$
 ^csl_file\.csl$
 ^quarto-yaml-template$
+^\.github$

@@ -1,7 +1,7 @@
 Type: Package
 Package: harmonisation
-Title: Utility functions for project
-Version: 0.0.0.9999
+Title: Utility Functions For A Data Harmonisation Project
+Version: 1.0.0.0
 Authors@R:
     person(given = "Jeremy",
            family = "Selva",
@@ -35,5 +35,5 @@ Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 RoxygenNote: 7.3.2
-URL: https://github.com/JauntyJJS/harmonisation
+URL: https://github.com/JauntyJJS/harmonisation, https://jauntyjjs.github.io/harmonisation
 BugReports: https://github.com/JauntyJJS/harmonisation/issues

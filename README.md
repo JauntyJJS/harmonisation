@@ -3,9 +3,14 @@
 
 <a name="top"></a>
 
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/JauntyJJS/harmonisation/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JauntyJJS/harmonisation/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 ## Table of Content
 
-- [Introduction](#introduction)
+- [Motivation](#motivation)
 - [Acknowledgement](#acknowledgement)
 - [File Structure](#file-structure)
 - [Software Installation](#software-installation)
@@ -21,14 +26,31 @@
 - [Data Harmonisation Summary](#data-harmonisation-summary)
 - [General Recommendations](#general-recommendations)
 
-## Introduction
+## Motivation
 
-This repository is a project template to create data harmonisation
-reports using [R](https://www.r-project.org/) and
-[Quarto](https://quarto.org/) books. To learn more about Quarto books
-visit <https://quarto.org/docs/books>.
+Some large cohort studies involve the pooling of data from multiple
+sites, studies or clinical trials. Prior to statistical or machine
+learning analysis, a data steward must be able to not just clean but
+organise and sort through these heterogeneous inputs in a standardised
+and consistent format. This process is sometimes called retrospective
+data harmonisation. As methods of data harmonisation for certain data
+fields or variables can be complicated, it must be recorded in a
+coherent way such that different stakeholders (such as your
+collaborators or study committee members) can understand what is being
+done to the raw/provided data. Despite its importance in the big data
+environment, there are limit resources on how to document the data
+harmonisation process in a structured, efficient (with some automation)
+and robust way.
 
-Output of these reports can be found here:
+This repository aims to be a project template to allow a data steward to
+be able to create data harmonisation reports using
+[R](https://www.r-project.org/) and [Quarto](https://quarto.org/) books.
+To learn more about Quarto books visit <https://quarto.org/docs/books>.
+
+Output of these reports are as follows:
+
+Run the R script `cohort_harmonisation_script.R` in `codes` folder to
+generate:
 
 - Cohort_A Harmonisation Report:
   - 🌐 HTML: <https://jauntyjjs-harmonisation-cohort-a.netlify.app>
@@ -42,12 +64,22 @@ Output of these reports can be found here:
     <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.pdf>
   - 📘 Word:
     <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.docx>
+
+Run the R script `cohort_all_harmonisation_script.R` in `codes` folder
+to generate:
+
 - Combined (All cohorts) Harmonisation Report:
   - 🌐 HTML: <https://jauntyjjs-harmonisation-cohort-all.netlify.app>
+
+Run the R script `harmonisation_summary_script.R` in `codes` folder to
+generate:
+
 - Harmonisation Summary:
   - 🌐 HTML: <https://jauntyjjs-harmonisation-summary.netlify.app>
   - 📘 Word:
     <https://jauntyjjs-harmonisation-summary.netlify.app/Harmonisation-Summary-Report-Template.docx>
+
+<a href="#top">Back to top</a>
 
 ## Acknowledgement
 
@@ -428,7 +460,7 @@ Here are the R platform environment used in this analysis.
 | collate | English_Singapore.utf8 |
 | ctype | English_Singapore.utf8 |
 | tz | Asia/Singapore |
-| date | 2025-03-12 |
+| date | 2025-03-14 |
 | pandoc | 3.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown) |
 | quarto | 1.6.37 @ C:/Program Files/Quarto/bin/quarto.exe/ (via quarto) |
 | knitr | 1.49 from RSPM |
