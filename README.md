@@ -422,7 +422,7 @@ Here are all the R packages used in this analysis.
 | fst | Lightning Fast Serialization of Data Frames | 0.9.8 | 2022-02-08 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
 | ftExtra | Extensions for ‘Flextable’ | 0.6.4 | 2024-05-10 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
 | glue | Interpreted String Literals | 1.8.0 | 2024-09-30 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
-| harmonisation | Utility functions for project | 0.0.0.9999 | 2025-03-09 | local | NA |
+| harmonisation | Utility Functions For A Data Harmonisation Project | 1.0.0.0 | 2025-03-14 | local | NA |
 | here | A Simpler Way to Find Your Files | 1.0.1 | 2020-12-13 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
 | htmltools | Tools for HTML | 0.5.8.1 | 2024-04-04 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |
 | htmlwidgets | HTML Widgets for R | 1.6.4 | 2023-12-06 | RSPM | https://packagemanager.posit.co/cran/2025-03-06 |

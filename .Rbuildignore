@@ -10,6 +10,7 @@
 ^docs$
 ^pkgdown$
 ^README\.Rmd$
+^README\.qmd$
 ^\.lintr$
 ^\.renvignore$
 ^\.quarto$
@@ -21,5 +22,5 @@
 ^references\.bib$
 ^references\.qmd$
 ^csl_file\.csl$
-^quarto-yaml-template$
+^templates$
 ^\.github$

@@ -7,10 +7,13 @@ test_that("get_quarto_version works", {
   quarto_version_sys_no_path <- get_quarto_version(test_sys_path = TRUE,
                                                    test_no_path = TRUE)
 
-  testthat::expect_true(stringr::str_detect(quarto_version[1], "quarto.exe"))
-  testthat::expect_true(stringr::str_detect(quarto_version_sys[1], "quarto.exe"))
-  testthat::expect_equal(quarto_version_no_path, "NA (via quarto)")
-  testthat::expect_equal(quarto_version_sys_no_path, "NA")
+  if (Sys.info()["sysname"] == "Windows") {
+    testthat::expect_true(stringr::str_detect(quarto_version[1], "quarto.exe"))
+    testthat::expect_true(stringr::str_detect(quarto_version_sys[1], "quarto.exe"))
+    testthat::expect_equal(quarto_version_no_path, "NA (via quarto)")
+    testthat::expect_equal(quarto_version_sys_no_path, "NA")
+  }
+
 })
 
 test_that("get_r_package_info works", {

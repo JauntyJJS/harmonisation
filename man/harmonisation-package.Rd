@@ -4,9 +4,18 @@
 \name{harmonisation-package}
 \alias{harmonisation}
 \alias{harmonisation-package}
-\title{harmonisation: Utility functions for project}
+\title{harmonisation: Utility Functions For A Data Harmonisation Project}
 \description{
 Utility functions to harmonise data for project.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/JauntyJJS/harmonisation}
+  \item \url{https://jauntyjjs.github.io/harmonisation}
+  \item Report bugs at \url{https://github.com/JauntyJJS/harmonisation/issues}
+}
+
 }
 \author{
 \strong{Maintainer}: Jeremy Selva \email{jeremy1189.jjs@gmail.com} (\href{https://orcid.org/0000-0002-4498-2662}{ORCID})
