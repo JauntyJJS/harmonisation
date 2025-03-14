@@ -368,12 +368,13 @@ for (pkg in r_package_data$package) {
 
 Here is an example of the command to use `pak::pak("{package name}")` to install packages from the Posit Public Package Manager [PPM](https://packagemanager.posit.co/client).
 
-There is no need to source the functions in the R folder. Use [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html) instead. [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html) will load required dependencies listed in `DESCRIPTION` and R functions stored in `R/`. Prior installation of these dependencies is required for the load to be successful.
+There is no need to source the functions in the `R` folder. Use [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html) instead. [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html) will load required dependencies listed in `DESCRIPTION` and R functions stored in `R/`. Prior installation of these dependencies is required for the load to be successful.
 
 After loading, R functions can be documented (using [`devtools::document()`](https://devtools.r-lib.org/reference/document.html)), tested (using [`devtools::test()`](https://devtools.r-lib.org/reference/test.html) and then [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)) and even installed as an R package (using [`devtools::install`](https://devtools.r-lib.org/reference/install.html)).
 
 More information of this workflow can be found in [Chapter 1: The Whole Game](https://r-pkgs.org/whole-game.html) of the R Packages (2e) book.
 
+Documentation of the functions in the `R` folder can be found in <https://jauntyjjs.github.io/harmonisation/reference/index.html>.
 
 ## R Packages Used
 

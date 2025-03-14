@@ -382,7 +382,7 @@ Here is an example of the command to use `pak::pak("{package name}")` to
 install packages from the Posit Public Package Manager
 [PPM](https://packagemanager.posit.co/client).
 
-There is no need to source the functions in the R folder. Use
+There is no need to source the functions in the `R` folder. Use
 [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html)
 instead.
 [`devtools::load_all()`](https://devtools.r-lib.org/reference/load_all.html)
@@ -401,6 +401,9 @@ and even installed as an R package (using
 
 More information of this workflow can be found in [Chapter 1: The Whole
 Game](https://r-pkgs.org/whole-game.html) of the R Packages (2e) book.
+
+Documentation of the functions in the `R` folder can be found in
+<https://jauntyjjs.github.io/harmonisation/reference/index.html>.
 
 ## R Packages Used
 
