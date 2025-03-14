@@ -1,0 +1,27 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://jauntyjjs.github.io/harmonisation/404.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/LICENSE-text.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/LICENSE.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/authors.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/index.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/add_cohort_name.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/calculate_column_max_char.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/create_dropdown_filter_render_function.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/get_knitr_version.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/get_max_stenosis_severity.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/get_number_of_vessels_with_high_stenosis_severity.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/get_number_of_vessels_with_high_stenosis_severity_exclude_LM.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/get_quarto_version.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/get_r_package_info.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/get_r_platform_info.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/harmonisation-package.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/index.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/is_integer_value.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/is_integer_vector.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/reactable_with_download_csv_button.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/round_to_nearest_digit.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/summarise_vessel_segments_severity.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/view_stenosis_summary.html</loc></url>
+<url><loc>https://jauntyjjs.github.io/harmonisation/reference/write_to_sheet.html</loc></url>
+</urlset>
+
