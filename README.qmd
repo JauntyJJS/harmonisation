@@ -49,8 +49,8 @@ Run the R script `cohort_harmonisation_script.R` in `codes` folder to generate:
    * 📘 Word: <https://jauntyjjs-harmonisation-cohort-a.netlify.app/Harmonisation-Template-for-Cohort-A.docx>
 *  Cohort_B Harmonisation Report:
    * 🌐 HTML: <https://jauntyjjs-harmonisation-cohort-b.netlify.app>
-   * 📕 PDF : <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.pdf>
-   * 📘 Word: <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.docx>
+   * 📕 PDF : <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-B.pdf>
+   * 📘 Word: <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-B.docx>
    
 Run the R script `cohort_all_harmonisation_script.R` in `codes` folder to generate:
    

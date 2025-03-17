@@ -61,9 +61,9 @@ generate:
 - Cohort_B Harmonisation Report:
   - 🌐 HTML: <https://jauntyjjs-harmonisation-cohort-b.netlify.app>
   - 📕 PDF :
-    <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.pdf>
+    <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-B.pdf>
   - 📘 Word:
-    <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-A.docx>
+    <https://jauntyjjs-harmonisation-cohort-b.netlify.app/Harmonisation-Template-for-Cohort-B.docx>
 
 Run the R script `cohort_all_harmonisation_script.R` in `codes` folder
 to generate:
@@ -463,7 +463,7 @@ Here are the R platform environment used in this analysis.
 | collate | English_Singapore.utf8 |
 | ctype | English_Singapore.utf8 |
 | tz | Asia/Singapore |
-| date | 2025-03-14 |
+| date | 2025-03-17 |
 | pandoc | 3.2 @ C:/Program Files/RStudio/resources/app/bin/quarto/bin/tools/ (via rmarkdown) |
 | quarto | 1.6.37 @ C:/Program Files/Quarto/bin/quarto.exe/ (via quarto) |
 | knitr | 1.49 from RSPM |
