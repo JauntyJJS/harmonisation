@@ -12,6 +12,8 @@ Description: Utility functions to harmonise data for project.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Language: en-US
+Depends:
+    R (>= 4.1.0)
 Imports:
     fs,
     quarto,

@@ -173,7 +173,7 @@ body_measurement_data <- cohort_B_data |>
   ) |> 
   pointblank::col_vals_between(
     columns = "bmi",
-    left = 15,
+    left = 10,
     right = 50,
     inclusive = c(TRUE, TRUE),
     na_pass = TRUE
@@ -319,6 +319,23 @@ smoking_data <- cohort_B_data |>
 if (params$show_table && knitr::is_html_output()) {
   smoking_data |>
     harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: smoking data not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  smoking_data |>
+    dplyr::distinct(.data[["Smoke History"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
 }
 
 ```

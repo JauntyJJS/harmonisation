@@ -212,7 +212,7 @@ body_measurement_data <- cohort_A_data |>
       dplyr::filter(
         !.data[["cohort_unique_id"]] %in% c("A010")
       ),
-    left = 15,
+    left = 10,
     right = 50,
     inclusive = c(TRUE, TRUE),
     na_pass = TRUE

@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.4.2",
+    "Version": "4.5.0",
     "Repositories": [
       {
         "Name": "P3M_20250306",
@@ -4598,7 +4598,7 @@
       "Config/testthat/parallel": "true",
       "NeedsCompilation": "no",
       "Author": "Gábor Csárdi [cre], Hadley Wickham [aut], Winston Chang [aut], Robert Flight [aut], Kirill Müller [aut], Jim Hester [aut], R Core team [ctb]",
-      "Repository": "https://cran.rstudio.com"
+      "Repository": "CRAN"
     },
     "shiny": {
       "Package": "shiny",
