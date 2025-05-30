@@ -581,7 +581,9 @@ orignal_response <- c(
     
     *past smoker* as a past smoker.
     
-    *current smoker* as a current smoker."
+    *current smoker* as a current smoker.
+    
+    *NA* as missing"
   )
 )
 
@@ -598,11 +600,15 @@ harmonisation_response <- c(
     
     *current smoker* as 1.
     
+    *NA* as -1.    
+    
     Map the values of *Smoke History* to *smoke_past* as follows:
     
     *non-smoker* and *current smoker* as 0.
     
-    *past smoker* as 1."
+    *past smoker* as 1.
+    
+    *NA* as -1. "
   )
 )
 

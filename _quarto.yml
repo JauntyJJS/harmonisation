@@ -1,10 +1,11 @@
 project:
   type: book
-  output-dir: reports/all
+  output-dir: reports/harmonisation_summary_report
+
 
 book:
-  title: "Harmonisation Template For All Cohorts"
-  author: "My Name"
+  downloads: [docx]
+  title: "Harmonisation Summary Report Template"
   navbar:
     search: true
   sidebar:
@@ -12,27 +13,39 @@ book:
 
   chapters:
     - index.qmd
-    - part: Cohort A Cleaning
+    - codes/harmonisation_summary/list_of_figures_tables.qmd
+    - part: Cohort
       chapters:
-        - codes/Cohort_A/00_R_Package_And_Environment.qmd
-        - codes/Cohort_A/01_Read_Cohort_A_Data.qmd
-        - codes/Cohort_A/02_Extract_Demographic.qmd
-        - codes/Cohort_A/03_Export_To_Excel.qmd
-    - part: Cohort B Cleaning
+        - codes/harmonisation_summary/cohort_introduction.qmd
+    - part: Demographic and Clinical Variables
       chapters:
-        - codes/Cohort_B/00_R_Package_And_Environment.qmd
-        - codes/Cohort_B/01_Read_Cohort_B_Data.qmd
-        - codes/Cohort_B/02_Extract_Demographic.qmd
-        - codes/Cohort_B/03_Export_To_Excel.qmd
+        - codes/harmonisation_summary/clinical_harmonisation.qmd
+    - codes/harmonisation_summary/references.qmd
 
 crossref:
   chapters: false
-  fig-title: Figure     # (default is "Figure")
-  tbl-title: Table      # (default is "Table")
-  fig-prefix: Figure    # (default is "Figure")
-  tbl-prefix: Table     # (default is "Table")
-  ref-hyperlink: true   # (default is true)
-  title-delim: ":"      # (default is ":")
+  # fig-title: Figure S     # (default is "Figure")
+  # tbl-title: Table S     # (default is "Table")
+  # fig-prefix: Figure S   # (default is "Figure")
+  # tbl-prefix: Table S    # (default is "Table")
+  # ref-hyperlink: true # (default is true)
+  # title-delim: ":"   # (default is ":")
+  custom:
+    - key: suppfig
+      kind: float
+      latex-env: suppfig
+      reference-prefix: Figure S
+      space-before-numbering: false
+      latex-list-of-description: Supplementary Figure
+      caption-location: top
+    - key: supptbl
+      kind: float
+      latex-env: supptbl
+      reference-prefix: Table S
+      space-before-numbering: false
+      latex-list-of-description: Supplementary Table
+      caption-location: top
+
 
 bibliography: references.bib
 csl: csl_file.csl
@@ -51,3 +64,12 @@ format:
         - flatly
       dark:
         - solar
+  docx:
+    toc: true
+    number-sections: true
+    number-depth: 6
+    reference-doc: custom-reference.docx
+    highlight-style: github
+
+
+
