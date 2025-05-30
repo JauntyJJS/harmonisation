@@ -583,7 +583,7 @@ orignal_response <- c(
     
     *current smoker* as a current smoker.
     
-    *NA* as missing"
+    *NA* as unknown."
   )
 )
 
@@ -608,7 +608,7 @@ harmonisation_response <- c(
     
     *past smoker* as 1.
     
-    *NA* as -1. "
+    *NA* as -1."
   )
 )
 
