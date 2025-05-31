@@ -250,7 +250,7 @@ weight_data <- weight_data |>
 join_specification <- dplyr::join_by("cohort_unique_id")
 
 cohort_A_data <- cohort_A_data |>
-  dplyr::left_join(weight_data, 
+  dplyr::inner_join(weight_data, 
                    by = join_specification,
                    unmatched = "error",
                    relationship = "one-to-one") |> 

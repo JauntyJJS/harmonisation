@@ -545,11 +545,11 @@ cat(tabl)
 
 symptoms_data <- cohort_B_data |>
   dplyr::select(c("cohort_unique_id")) |>
-  dplyr::left_join(shortness_of_breath_data, 
+  dplyr::inner_join(shortness_of_breath_data, 
                    by = dplyr::join_by("cohort_unique_id"),
                    unmatched = "error",
                    relationship = "one-to-one") |> 
-  dplyr::left_join(have_chest_pain_data, 
+  dplyr::inner_join(have_chest_pain_data, 
                    by = dplyr::join_by("cohort_unique_id"),
                    unmatched = "error",
                    relationship = "one-to-one") |>                   
@@ -719,19 +719,19 @@ join_specification <- dplyr::join_by("cohort_unique_id")
 
 chest_pain_data <- cohort_B_data |> 
   dplyr::select(c("cohort_unique_id")) |> 
-  dplyr::left_join(have_chest_pain_data, 
+  dplyr::inner_join(have_chest_pain_data, 
                    by = join_specification,
                    unmatched = "error",
                    relationship = "one-to-one") |> 
-  dplyr::left_join(chest_pain_type_data, 
+  dplyr::inner_join(chest_pain_type_data, 
                    by = join_specification,
                    unmatched = "error",
                    relationship = "one-to-one") |> 
-  dplyr::left_join(shortness_of_breath_data, 
+  dplyr::inner_join(shortness_of_breath_data, 
                    by = join_specification,
                    unmatched = "error",
                    relationship = "one-to-one") |> 
-  dplyr::left_join(symptoms_data,
+  dplyr::inner_join(symptoms_data,
                    by = join_specification,
                    unmatched = "error",
                    relationship = "one-to-one")
@@ -759,19 +759,19 @@ join_specification <- dplyr::join_by("cohort_unique_id")
 
 demo_behave_data <- cohort_B_data |>
   dplyr::select(c("cohort_unique_id")) |>
-  dplyr::left_join(age_gender_data,
+  dplyr::inner_join(age_gender_data,
                    by = join_specification,
                    unmatched = "error",
                    relationship = "one-to-one") |>
-  dplyr::left_join(body_measurement_data,
+  dplyr::inner_join(body_measurement_data,
                    by = join_specification,
                    unmatched = "error",
                    relationship = "one-to-one") |>
-  dplyr::left_join(smoking_data,
+  dplyr::inner_join(smoking_data,
                    by = join_specification,
                    unmatched = "error",
                    relationship = "one-to-one") |>
-  dplyr::left_join(chest_pain_data,
+  dplyr::inner_join(chest_pain_data,
                    by = join_specification,
                    unmatched = "error",
                    relationship = "one-to-one") |>
