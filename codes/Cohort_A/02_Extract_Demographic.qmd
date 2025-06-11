@@ -128,7 +128,7 @@ age_gender_data <- cohort_A_data |>
   ) |>
   dplyr::relocate(
     "sex",
-    .before = "sex_before"
+    .after = "sex_before"
   ) |> 
   pointblank::col_vals_in_set(
     columns = "sex",
@@ -158,6 +158,24 @@ if (params$show_table && knitr::is_html_output()) {
 ```
 
 :::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: age gender not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  age_gender_data |>
+    dplyr::distinct(.data[["sex_before"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
+}
+
+```
+
+:::
+
 
 Remove unnecessary columns so that we can merge with the other fields.
 
@@ -235,6 +253,22 @@ if (params$show_table && knitr::is_html_output()) {
 
 :::
 
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: body measurement not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  body_measurement_data |>
+    head(n = 5) |> 
+    knitr::kable()
+}
+
+```
+
+:::
+
 Remove unnecessary columns so that we can merge with the other fields.
 
 ```{r}
@@ -302,6 +336,24 @@ smoking_data <- cohort_A_data |>
 if (params$show_table && knitr::is_html_output()) {
   smoking_data |>
     harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: smoking data not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  smoking_data |>
+    dplyr::distinct(.data[["smoke_current_good"]], 
+                    .data[["smoke_past_good"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
 }
 
 ```
@@ -403,6 +455,23 @@ if (params$show_table && knitr::is_html_output()) {
 
 :::
 
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: shortness of breath not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  shortness_of_breath_data |>
+    dplyr::distinct(.data[["have_sob"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
+}
+
+```
+
+:::
+
 #### Have chest pain or not
 
 `have_chest_pain` is grouped as follows:
@@ -464,6 +533,23 @@ have_chest_pain_data <- cohort_A_data |>
 if (params$show_table && knitr::is_html_output()) {
   have_chest_pain_data |> 
     harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: have chest pain not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  have_chest_pain_data |>
+    dplyr::distinct(.data[["chest_pain_type"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
 }
 
 ```
@@ -564,6 +650,23 @@ if (params$show_table && knitr::is_html_output()) {
 
 :::
 
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: symptoms not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  symptoms_data |>
+    dplyr::distinct(.data[["have_chest_pain"]], .data[["have_sob"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
+}
+
+```
+
+:::
+
 Remove unnecessary columns so that we can merge with the other fields.
 
 ```{r}
@@ -648,7 +751,7 @@ chest_pain_type_data <- cohort_A_data |>
   ) |> 
   dplyr::relocate(
     "chest_pain_type_before",
-    .before = "cohort_unique_id"
+    .before = "chest_pain_type"
   ) |> 
   pointblank::col_vals_in_set(
     columns = c("chest_pain_type"),
@@ -666,6 +769,24 @@ chest_pain_type_data <- cohort_A_data |>
 if (params$show_table && knitr::is_html_output()) {
   chest_pain_type_data |> 
     harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: chest pain type not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  chest_pain_type_data |>
+    dplyr::distinct(.data[["have_sob"]], 
+                    .data[["chest_pain_type_before"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
 }
 
 ```

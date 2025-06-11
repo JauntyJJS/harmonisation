@@ -100,7 +100,7 @@ age_gender_data <- cohort_B_data |>
   ) |>
   dplyr::relocate(
     "sex",
-    .before = "Sex"
+    .after = "Sex"
   ) |> 
   dplyr::relocate(
     "age_years",
@@ -129,6 +129,23 @@ age_gender_data <- cohort_B_data |>
 if (params$show_table && knitr::is_html_output()) {
   age_gender_data |> 
     harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: age gender not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  age_gender_data |>
+    dplyr::distinct(.data[["Sex"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
 }
 
 ```
@@ -190,6 +207,22 @@ body_measurement_data <- cohort_B_data |>
 if (params$show_table && knitr::is_html_output()) {
   body_measurement_data |>
     harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: body measurement not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  body_measurement_data |>
+    head(n = 5) |> 
+    knitr::kable()
 }
 
 ```
@@ -423,6 +456,23 @@ if (params$show_table && knitr::is_html_output()) {
 
 :::
 
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: shortness of breath not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  shortness_of_breath_data |>
+    dplyr::distinct(.data[["Dyspnea"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
+}
+
+```
+
+:::
+
 Remove unnecessary columns so that we can merge with the other fields.
 
 ```{r}
@@ -495,6 +545,23 @@ have_chest_pain_data <- cohort_B_data |>
 if (params$show_table && knitr::is_html_output()) {
   have_chest_pain_data |> 
     harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: have chest pain not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  have_chest_pain_data |>
+    dplyr::distinct(.data[["Chest Pain Character"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
 }
 
 ```
@@ -589,6 +656,23 @@ symptoms_data <- cohort_B_data |>
 if (params$show_table && knitr::is_html_output()) {
   symptoms_data |> 
     harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: symptoms not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  symptoms_data |>
+    dplyr::distinct(.data[["have_chest_pain"]], .data[["have_sob"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
 }
 
 ```
@@ -692,6 +776,23 @@ chest_pain_type_data <- cohort_B_data |>
 if (params$show_table && knitr::is_html_output()) {
   chest_pain_type_data |> 
     harmonisation::reactable_with_download_csv_button()
+}
+
+```
+
+:::
+
+::: {.content-visible unless-format="html"}
+
+```{r}
+#| label: chest pain type not html
+#| eval: !expr out_type != "html"
+
+if (params$show_table) {
+  chest_pain_type_data |>
+    dplyr::distinct(.data[["Dyspnea"]], .data[["Chest Pain Character"]], 
+                    .keep_all = TRUE) |> 
+    knitr::kable()
 }
 
 ```
