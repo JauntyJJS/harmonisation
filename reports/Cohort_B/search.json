@@ -68,7 +68,7 @@
     "href": "codes/Cohort_B/01_Read_Cohort_B_Data.html#write-preprocessed-file",
     "title": "2  Read Cohort B Data",
     "section": "2 Write Preprocessed File",
-    "text": "2 Write Preprocessed File\nWe output data to be used for the next session.\n\n\nCode\ncohort_B_data |&gt;\n  fst::write_fst(\n    path = here::here(params$analysis_folder,\n                      params$harmonisation_folder,\n                      params$preprocessing_folder,\n                      \"01_Cohort_B_cleaned.fst\")\n)",
+    "text": "2 Write Preprocessed File\nWe output data to be used for the next session.\n\n\nCode\ncohort_B_data |&gt; \n  nanoparquet::write_parquet(\n    file = here::here(\n      params$analysis_folder,\n      params$harmonisation_folder,\n      params$preprocessing_folder,\n      \"01_Cohort_B_cleaned.parquet\"\n  )\n)",
     "crumbs": [
       "Cohort B Cleaning",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Read Cohort B Data</span>"
@@ -101,7 +101,7 @@
     "href": "codes/Cohort_B/02_Extract_Demographic.html#write-preprocessed-file",
     "title": "3  Extract Demographic",
     "section": "3 Write Preprocessed File",
-    "text": "3 Write Preprocessed File\nWe output data to be used for the next session.\n\n\nCode\ndemo_behave_data |&gt;\n  fst::write_fst(\n    path = here::here(\n      params$analysis_folder,\n      params$harmonisation_folder,\n      params$preprocessing_folder,\n      \"02_demographic_data.fst\"),\n)",
+    "text": "3 Write Preprocessed File\nWe output data to be used for the next session.\n\n\nCode\ndemo_behave_data |&gt;\n  nanoparquet::write_parquet(\n    file = here::here(\n      params$analysis_folder,\n      params$harmonisation_folder,\n      params$preprocessing_folder,\n      \"02_demographic_data.parquet\"\n  )\n)",
     "crumbs": [
       "Cohort B Cleaning",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Extract Demographic</span>"

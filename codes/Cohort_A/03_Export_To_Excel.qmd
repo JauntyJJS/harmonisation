@@ -33,11 +33,13 @@ We read all tabular data from the previous section.
 #| label: read all tabular data
 #| echo: false
 
-demo_behave_data <- fst::read_fst(
-  path = here::here(params$analysis_folder,
-                    params$harmonisation_folder,
-                    params$preprocessing_folder,
-                    "02_demographic_data.fst")
+demo_behave_data <- nanoparquet::read_parquet(
+  file = here::here(
+    params$analysis_folder,
+    params$harmonisation_folder,
+    params$preprocessing_folder,
+    "02_demographic_data.parquet"
+  )
 )
 
 ```

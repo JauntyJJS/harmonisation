@@ -624,9 +624,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
-<div class="reactable html-widget html-fill-item" id="reactable-633860e31cdd" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="reactable-633860e31cdd">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"cohort_unique_id":["A018"],"weight":[215.4],"updated_weight":[90.1]},"columns":[{"id":"cohort_unique_id","name":"cohort_unique_id","type":"character"},{"id":"weight","name":"weight","type":"numeric"},{"id":"updated_weight","name":"updated_weight","type":"numeric"}],"filterable":true,"defaultPageSize":5,"paginationType":"jump","elementId":"reactable-633860e31cdd","dataKey":"5f4228316fe0cc4e555fe191883bf415"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
-<button onclick="Reactable.downloadDataCSV('reactable-633860e31cdd', 'download.csv')">
+<div class="reactable html-widget html-fill-item" id="reactable-419078bff43" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="reactable-419078bff43">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"cohort_unique_id":["A018"],"weight":[215.4],"updated_weight":[90.1]},"columns":[{"id":"cohort_unique_id","name":"cohort_unique_id","type":"character"},{"id":"weight","name":"weight","type":"numeric"},{"id":"updated_weight","name":"updated_weight","type":"numeric"}],"filterable":true,"defaultPageSize":5,"paginationType":"jump","elementId":"reactable-419078bff43","dataKey":"5f4228316fe0cc4e555fe191883bf415"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<button onclick="Reactable.downloadDataCSV('reactable-419078bff43', 'download.csv')">
 <svg aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1em;width:1em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:currentColor;overflow:visible;position:relative;"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"></path></svg>
 Download as CSV
 </button>
@@ -695,13 +695,15 @@ Download as CSV
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cohort_A_data <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  fst<span class="sc">::</span><span class="fu">write_fst</span>(</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">path =</span> here<span class="sc">::</span><span class="fu">here</span>(params<span class="sc">$</span>analysis_folder,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                      params<span class="sc">$</span>harmonisation_folder,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                      params<span class="sc">$</span>preprocessing_folder,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"01_Cohort_A_cleaned.fst"</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cohort_A_data <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  nanoparquet<span class="sc">::</span><span class="fu">write_parquet</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">file =</span> here<span class="sc">::</span><span class="fu">here</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>      params<span class="sc">$</span>analysis_folder,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      params<span class="sc">$</span>harmonisation_folder,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      params<span class="sc">$</span>preprocessing_folder,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"01_Cohort_A_cleaned.parquet"</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 

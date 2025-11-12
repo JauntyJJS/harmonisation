@@ -30,11 +30,13 @@ We read output data from the previous section.
 #| label: read Cohort B data
 #| echo: false
 
-cohort_B_data <- fst::read_fst(
-  path = here::here(params$analysis_folder,
-                    params$harmonisation_folder,
-                    params$preprocessing_folder,
-                    "01_Cohort_B_cleaned.fst")
+cohort_B_data <- nanoparquet::read_parquet(
+  file = here::here(
+    params$analysis_folder,
+    params$harmonisation_folder,
+    params$preprocessing_folder,
+    "01_Cohort_B_cleaned.parquet"
+  )
 )
 
 ```
@@ -907,12 +909,13 @@ We output data to be used for the next session.
 #| label: output demographic data
 
 demo_behave_data |>
-  fst::write_fst(
-    path = here::here(
+  nanoparquet::write_parquet(
+    file = here::here(
       params$analysis_folder,
       params$harmonisation_folder,
       params$preprocessing_folder,
-      "02_demographic_data.fst"),
-)
+      "02_demographic_data.parquet"
+  )
+)  
 
 ```

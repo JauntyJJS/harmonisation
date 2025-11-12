@@ -25,7 +25,6 @@ library("harmonisation")
 
 library("here")
 library("vroom")
-library("nanoparquet")
 
 library("dplyr")
 library("tidyr")

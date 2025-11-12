@@ -125,12 +125,14 @@ We output data to be used for the next session.
 ```{r}
 #| label: output unharmonised Cohort B data
 
-cohort_B_data |>
-  fst::write_fst(
-    path = here::here(params$analysis_folder,
-                      params$harmonisation_folder,
-                      params$preprocessing_folder,
-                      "01_Cohort_B_cleaned.fst")
+cohort_B_data |> 
+  nanoparquet::write_parquet(
+    file = here::here(
+      params$analysis_folder,
+      params$harmonisation_folder,
+      params$preprocessing_folder,
+      "01_Cohort_B_cleaned.parquet"
+  )
 )
 
 ```
