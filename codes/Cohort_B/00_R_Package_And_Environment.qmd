@@ -25,6 +25,7 @@ library("harmonisation")
 
 library("here")
 library("vroom")
+library("nanoparquet")
 
 library("dplyr")
 library("tidyr")
@@ -32,7 +33,6 @@ library("magrittr")
 library("stringr")
 library("forcats")
 library("purrr")
-library("lubridate")
 library("tibble")
 
 library("pointblank")

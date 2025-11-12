@@ -10,3 +10,4 @@ renv
 /.quarto/
 .Rmarkdown
 .html
+**/*.quarto_ipynb

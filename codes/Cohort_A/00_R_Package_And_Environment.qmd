@@ -25,6 +25,7 @@ library("harmonisation")
 
 library("here")
 library("readxl")
+library("nanoparquet")
 
 library("dplyr")
 library("tidyr")

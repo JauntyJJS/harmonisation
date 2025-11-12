@@ -142,7 +142,7 @@ get_knitr_version <- function() {
 #' @export
 get_r_platform_info <- function() {
 
-  r_platform_table <- sessioninfo::platform_info()
+  r_platform_table <- suppressWarnings(sessioninfo::platform_info())
   r_platform_table[["quarto"]] <- get_quarto_version()[1]
   r_platform_table[["knitr"]] <- get_knitr_version()[1]
 
