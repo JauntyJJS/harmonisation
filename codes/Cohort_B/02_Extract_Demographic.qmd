@@ -147,7 +147,7 @@ if (params$show_table) {
   age_gender_data |>
     dplyr::distinct(.data[["Sex"]], 
                     .keep_all = TRUE) |> 
-    knitr::kable()
+    gt::gt()
 }
 
 ```
@@ -224,7 +224,7 @@ if (params$show_table && knitr::is_html_output()) {
 if (params$show_table) {
   body_measurement_data |>
     head(n = 5) |> 
-    knitr::kable()
+    gt::gt()
 }
 
 ```
@@ -374,7 +374,7 @@ if (params$show_table) {
   smoking_data |>
     dplyr::distinct(.data[["Smoke History"]], 
                     .keep_all = TRUE) |> 
-    knitr::kable()
+    gt::gt()
 }
 
 ```
@@ -468,7 +468,7 @@ if (params$show_table) {
   shortness_of_breath_data |>
     dplyr::distinct(.data[["Dyspnea"]], 
                     .keep_all = TRUE) |> 
-    knitr::kable()
+    gt::gt()
 }
 
 ```
@@ -563,7 +563,7 @@ if (params$show_table) {
   have_chest_pain_data |>
     dplyr::distinct(.data[["Chest Pain Character"]], 
                     .keep_all = TRUE) |> 
-    knitr::kable()
+    gt::gt()
 }
 
 ```
@@ -674,7 +674,7 @@ if (params$show_table) {
   symptoms_data |>
     dplyr::distinct(.data[["have_chest_pain"]], .data[["have_sob"]], 
                     .keep_all = TRUE) |> 
-    knitr::kable()
+    gt::gt()
 }
 
 ```
@@ -794,7 +794,7 @@ if (params$show_table) {
   chest_pain_type_data |>
     dplyr::distinct(.data[["Dyspnea"]], .data[["Chest Pain Character"]], 
                     .keep_all = TRUE) |> 
-    knitr::kable()
+    gt::gt()
 }
 
 ```

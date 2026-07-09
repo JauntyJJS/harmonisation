@@ -24,3 +24,5 @@
 ^csl_file\.csl$
 ^templates$
 ^\.github$
+^_targets$
+^_targets.R$

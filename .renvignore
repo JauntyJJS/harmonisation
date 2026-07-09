@@ -4,7 +4,18 @@
 /docs/
 /inst/
 /man/
-/.quarto/
 /renv/
 /reports/
 /quarto-yaml-template/
+
+# Ignore Quarto stuff
+/_extensions/
+/_freeze/
+/.quarto/
+html/
+
+# Ignore {targets} output
+_targets/
+
+# Ignore miscellaneous stuff
+.vscode/

@@ -73,7 +73,7 @@ if (params$show_table && knitr::is_html_output()) {
 #| eval: !expr out_type != "html"
 
 harmonisation::get_r_package_info() |> 
-  knitr::kable()
+  gt::gt()
 
 ```
 
@@ -108,7 +108,7 @@ if (params$show_table && knitr::is_html_output()) {
 #| eval: !expr out_type != "html"
 
 harmonisation::get_r_platform_info() |> 
-  knitr::kable()
+  gt::gt()
 
 ```
 

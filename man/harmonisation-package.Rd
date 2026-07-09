@@ -20,5 +20,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Jeremy Selva \email{jeremy1189.jjs@gmail.com} (\href{https://orcid.org/0000-0002-4498-2662}{ORCID})
 
+Authors:
+\itemize{
+  \item Jeremy Selva \email{jeremy1189.jjs@gmail.com} (\href{https://orcid.org/0000-0002-4498-2662}{ORCID})
+}
+
 }
 \keyword{internal}

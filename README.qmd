@@ -349,7 +349,7 @@ r_package_data <- harmonisation::get_r_package_info() |>
   )
   
 r_package_data |>   
-  knitr::kable()
+  gt::gt()
 
 ```
 
@@ -467,7 +467,7 @@ r_package_data <- harmonisation::get_r_package_info() |>
   )
   
 r_package_data |>   
-  knitr::kable()
+  gt::gt()
 
 ```
 
@@ -489,7 +489,7 @@ Here are the R platform environment used in this analysis.
 #| eval: !expr out_type != "html"
 
 harmonisation::get_r_platform_info() |> 
-  knitr::kable()
+  gt::gt()
 
 ```
 
