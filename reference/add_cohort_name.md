@@ -39,6 +39,7 @@ allowed.
 ## Examples
 
 ``` r
+
 input_data <- tibble::tribble(
   ~column_a, ~column_b,
   1, "Yes",

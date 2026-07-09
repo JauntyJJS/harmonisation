@@ -21,5 +21,6 @@ A tibble with two columns \`setting\`, and \`value\`.
 ## Examples
 
 ``` r
+
 r_platform_table <- get_r_platform_info
 ```

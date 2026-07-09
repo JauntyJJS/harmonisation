@@ -10,14 +10,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/JauntyJJS/harmonisation/blob/main/DESCRIPTION)
 
-Selva J (2025). *harmonisation: Utility Functions For A Data
+Selva J (2026). *harmonisation: Utility Functions For A Data
 Harmonisation Project*. R package version 1.0.0.0,
 <https://github.com/JauntyJJS/harmonisation>.
 
     @Manual{,
       title = {harmonisation: Utility Functions For A Data Harmonisation Project},
       author = {Jeremy Selva},
-      year = {2025},
+      year = {2026},
       note = {R package version 1.0.0.0},
       url = {https://github.com/JauntyJJS/harmonisation},
     }

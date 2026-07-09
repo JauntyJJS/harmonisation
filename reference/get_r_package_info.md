@@ -41,7 +41,7 @@ r_package_info
 #> # A tibble: 3 × 4
 #>   package       version date       source
 #>   <chr>         <chr>   <chr>      <chr> 
-#> 1 dplyr         1.1.4   2023-11-17 RSPM  
-#> 2 harmonisation 1.0.0.0 2025-11-12 local 
-#> 3 knitr         1.50    2025-03-16 RSPM  
+#> 1 dplyr         1.2.1   2026-04-03 RSPM  
+#> 2 harmonisation 1.0.0.0 2026-07-09 local 
+#> 3 knitr         1.51    2025-12-20 RSPM  
 ```

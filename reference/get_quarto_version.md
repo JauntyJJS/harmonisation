@@ -29,5 +29,6 @@ the computer.
 ## Examples
 
 ``` r
+
 quarto_version <- get_quarto_version()
 ```

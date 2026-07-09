@@ -20,5 +20,5 @@ library("knitr")
 knitr_info <- get_knitr_version()
 
 knitr_info
-#> [1] "1.50 from RSPM"
+#> [1] "1.51 from RSPM"
 ```

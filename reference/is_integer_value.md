@@ -27,6 +27,7 @@ otherwise.
 ## Examples
 
 ``` r
+
 # An integer
 is_integer_value(1)
 #> [1] TRUE

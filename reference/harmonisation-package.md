@@ -16,3 +16,8 @@ Useful links:
 
 **Maintainer**: Jeremy Selva <jeremy1189.jjs@gmail.com>
 ([ORCID](https://orcid.org/0000-0002-4498-2662))
+
+Authors:
+
+- Jeremy Selva <jeremy1189.jjs@gmail.com>
+  ([ORCID](https://orcid.org/0000-0002-4498-2662))

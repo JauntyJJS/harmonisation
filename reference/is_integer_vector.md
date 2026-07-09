@@ -32,6 +32,7 @@ be given a FALSE value.
 ## Examples
 
 ``` r
+
 # An integer
 is_integer_vector(c(1, 2, 3))
 #> [1] TRUE TRUE TRUE
